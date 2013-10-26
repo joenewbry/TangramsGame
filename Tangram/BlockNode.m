@@ -14,18 +14,21 @@
 {
     if (self = [super init])
     {
+         SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
+
+        [self addChild:sprite];
+//        SKShapeNode *square = [[SKShapeNode alloc] init];
+//        self.path = CGPathCreateWithRoundedRect(CGRectMake(0, 0, 100, 100), 5, 5, nil);
+//        self.fillColor = [UIColor redColor];
+//        self.lineWidth = .2;
+//        
+//        self.antialiased = YES;
+//        self.strokeColor = [UIColor whiteColor];
         
-        SKShapeNode *square = [[SKShapeNode alloc] init];
-        square.path = CGPathCreateWithRoundedRect(CGRectMake(0, 0, 100, 100), 5, 5, nil);
-        square.fillColor = [UIColor redColor];
-        square.lineWidth = .2;
         
-        square.antialiased = YES;
-        square.strokeColor = [UIColor whiteColor];
         
         self.anchorPoint = CGPointMake(0.5, 0.5); // sets rotation anchor to center of object
         
-        [self addChild:square];
     }
     return self;
 }
