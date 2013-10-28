@@ -10,33 +10,34 @@
 #import "BlockNode.h"
 
 
-
 @implementation LevelScene
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         
+        [self setUpPhysics];
+        
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
         
         SKSpriteNode *testBlock = [[BlockNode alloc] init];
         testBlock.position = CGPointMake(self.size.width/2, self.size.height/2);
         //[testBlock setScale:50];
+        
+        // ** all nodes have a user data dictionary to store specific things assocted with the node
+        //testBlock.userData
         [self addChild:testBlock];
-        
-        
         
         SKSpriteNode *secondBlock = [[BlockNode alloc] init];
         secondBlock.position = CGPointMake(self.size.width/3, self.size.height/3);
         [self addChild:secondBlock];
-        
-//        UIButton *spaceShip = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width/2,
-//                                                                         self.frame.size.height - 40.0,
-//                                                                         100.0, 25.0)];
-//        [self add:spaceShip];
-        
     }
     return self;
+}
+
+- (void)setUpPhysics
+{
+    self.physicsWorld.gravity = CGVectorMake(0.0, -1.0);
 }
 
 - (void)didMoveToView:(SKView *)view

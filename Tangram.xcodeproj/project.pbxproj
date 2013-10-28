@@ -26,6 +26,9 @@
 		D8693E79181B08AE005EE51F /* TangramTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D8693E78181B08AE005EE51F /* TangramTests.m */; };
 		D8693E84181B218B005EE51F /* LevelScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D8693E83181B218B005EE51F /* LevelScene.m */; };
 		D8693E8D181B638A005EE51F /* BlockNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D8693E8C181B638A005EE51F /* BlockNode.m */; };
+		D8693E95181C817D005EE51F /* tri-blink.png in Resources */ = {isa = PBXBuildFile; fileRef = D8693E92181C817D005EE51F /* tri-blink.png */; };
+		D8693E96181C817D005EE51F /* tri-leg.png in Resources */ = {isa = PBXBuildFile; fileRef = D8693E93181C817D005EE51F /* tri-leg.png */; };
+		D8693E97181C817D005EE51F /* tri-open.png in Resources */ = {isa = PBXBuildFile; fileRef = D8693E94181C817D005EE51F /* tri-open.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +69,9 @@
 		D8693E83181B218B005EE51F /* LevelScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelScene.m; sourceTree = "<group>"; };
 		D8693E8B181B638A005EE51F /* BlockNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockNode.h; sourceTree = "<group>"; };
 		D8693E8C181B638A005EE51F /* BlockNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockNode.m; sourceTree = "<group>"; };
+		D8693E92181C817D005EE51F /* tri-blink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tri-blink.png"; sourceTree = "<group>"; };
+		D8693E93181C817D005EE51F /* tri-leg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tri-leg.png"; sourceTree = "<group>"; };
+		D8693E94181C817D005EE51F /* tri-open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tri-open.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +133,7 @@
 		D8693E4E181B08AE005EE51F /* Tangram */ = {
 			isa = PBXGroup;
 			children = (
+				D8693E91181C8166005EE51F /* art.atlas */,
 				D8693E57181B08AE005EE51F /* MainAppDelegate.h */,
 				D8693E58181B08AE005EE51F /* MainAppDelegate.m */,
 				D8693E5A181B08AE005EE51F /* Main.storyboard */,
@@ -172,6 +179,16 @@
 				D8693E75181B08AE005EE51F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D8693E91181C8166005EE51F /* art.atlas */ = {
+			isa = PBXGroup;
+			children = (
+				D8693E92181C817D005EE51F /* tri-blink.png */,
+				D8693E93181C817D005EE51F /* tri-leg.png */,
+				D8693E94181C817D005EE51F /* tri-open.png */,
+			);
+			name = art.atlas;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,7 +270,10 @@
 			files = (
 				D8693E53181B08AE005EE51F /* InfoPlist.strings in Resources */,
 				D8693E66181B08AE005EE51F /* Images.xcassets in Resources */,
+				D8693E97181C817D005EE51F /* tri-open.png in Resources */,
+				D8693E96181C817D005EE51F /* tri-leg.png in Resources */,
 				D8693E64181B08AE005EE51F /* Spaceship.png in Resources */,
+				D8693E95181C817D005EE51F /* tri-blink.png in Resources */,
 				D8693E5C181B08AE005EE51F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -491,6 +511,7 @@
 				D8693E7E181B08AE005EE51F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D8693E7F181B08AE005EE51F /* Build configuration list for PBXNativeTarget "TangramTests" */ = {
 			isa = XCConfigurationList;
@@ -499,6 +520,7 @@
 				D8693E81181B08AE005EE51F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

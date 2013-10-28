@@ -23,6 +23,7 @@
     
     // Create and configure the scene.
     SKScene * scene = [LevelScene sceneWithSize:skView.bounds.size];
+    
     scene.scaleMode = SKSceneScaleModeAspectFill;
     
     // Present the scene.

@@ -14,19 +14,21 @@
 {
     if (self = [super init])
     {
-         SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
+        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"tri-open"];
+        SKTexture *f1 = [SKTexture textureWithImageNamed:@"tri-blink.png"];
+        SKTexture *f2 = [SKTexture textureWithImageNamed:@"tri-leg.png"];
+        SKTexture *f3 = [SKTexture textureWithImageNamed:@"tri-open.png"];
+        NSArray *triangleChillingTextures = @[f1, f3];
+        SKAction *chillingAnimiation = [SKAction animateWithTextures:triangleChillingTextures
+                                                        timePerFrame:2.0
+                                                              resize:NO
+                                                             restore:YES];
+        SKAction *chillingForever = [SKAction repeatActionForever:chillingAnimiation];
+        [sprite runAction:chillingForever];
+        self.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.size];
+        self.physicsBody.dynamic = YES;
 
         [self addChild:sprite];
-//        SKShapeNode *square = [[SKShapeNode alloc] init];
-//        self.path = CGPathCreateWithRoundedRect(CGRectMake(0, 0, 100, 100), 5, 5, nil);
-//        self.fillColor = [UIColor redColor];
-//        self.lineWidth = .2;
-//        
-//        self.antialiased = YES;
-//        self.strokeColor = [UIColor whiteColor];
-        
-        
-        
         self.anchorPoint = CGPointMake(0.5, 0.5); // sets rotation anchor to center of object
         
     }
