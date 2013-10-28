@@ -9,7 +9,7 @@
 #import <SpriteKit/SpriteKit.h>
 #import "BlockNode.h"
 
-@interface LevelScene : SKScene
+@interface LevelScene : SKScene <SKPhysicsContactDelegate>
 
 @property(strong, nonatomic) BlockNode *testBlock;
 @property(nonatomic) CGFloat rotation;
