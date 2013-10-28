@@ -30,7 +30,7 @@
 
         [self addChild:sprite];
         self.anchorPoint = CGPointMake(0.5, 0.5); // sets rotation anchor to center of object
-        
+        self.isButton = TRUE; // tells block that it is a button
     }
     return self;
 }

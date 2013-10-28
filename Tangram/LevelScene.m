@@ -20,12 +20,9 @@
         
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
         
-        SKSpriteNode *testBlock = [[BlockNode alloc] init];
+        BlockNode *testBlock = [[BlockNode alloc] init];
         testBlock.position = CGPointMake(self.size.width/2, self.size.height/2);
-        //[testBlock setScale:50];
         
-        // ** all nodes have a user data dictionary to store specific things assocted with the node
-        //testBlock.userData
         [self addChild:testBlock];
         
         SKSpriteNode *secondBlock = [[BlockNode alloc] init];
@@ -55,22 +52,13 @@
     /* Called when a touch begins */
     
     for (UITouch *touch in touches) {
-        //CGPoint location = [touch locationInNode:self];
-        
-        // later on store an array of objects
-        
-//        if([_testBlock containsPoint:location])
-//        {
-//            
-//        }
+
     }
 }
 
 -(void)selectNodeForTouch:(CGPoint)touchLocation
 {
-    _selectedNode =  (SKSpriteNode *)[self nodeAtPoint:touchLocation];
-    
-    
+        _selectedNode =  (BlockNode *)[self nodeAtPoint:touchLocation];
 }
 
 -(void)pan:(UIPanGestureRecognizer *)gesture
@@ -78,9 +66,7 @@
     if (gesture.state == UIGestureRecognizerStateBegan)
     {
         CGPoint touchLocation = [gesture locationInView:gesture.view];
-        
         touchLocation = [self convertPointFromView:touchLocation];
-        
         [self selectNodeForTouch:touchLocation];
     }
     
@@ -91,13 +77,21 @@
         _selectedNode.position = CGPointMake(_selectedNode.position.x + translation.x,
                                           _selectedNode.position.y - translation.y);
         [gesture setTranslation:CGPointMake(0, 0) inView:self.view];
+        NSLog(@"called or not");
         
-        //CGPoint location = [gesture locationInView:self.view];
+        // check to see if object location is over the trash can, if it is remove the object
+    }
     
-//        
-//        if ([_selectedNode containsPoint:location]) {
-//            NSLog(@"Pan Detected");
-//        }
+    // use to determine when initial drag is completed
+    // why does _selectedNode.isButton break; Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '-[SKSpriteNode isButton]: unrecognized selector sent to instance 0xa36ffc0'
+    // break the system
+    
+    if (gesture.state == UIGestureRecognizerStateEnded)
+    {
+        NSLog(@"Gesture ended");
+        SKSpriteNode *addBlock = [[BlockNode alloc] init];
+        addBlock.position = CGPointMake(self.size.width/2, self.size.height/2);
+        [self addChild:addBlock];
         
     }
 }
@@ -107,9 +101,7 @@
     if (gesture.state == UIGestureRecognizerStateBegan)
     {
         CGPoint touchLocation = [gesture locationInView:gesture.view];
-        
         touchLocation = [self convertPointFromView:touchLocation];
-        
         [self selectNodeForTouch:touchLocation];
     }
     if ((gesture.state == UIGestureRecognizerStateChanged) ||
@@ -117,9 +109,10 @@
     {
         _rotation = _rotation - gesture.rotation;
         _selectedNode.zRotation = _rotation;
-        
         gesture.rotation = 0.0;
     }
+    
+
 }
 
 -(void)update:(CFTimeInterval)currentTime

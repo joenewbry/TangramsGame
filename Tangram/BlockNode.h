@@ -9,5 +9,6 @@
 #import <SpriteKit/SpriteKit.h>
 
 @interface BlockNode : SKSpriteNode
-
+@property (nonatomic) BOOL isButton;
+@property (nonatomic) int objectType;
 @end
