@@ -15,3 +15,4 @@ profile
 *.moved-aside
 DerivedData
 .idea/:w
+Tangram.xcodeproj/project.xcworkspace/xcshareddata/
