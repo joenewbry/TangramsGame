@@ -16,8 +16,6 @@
 		D8693E59181B08AE005EE51F /* MainAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D8693E58181B08AE005EE51F /* MainAppDelegate.m */; };
 		D8693E5C181B08AE005EE51F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8693E5A181B08AE005EE51F /* Main.storyboard */; };
 		D8693E5F181B08AE005EE51F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8693E5E181B08AE005EE51F /* MainViewController.m */; };
-		D8693E62181B08AE005EE51F /* MainMyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D8693E61181B08AE005EE51F /* MainMyScene.m */; };
-		D8693E64181B08AE005EE51F /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = D8693E63181B08AE005EE51F /* Spaceship.png */; };
 		D8693E66181B08AE005EE51F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8693E65181B08AE005EE51F /* Images.xcassets */; };
 		D8693E6D181B08AE005EE51F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8693E6C181B08AE005EE51F /* XCTest.framework */; };
 		D8693E6E181B08AE005EE51F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8693E46181B08AD005EE51F /* Foundation.framework */; };
@@ -56,9 +54,6 @@
 		D8693E5B181B08AE005EE51F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D8693E5D181B08AE005EE51F /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		D8693E5E181B08AE005EE51F /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		D8693E60181B08AE005EE51F /* MainMyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainMyScene.h; sourceTree = "<group>"; };
-		D8693E61181B08AE005EE51F /* MainMyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainMyScene.m; sourceTree = "<group>"; };
-		D8693E63181B08AE005EE51F /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
 		D8693E65181B08AE005EE51F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D8693E6B181B08AE005EE51F /* TangramTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TangramTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8693E6C181B08AE005EE51F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -141,9 +136,6 @@
 				D8693E5E181B08AE005EE51F /* MainViewController.m */,
 				D8693E82181B218B005EE51F /* LevelScene.h */,
 				D8693E83181B218B005EE51F /* LevelScene.m */,
-				D8693E60181B08AE005EE51F /* MainMyScene.h */,
-				D8693E61181B08AE005EE51F /* MainMyScene.m */,
-				D8693E63181B08AE005EE51F /* Spaceship.png */,
 				D8693E65181B08AE005EE51F /* Images.xcassets */,
 				D8693E4F181B08AE005EE51F /* Supporting Files */,
 				D8693E8B181B638A005EE51F /* BlockNode.h */,
@@ -272,7 +264,6 @@
 				D8693E66181B08AE005EE51F /* Images.xcassets in Resources */,
 				D8693E97181C817D005EE51F /* tri-open.png in Resources */,
 				D8693E96181C817D005EE51F /* tri-leg.png in Resources */,
-				D8693E64181B08AE005EE51F /* Spaceship.png in Resources */,
 				D8693E95181C817D005EE51F /* tri-blink.png in Resources */,
 				D8693E5C181B08AE005EE51F /* Main.storyboard in Resources */,
 			);
@@ -295,7 +286,6 @@
 			files = (
 				D8693E55181B08AE005EE51F /* main.m in Sources */,
 				D8693E84181B218B005EE51F /* LevelScene.m in Sources */,
-				D8693E62181B08AE005EE51F /* MainMyScene.m in Sources */,
 				D8693E8D181B638A005EE51F /* BlockNode.m in Sources */,
 				D8693E5F181B08AE005EE51F /* MainViewController.m in Sources */,
 				D8693E59181B08AE005EE51F /* MainAppDelegate.m in Sources */,

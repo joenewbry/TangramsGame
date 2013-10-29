@@ -14,8 +14,6 @@ static const uint32_t blockCategory = 0x1 << 0;
 static const uint32_t wallCategory = 0x1 << 1;
 static const uint32_t targetCategory = 0x1 << 2;
 
-
-
 @implementation LevelScene
 
 -(id)initWithSize:(CGSize)size {
@@ -45,14 +43,25 @@ static const uint32_t targetCategory = 0x1 << 2;
     
         [self addChild:secondBlock];
         
-//        SKSpriteNode * testing = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(100.0, 100.0)];
-//        testing.position = CGPointMake(self.size.width/2, self.size.height/2);
-//        testing.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100.0, 100.0)];
-//        testing.physicsBody.dynamic = YES;
-//        testing.physicsBody.categoryBitMask = blockCategory;
-//        testing.physicsBody.contactTestBitMask = blockCategory; // calls intersection method
-//        testing.physicsBody.collisionBitMask = blockCategory;
-//        [self addChild:testing];
+//        SKSpriteNode * redBlock = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(100.0, 100.0)];
+//        redBlock.position = CGPointMake(self.size.width/2, self.size.height/2);
+//        redBlock.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100.0, 100.0)];
+//        redBlock.physicsBody.dynamic = YES;
+//        redBlock.physicsBody.categoryBitMask = blockCategory;
+//        //redBlock.physicsBody.contactTestBitMask = blockCategory; // calls intersection method
+//        redBlock.physicsBody.collisionBitMask = blockCategory;
+//        [self addChild:redBlock];
+//        
+//        SKSpriteNode * greenBlock = [SKSpriteNode spriteNodeWithColor:[UIColor greenColor] size:CGSizeMake(100.0, 100.0)];
+//        greenBlock.position = CGPointMake(self.size.width/3, self.size.height/3);
+//        greenBlock.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100.0, 100.0)];
+//        greenBlock.physicsBody.dynamic = YES;
+//        greenBlock.physicsBody.categoryBitMask = blockCategory;
+//        greenBlock.physicsBody.contactTestBitMask = blockCategory; // calls intersection method
+//        greenBlock.physicsBody.collisionBitMask = blockCategory;
+//        [self addChild:greenBlock];
+        
+        
     
     }
     return self;
@@ -60,7 +69,7 @@ static const uint32_t targetCategory = 0x1 << 2;
 
 - (void)setUpPhysics
 {
-    self.physicsWorld.gravity = CGVectorMake(0.0, -.3);
+    self.physicsWorld.gravity = CGVectorMake(0.0, -0.3);
     self.physicsWorld.contactDelegate = self;
 }
 
@@ -85,7 +94,7 @@ static const uint32_t targetCategory = 0x1 << 2;
 
 -(void)selectNodeForTouch:(CGPoint)touchLocation
 {
-        _selectedNode =  (BlockNode *)[self nodeAtPoint:touchLocation];
+        _selectedNode =  [self nodeAtPoint:touchLocation];
 }
 
 -(void)pan:(UIPanGestureRecognizer *)gesture
@@ -95,6 +104,7 @@ static const uint32_t targetCategory = 0x1 << 2;
         CGPoint touchLocation = [gesture locationInView:gesture.view];
         touchLocation = [self convertPointFromView:touchLocation];
         [self selectNodeForTouch:touchLocation];
+//        _selectedNode.physicsBody.dynamic = NO;
     }
     
     else if ((gesture.state == UIGestureRecognizerStateChanged) ||
@@ -120,7 +130,9 @@ static const uint32_t targetCategory = 0x1 << 2;
         addBlock.physicsBody.categoryBitMask = blockCategory; // type of physics objects
         addBlock.physicsBody.collisionBitMask = blockCategory | wallCategory; // collision with specified objects calls method
         addBlock.physicsBody.contactTestBitMask = blockCategory | wallCategory; // contact with specified object types calls method
-        [self addChild:addBlock];
+       [self addChild:addBlock];
+
+        _selectedNode.physicsBody.dynamic = YES;
         
     }
 }
@@ -147,7 +159,6 @@ static const uint32_t targetCategory = 0x1 << 2;
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
     SKPhysicsBody *firstBody, *secondBody;
-    NSLog(@"contact occuring");
     if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask)
     {
         firstBody = contact.bodyA;
@@ -158,11 +169,12 @@ static const uint32_t targetCategory = 0x1 << 2;
         firstBody = contact.bodyB;
         secondBody = contact.bodyA;
     }
-//    if ((firstBody.categoryBitMask & missileCategory) != 0)
-//    {
-//        [self attack: secondBody.node withMissile:firstBody.node];
-//    }
-//    ...
+    
+    if ((firstBody.categoryBitMask & blockCategory) != 0)
+    {
+        NSLog(@"block has hit target");
+    }
+
 }
 
 -(void)update:(CFTimeInterval)currentTime

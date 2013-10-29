@@ -13,7 +13,7 @@
 
 @property(strong, nonatomic) BlockNode *testBlock;
 @property(nonatomic) CGFloat rotation;
-@property(strong, nonatomic) BlockNode *selectedNode;
+@property(strong, nonatomic) SKNode *selectedNode;
 
 -(void)rotate:(UIRotationGestureRecognizer *)gesture;
 -(void)pan:(UIPanGestureRecognizer *)gesture;

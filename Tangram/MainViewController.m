@@ -7,7 +7,6 @@
 //
 
 #import "MainViewController.h"
-#import "MainMyScene.h"
 #import "LevelScene.h"
 
 @implementation MainViewController

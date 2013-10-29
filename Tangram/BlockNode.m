@@ -18,9 +18,9 @@
         SKTexture *f1 = [SKTexture textureWithImageNamed:@"tri-blink.png"];
        // SKTexture *f2 = [SKTexture textureWithImageNamed:@"tri-leg.png"];
         SKTexture *f3 = [SKTexture textureWithImageNamed:@"tri-open.png"];
-        NSArray *triangleChillingTextures = @[f1, f3];
+        NSArray *triangleChillingTextures = @[f1, f1, f1, f1, f1, f3];
         SKAction *chillingAnimiation = [SKAction animateWithTextures:triangleChillingTextures
-                                                        timePerFrame:2.0
+                                                        timePerFrame:.2
                                                               resize:NO
                                                              restore:YES];
         SKAction *chillingForever = [SKAction repeatActionForever:chillingAnimiation];
