@@ -16,10 +16,14 @@
 {
      if (self = [super initWithSize:size])
     {
-        self.backgroundColor = [UIColor blackColor];
+        self.backgroundColor = [UIColor blueColor];
         
-        SKSpriteNode *firstLevel = [[SKSpriteNode alloc] initWithColor:[UIColor purpleColor] size:CGSizeMake(100.0, 100.0)];
-        [self addChild:firstLevel];
+        SKLabelNode *level1 = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
+        level1.position = CGPointMake(self.size.width/2, self.size.height/2);
+        level1.fontColor = [UIColor redColor];
+        level1.text = @"Level 1";
+        
+        [self addChild:level1];
     }
     return self;
 }
