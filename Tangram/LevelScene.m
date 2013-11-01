@@ -14,18 +14,14 @@ static const uint32_t blockCategory = 0x1 << 0;
 static const uint32_t wallCategory = 0x1 << 1;
 static const uint32_t targetCategory = 0x1 << 2;
 
-
-/* each block type corresponds to a specific number
-    0 - triangle
-    1 - square
-    2 - rhombus
-    3 - trapezoid
-*/
+// TODO: change to a diction of levels (defined by level name strings? and arrays of 4 ints defining the number of each object type
 const float levelData[] = {0,1};
 
 @interface LevelScene ()
 {
-    CGPoint startPoint;
+    CGPoint startPoint; // stores starting touch location if final block placement is incorrect
+    CGFloat _rotation; //
+    SKNode *_selectedNode;
 }
 
 @end
@@ -35,6 +31,7 @@ const float levelData[] = {0,1};
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
+        _selectedNode = [[SKNode alloc] init];
         
         [self setupPhysics];
         
@@ -43,47 +40,12 @@ const float levelData[] = {0,1};
         [self setupTargetInScene];
         
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
-        
-//        BlockNode *testBlock = [[BlockNode alloc] init];
-//        testBlock.physicsBody.categoryBitMask = blockCategory; // type of physics objects
-//        testBlock.physicsBody.collisionBitMask = 0; // collision with specified objects calls method
-//        testBlock.physicsBody.contactTestBitMask = blockCategory | wallCategory; // contact with specified object types calls method
-//        testBlock.position = CGPointMake(self.size.width/2, self.size.height/2);
-//        //testBlock.physicsBody.dynamic = YES;
-//        testBlock.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100.0, 100.0)];
-//        [self addChild:testBlock];
-        
-//        SKSpriteNode *secondBlock = [[BlockNode alloc] init];
-//        secondBlock.position = CGPointMake(self.size.width/3, self.size.height/3);
-//        secondBlock.physicsBody.categoryBitMask = blockCategory;
-//        secondBlock.physicsBody.collisionBitMask = 0;
-//        secondBlock.physicsBody.contactTestBitMask = blockCategory | wallCategory;
-//        //secondBlock.physicsBody.dynamic = YES;
-//        secondBlock.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100.0, 100.0)];
-//    
-//        [self addChild:secondBlock];
-        
-//        SKSpriteNode * redBlock = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(100.0, 100.0)];
-//        redBlock.position = CGPointMake(self.size.width/2, self.size.height/2);
-//        redBlock.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100.0, 100.0)];
-//        redBlock.physicsBody.dynamic = YES;
-//        redBlock.physicsBody.categoryBitMask = blockCategory;
-//        //redBlock.physicsBody.contactTestBitMask = blockCategory; // calls intersection method
-//        redBlock.physicsBody.collisionBitMask = blockCategory;
-//        [self addChild:redBlock];
-//        
-//        SKSpriteNode * greenBlock = [SKSpriteNode spriteNodeWithColor:[UIColor greenColor] size:CGSizeMake(100.0, 100.0)];
-//        greenBlock.position = CGPointMake(self.size.width/3, self.size.height/3);
-//        greenBlock.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100.0, 100.0)];
-//        greenBlock.physicsBody.dynamic = YES;
-//        greenBlock.physicsBody.categoryBitMask = blockCategory;
-//        greenBlock.physicsBody.contactTestBitMask = blockCategory; // calls intersection method
-//        greenBlock.physicsBody.collisionBitMask = blockCategory;
-//        [self addChild:greenBlock];
     }
     return self;
 }
 
+
+// TODO: change this so the initilization is from BlockNode rather than SKSpriteNode (takes one extra parameter specifying name or type)
 -(void)setupBlocksInScene
 {
 
@@ -98,11 +60,14 @@ const float levelData[] = {0,1};
             triangleBlock.physicsBody.contactTestBitMask = blockCategory | targetCategory | wallCategory;
             triangleBlock.physicsBody.collisionBitMask = 0;
             triangleBlock.physicsBody.dynamic = YES;
+            triangleBlock.physicsBody.usesPreciseCollisionDetection = YES;
             
+            /* line below moves anchor but it needs a little fine tuning once we have final blocks made */
             //[triangleBlock setAnchorPoint:CGPointMake(triangleBlock.size.width/3, triangleBlock.size.width/3)];
             
             [self addChild:triangleBlock];
         }
+        
         else if(levelData[i] == 1)
         {
             SKSpriteNode *squareBlock = [SKSpriteNode spriteNodeWithColor:[UIColor greenColor] size:CGSizeMake(100.0, 100.0)];
@@ -112,27 +77,31 @@ const float levelData[] = {0,1};
             squareBlock.physicsBody.contactTestBitMask = blockCategory | targetCategory | wallCategory;
             squareBlock.physicsBody.collisionBitMask = 0;
             squareBlock.physicsBody.dynamic = YES;
+            squareBlock.physicsBody.usesPreciseCollisionDetection = YES;
             
             [self addChild:squareBlock];
             
         }
+        
+        // drawing of rhombus TODO
         else if (levelData[i] == 2)
         {
             SKSpriteNode *rhombusBlock = [SKSpriteNode spriteNodeWithColor:[UIColor orangeColor] size:CGSizeMake(100.0, 100.0)];
             rhombusBlock.position = CGPointMake(self.size.width/ 5 + self.size.width / 5 * i, self.size.height / 3);
             [self addChild:rhombusBlock];
         }
+        
+        // TODO drawing of trapezoid block
         else if (levelData[i] == 3)
         {
             SKSpriteNode *trapezoidBlock = [SKSpriteNode spriteNodeWithColor:[UIColor blackColor] size:CGSizeMake(100.0, 100.0)];
             trapezoidBlock.position = CGPointMake(self.size.width/ 5 + self.size.width / 5 * i, self.size.height / 3);
             [self addChild:trapezoidBlock];
         }
-    
     }
 }
 
-
+// TODO: add in physics body outline and figure out how to determine if shap is filled
 -(void)setupTargetInScene
 {
     SKSpriteNode *largeSquareTarget = [SKSpriteNode spriteNodeWithColor:[UIColor blackColor] size: CGSizeMake(200, 200)];
@@ -146,6 +115,7 @@ const float levelData[] = {0,1};
     self.physicsWorld.contactDelegate = self;
 }
 
+// sets recognizers for pan, rotate, and tap gestures
 - (void)didMoveToView:(SKView *)view
 {
     UIPanGestureRecognizer *gestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
@@ -161,25 +131,23 @@ const float levelData[] = {0,1};
     [[self view] addGestureRecognizer:tapGestureRecognizer];
 }
 
+// TODO navigation objects added and recognized/responded to here
 -(void)tap:(UITapGestureRecognizer *)gesture
 {
     
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    /* Called when a touch begins */
-    
-    for (UITouch *touch in touches) {
-
-    }
-}
+// TODO update so that node is only selected if touchLocation is within the physics body rather than bounds of object
 
 -(void)selectNodeForTouch:(CGPoint)touchLocation
 {
-    // update so that node is only selected if touchLocation is within the physics body
     _selectedNode =  [self nodeAtPoint:touchLocation];
 }
 
+
+// TODO: check to see if object location is over the trash can, if it is remove the object
+// TODO: add in block counting functionality so on drop from pallet a new block is added
+// TODO (not critical): fix initial point calculation stuff
 -(void)pan:(UIPanGestureRecognizer *)gesture
 {
     if (gesture.state == UIGestureRecognizerStateBegan)
@@ -189,10 +157,13 @@ const float levelData[] = {0,1};
         
         touchLocation = [self convertPointFromView:touchLocation];
         [self selectNodeForTouch:touchLocation];
+        
+        startPoint.x = startPoint.x + _selectedNode.position.x - touchLocation.x;
+        startPoint.y = startPoint.y + touchLocation.y - _selectedNode.position.y;
         _selectedNode.position = touchLocation;
-//        _selectedNode.physicsBody.dynamic = NO;
+        
         [_selectedNode setScale:.5];
-        //[_selectedNode setAlpha:.8];
+        [_selectedNode setZPosition:100.0];
     }
     
     else if ((gesture.state == UIGestureRecognizerStateChanged) ||
@@ -203,25 +174,21 @@ const float levelData[] = {0,1};
         _selectedNode.position = CGPointMake(_selectedNode.position.x + translation.x,
                                           _selectedNode.position.y - translation.y);
         [gesture setTranslation:CGPointMake(0, 0) inView:self.view];
-//        CGPoint touchLocation = [gesture locationInView:gesture.view];
-//        _selectedNode.position = touchLocation;
-
-        // check to see if object location is over the trash can, if it is remove the object
     }
-    
-    // use to determine when initial drag is completed
-    // why does _selectedNode.isButton break; Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '-[SKSpriteNode isButton]: unrecognized selector sent to instance 0xa36ffc0'
-    // break the system
     
     if (gesture.state == UIGestureRecognizerStateEnded)
     {
-        // check to see if node overlaps with any other nodes
+        if (_selectedNode.alpha != 1.0)
+        {
+            [_selectedNode setPosition:CGPointMake(startPoint.x, self.size.height - startPoint.y)];
+        }
         
-        // set selected node scale back to default size
+        // set selected node scale back to default size and alpha and zPosition
         [_selectedNode setScale:1];
         [_selectedNode setAlpha:1];
+        [_selectedNode setZPosition:1.0];
         
-        // adding node if the motion is ended
+        /* a good way to add a block after it has been drug out of the block pallet */
 //        SKSpriteNode *addBlock = [[BlockNode alloc] init];
 //        addBlock.position = CGPointMake(self.size.width/2, self.size.height/2);
 //        
@@ -229,9 +196,6 @@ const float levelData[] = {0,1};
 //        addBlock.physicsBody.collisionBitMask = blockCategory | wallCategory; // collision with specified objects calls method
 //        addBlock.physicsBody.contactTestBitMask = blockCategory | wallCategory; // contact with specified object types calls method
 //       [self addChild:addBlock];
-//
-//        _selectedNode.physicsBody.dynamic = YES;
-        
     }
 }
 
@@ -254,6 +218,8 @@ const float levelData[] = {0,1};
 
 }
 
+
+// TODO: block collision with target handled
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
     SKPhysicsBody *firstBody, *secondBody;
@@ -270,9 +236,11 @@ const float levelData[] = {0,1};
     
     if ((firstBody.categoryBitMask & blockCategory) != 0)
     {
+        
         [_selectedNode setAlpha:.4];
     }
-    if ((firstBody.categoryBitMask & blockCategory) == 0)
+    
+    if ((firstBody.categoryBitMask & targetCategory) != 0)
     {
         NSLog(@"Hit block");
     }
@@ -297,6 +265,7 @@ const float levelData[] = {0,1};
     }
 }
 
+// TODO: Maybe check for win condition in here??
 -(void)update:(CFTimeInterval)currentTime
 {
     /* Called before each frame is rendered */

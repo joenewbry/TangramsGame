@@ -11,7 +11,7 @@
 
 @implementation LevelSelectionScene
 
-//
+// TODO: add three different levels & navigation between levels
 - (id)initWithSize:(CGSize) size
 {
      if (self = [super initWithSize:size])

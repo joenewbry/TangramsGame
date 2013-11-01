@@ -19,18 +19,13 @@
 
 @implementation HomeScene
 
+// TODO: add in settings page
 -(id)initWithSize:(CGSize)size {
      if (self = [super initWithSize:size])
      {
         /* Setup your scene here */
         
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
-        
-
-        
-        SKSpriteNode *block = [[SKSpriteNode alloc] initWithColor:[UIColor yellowColor] size:CGSizeMake(500.0, 500.0)];
-         [block setPosition:CGPointMake(self.size.width/2, self.size.height/2)];
-        [self addChild:block];
          
          SKLabelNode *playButton = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
          playButton.fontSize = 20;
@@ -42,6 +37,7 @@
     return self;
 }
 
+// TODO: remove unnecessary gesture recognizers
 - (void)didMoveToView:(SKView *)view
 {
     UIPanGestureRecognizer *gestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
@@ -55,7 +51,6 @@
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(tap:)];
     [[self view] addGestureRecognizer:tapGestureRecognizer];
-    
 }
 
 -(void)pan:(UIGestureRecognizer*) gesture
