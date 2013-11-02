@@ -7,7 +7,6 @@
 //
 
 #import "LevelScene.h"
-#import "BlockNode.h"
 
 // the different categories used in collision detection
 static const uint32_t blockCategory = 0x1 << 0;
@@ -15,31 +14,34 @@ static const uint32_t wallCategory = 0x1 << 1;
 static const uint32_t targetCategory = 0x1 << 2;
 static const uint32_t trashCategory = 0x1 << 3;
 
-// TODO: dictionary defined by level name strings? and arrays of 4 ints defining the number of each object type
-int levelData[] = {2,1,0,0};
-
 @interface LevelScene ()
 {
     CGPoint startPoint; // stores starting touch location if final block placement is incorrect
-    CGFloat _rotation; //
+    CGFloat _rotation;
     BlockNode *_selectedNode;
     SKLabelNode *trianglesRemaining;
     SKLabelNode *squaresRemaining;
-    //SKLabelNode *squaresRemaining;
 }
 
 @end
 
 @implementation LevelScene
 
--(id)initWithSize:(CGSize)size {
+
+- (id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-        /* Setup your scene here */
+        
+        // TODO: change this sop that initiWithLevel passes the right level int
+        // inialize the model
+        self.levelModel = [[LevelModel alloc] initWithLevel:0];
+        
+        self.triangleCount = [self.levelModel.shapeCount[TRIANGLE] integerValue];
+        self.squareCount = [self.levelModel.shapeCount[SQUARE] integerValue];
+        self.trapezoidCount = [self.levelModel.shapeCount[TRAPEZOID] integerValue];
+        self.rhombusCount = [self.levelModel.shapeCount[RHOMBUS] integerValue];
         
         [self setupPhysics];
-        
         [self setupBlocksInScene];
-        
         [self setupTargetInScene];
         
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
@@ -53,66 +55,61 @@ int levelData[] = {2,1,0,0};
 -(void)setupBlocksInScene
 {
 
-    for (int i = 0; i < sizeof(levelData); i++)
-    {
-        //
-        if (levelData[i] != 0){
-            if (i == 0)
-            {
-                // init, positions, and sets up collision logic
-                BlockNode *triangleBlock = [[BlockNode alloc] initWithBlockType:0];
-                triangleBlock.position = CGPointMake(self.size.width/ 5 + self.size.width / 5 * i, self.size.height / 3);
-                triangleBlock.physicsBody.categoryBitMask = blockCategory;
-                triangleBlock.physicsBody.contactTestBitMask = blockCategory | targetCategory | wallCategory;
-                triangleBlock.physicsBody.collisionBitMask = 0;
-                triangleBlock.objectType = 0;
-                triangleBlock.isButton = true;
-                
-                [self addChild:triangleBlock];
-                
-                trianglesRemaining = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
-                trianglesRemaining.fontColor = [UIColor greenColor];
-                trianglesRemaining.text =  [NSString stringWithFormat:@"%i", levelData[i]];
-                trianglesRemaining.position = CGPointMake(triangleBlock.position.x, triangleBlock.position.y - 75);
-                [self addChild:trianglesRemaining];
-            }
-            
-            else if(i == 1)
-            {
-                BlockNode *squareBlock = [[BlockNode alloc] initWithBlockType:1];
-                squareBlock.position = CGPointMake(self.size.width/ 5 + self.size.width / 5 * i, self.size.height / 3);
-                squareBlock.physicsBody.categoryBitMask = blockCategory;
-                squareBlock.physicsBody.contactTestBitMask = blockCategory | targetCategory | wallCategory;
-                squareBlock.physicsBody.collisionBitMask = 0;
-                [self addChild:squareBlock];
-                
-                squaresRemaining = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
-                squaresRemaining.fontColor = [UIColor greenColor];
-                squaresRemaining.text =  [NSString stringWithFormat:@"%i", levelData[i]];
-                squaresRemaining.position = CGPointMake(squareBlock.position.x, squareBlock.position.y - 75);
-                [self addChild:squaresRemaining];
-                
-            }
-            
-            // drawing of rhombus TODO
-            else if (i == 2)
-            {
-                SKSpriteNode *rhombusBlock = [SKSpriteNode spriteNodeWithColor:[UIColor orangeColor] size:CGSizeMake(100.0, 100.0)];
-                rhombusBlock.position = CGPointMake(self.size.width/ 5 + self.size.width / 5 * i, self.size.height / 3);
-                [self addChild:rhombusBlock];
-            }
-            
-            // TODO drawing of trapezoid block
-            else if (i == 3)
-            {
-                SKSpriteNode *trapezoidBlock = [SKSpriteNode spriteNodeWithColor:[UIColor blackColor] size:CGSizeMake(100.0, 100.0)];
-                trapezoidBlock.position = CGPointMake(self.size.width/ 5 + self.size.width / 5 * i, self.size.height / 3);
-                [self addChild:trapezoidBlock];
-            }
-        }
+    if (self.triangleCount > 0){
+        
+        CGPoint trianglePoint = CGPointMake(self.size.width/ 5, self.size.height / 3);
+        BlockNode *triangleBlock = [self createNode:TRIANGLE withPoint:trianglePoint];
+        [self addChild:triangleBlock];
+      
+        CGPoint triangleLabelPoint = CGPointMake(triangleBlock.position.x, triangleBlock.position.y - 75);
+        trianglesRemaining = [self labelNodeWithRemaining:self.triangleCount at:triangleLabelPoint];
+        [self addChild:trianglesRemaining];
+    }
+    
+    if (self.squareCount > 0) {
+        
+        CGPoint squarePoint  = CGPointMake(self.size.width/ 5 + (self.size.width / 5), self.size.height / 3);
+        BlockNode *squareBlock = [self createNode:SQUARE withPoint:squarePoint];
+        [self addChild:squareBlock];
+        
+        CGPoint squareLabelPoint = CGPointMake(squareBlock.position.x, squareBlock.position.y - 75);
+        squaresRemaining = [self labelNodeWithRemaining:self.squareCount at:squareLabelPoint];
+        [self addChild:squaresRemaining];
+    }
+    
+    if (self.rhombusCount > 0) {
+        // draw a rhombus
+       
+        // set rhomuses remaining
+    }
 
+    if (self.trapezoidCount > 0) {
+        // draw a trapezoid
+        
+        // set trapezoids remaining
     }
 }
+
+- (BlockNode *)createNode:(BlockType)type withPoint:(CGPoint) point
+{
+    BlockNode * block = [[BlockNode alloc] initWithBlockType:type];
+    block.position = point;
+    block.physicsBody.categoryBitMask = blockCategory;
+    block.physicsBody.contactTestBitMask = blockCategory | targetCategory | wallCategory;
+    block.physicsBody.collisionBitMask = 0;
+    block.isButton = true;
+    return block;
+}
+
+- (SKLabelNode *)labelNodeWithRemaining:(int)numRemaining at:(CGPoint)labelPoint
+{
+    SKLabelNode * shapeRemaining = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
+    shapeRemaining.fontColor = [UIColor greenColor];
+    shapeRemaining.text =  [NSString stringWithFormat:@"%i", numRemaining];
+    shapeRemaining.position = labelPoint;
+    return shapeRemaining;
+}
+
 
 // TODO: add in physics body outline and figure out how to determine if shap is filled
 -(void)setupTargetInScene
@@ -201,6 +198,7 @@ int levelData[] = {2,1,0,0};
     
     if (gesture.state == UIGestureRecognizerStateEnded)
     {
+        
         if (_selectedNode.alpha != 1.0)
         {
             [_selectedNode setPosition:CGPointMake(startPoint.x, self.size.height - startPoint.y)];
@@ -209,21 +207,28 @@ int levelData[] = {2,1,0,0};
         {
             _selectedNode.isButton = false;
             
-            levelData[_selectedNode.objectType] = levelData[_selectedNode.objectType] - 1;
-            
-            // change to dictionary
-            if(_selectedNode.objectType == 0)
-            {
-                trianglesRemaining.text =  [NSString stringWithFormat:@"%i", levelData[_selectedNode.objectType]];
+            int thisCount = -1;
+            switch (_selectedNode.objectType) {
+                case TRIANGLE:
+                    thisCount = --self.triangleCount;
+                    trianglesRemaining.text =  [NSString stringWithFormat:@"%i", self.triangleCount];
+                    break;
+                case SQUARE:
+                    thisCount = --self.squareCount;
+                    squaresRemaining.text = [NSString stringWithFormat:@"%i", self.squareCount];
+                    break;
+                case RHOMBUS:
+                    thisCount = --self.rhombusCount;
+                    break;
+                case TRAPEZOID:
+                    thisCount = --self.trapezoidCount;
+                    break;
+                default:
+                    break;
             }
-            else if (_selectedNode.objectType == 1)
-            {
-                squaresRemaining.text = [NSString stringWithFormat:@"%i", levelData[_selectedNode.objectType]];
-            }
-            
             
             // a block should be added if there is more than 1 block left
-            if (levelData[_selectedNode.objectType] > 0)
+            if (thisCount > 0)
             {
                 BlockNode *addBlock = [[BlockNode alloc] initWithBlockType:_selectedNode.objectType];
                 addBlock.position = CGPointMake(self.size.width/ 5 , self.size.height / 3);

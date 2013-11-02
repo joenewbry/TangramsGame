@@ -10,4 +10,10 @@
 
 @interface LevelModel : NSObject
 
+@property (nonatomic, strong) NSArray *shapeCount;
+@property (nonatomic, strong) NSString *outlineFilepath;
+@property (nonatomic, strong) NSArray *physicsBodyCoords;
+
+- (id)initWithLevel:(int)level;
+
 @end

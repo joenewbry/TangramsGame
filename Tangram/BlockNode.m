@@ -10,34 +10,38 @@
 
 @implementation BlockNode
 
--(id)initWithBlockType:(int) blockType
+
+-(id)initWithBlockType:(BlockType)blockType
 {
     if (self = [super init])
     {
         [self.physicsBody setDynamic:YES];
         [self.physicsBody setUsesPreciseCollisionDetection:YES];
-        if (blockType == 0)
+        
+        self.objectType = blockType;
+        
+        // triangle is type 0
+        if (blockType == TRIANGLE)
         {
-            self.objectType = 0;
             self.isButton = true;
             [self setColor:[UIColor orangeColor]];
             [self setSize:CGSizeMake(100.0, 100.0)];
             [self setPhysicsBody:[SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100.0, 100.0)]];
 
         }
-        else if (blockType == 1)
+        // square is type 1
+        else if (blockType == SQUARE)
         {
-            self.objectType = 1;
             self.isButton = true;
             [self setColor:[UIColor greenColor]];
             [self setSize:CGSizeMake(100.0, 100.0)];
             [self setPhysicsBody:[SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100.0, 100.0)]];
         }
-        else if (blockType == 2)
+        else if (blockType == TRAPEZOID)
         {
             
         }
-        else if (blockType == 3)
+        else if (blockType == RHOMBUS)
         {
             
         }

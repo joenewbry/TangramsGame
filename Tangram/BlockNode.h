@@ -8,11 +8,21 @@
 
 #import <SpriteKit/SpriteKit.h>
 
+typedef enum {
+    TRIANGLE,
+    SQUARE,
+    TRAPEZOID,
+    RHOMBUS
+} BlockType;
+
+
 @interface BlockNode : SKSpriteNode
 
--(id)initWithBlockType:(int) blockType;
+-(id)initWithBlockType:(BlockType)blockType;
 
 @property (nonatomic) BOOL isButton;
+@property (nonatomic) BlockType blockType;
 @property (nonatomic) int objectType;
+
 @end
 

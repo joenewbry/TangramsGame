@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0D501B92181F716700870EB0 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D501B91181F716700870EB0 /* GameView.m */; };
 		0D501B95181F718400870EB0 /* LevelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D501B94181F718400870EB0 /* LevelModel.m */; };
+		724A600818259AB900852FDE /* levelsData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 724A600718259AB900852FDE /* levelsData.plist */; };
 		D81EA892182302BF00E33EA3 /* HomeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D81EA891182302BF00E33EA3 /* HomeScene.m */; };
 		D81EA89518233DC300E33EA3 /* LevelSelectionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D81EA89418233DC300E33EA3 /* LevelSelectionScene.m */; };
 		D8693E47181B08AD005EE51F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8693E46181B08AD005EE51F /* Foundation.framework */; };
@@ -48,6 +49,7 @@
 		0D501B91181F716700870EB0 /* GameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
 		0D501B93181F718400870EB0 /* LevelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelModel.h; sourceTree = "<group>"; };
 		0D501B94181F718400870EB0 /* LevelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelModel.m; sourceTree = "<group>"; };
+		724A600718259AB900852FDE /* levelsData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = levelsData.plist; sourceTree = "<group>"; };
 		D81EA890182302BF00E33EA3 /* HomeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScene.h; sourceTree = "<group>"; };
 		D81EA891182302BF00E33EA3 /* HomeScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScene.m; sourceTree = "<group>"; };
 		D81EA89318233DC200E33EA3 /* LevelSelectionScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelSelectionScene.h; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				D8693E51181B08AE005EE51F /* InfoPlist.strings */,
 				D8693E54181B08AE005EE51F /* main.m */,
 				D8693E56181B08AE005EE51F /* Tangram-Prefix.pch */,
+				724A600718259AB900852FDE /* levelsData.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8693E53181B08AE005EE51F /* InfoPlist.strings in Resources */,
+				724A600818259AB900852FDE /* levelsData.plist in Resources */,
 				D8693E66181B08AE005EE51F /* Images.xcassets in Resources */,
 				D8693E97181C817D005EE51F /* tri-open.png in Resources */,
 				D8693E96181C817D005EE51F /* tri-leg.png in Resources */,
