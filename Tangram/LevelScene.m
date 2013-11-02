@@ -21,6 +21,14 @@ static const uint32_t trashCategory = 0x1 << 3;
     BlockNode *_selectedNode;
     SKLabelNode *trianglesRemaining;
     SKLabelNode *squaresRemaining;
+    
+    int shapeCount[4];
+    
+    CGPoint trianglePoint;
+    CGPoint triangleLabelPoint;
+    CGPoint squarePoint;
+    CGPoint squareLabelPoint;
+    
 }
 
 @end
@@ -34,11 +42,16 @@ static const uint32_t trashCategory = 0x1 << 3;
         // TODO: change this sop that initiWithLevel passes the right level int
         // inialize the model
         self.levelModel = [[LevelModel alloc] initWithLevel:0];
+
+        // convert shapeCount to ints
+        for (int i = 0; i < self.levelModel.shapeCount.count; i++) {
+            shapeCount[i] = [self.levelModel.shapeCount[i] integerValue];
+        }
         
-        self.triangleCount = [self.levelModel.shapeCount[TRIANGLE] integerValue];
-        self.squareCount = [self.levelModel.shapeCount[SQUARE] integerValue];
-        self.trapezoidCount = [self.levelModel.shapeCount[TRAPEZOID] integerValue];
-        self.rhombusCount = [self.levelModel.shapeCount[RHOMBUS] integerValue];
+        trianglePoint = CGPointMake(self.size.width/ 5, self.size.height / 3);
+        triangleLabelPoint = CGPointMake(trianglePoint.x, trianglePoint.y - 75);
+        squarePoint = CGPointMake(self.size.width/ 5 + (self.size.width / 5), self.size.height / 3);
+        squareLabelPoint = CGPointMake(squarePoint.x, squarePoint.y - 75);
         
         [self setupPhysics];
         [self setupBlocksInScene];
@@ -54,44 +67,41 @@ static const uint32_t trashCategory = 0x1 << 3;
 // TODO: move setup logic into BlockNode class rather than in these methods
 -(void)setupBlocksInScene
 {
-
-    if (self.triangleCount > 0){
+    
+    if (shapeCount[TRIANGLE] > 0){
         
-        CGPoint trianglePoint = CGPointMake(self.size.width/ 5, self.size.height / 3);
-        BlockNode *triangleBlock = [self createNode:TRIANGLE withPoint:trianglePoint];
+        BlockNode *triangleBlock = [self createNodeWithType:TRIANGLE withPoint:trianglePoint];
         [self addChild:triangleBlock];
       
-        CGPoint triangleLabelPoint = CGPointMake(triangleBlock.position.x, triangleBlock.position.y - 75);
-        trianglesRemaining = [self labelNodeWithRemaining:self.triangleCount at:triangleLabelPoint];
+        trianglesRemaining = [self labelNodeWithRemaining:shapeCount[TRIANGLE] at:triangleLabelPoint];
         [self addChild:trianglesRemaining];
     }
     
-    if (self.squareCount > 0) {
+    if (shapeCount[SQUARE] > 0) {
         
-        CGPoint squarePoint  = CGPointMake(self.size.width/ 5 + (self.size.width / 5), self.size.height / 3);
-        BlockNode *squareBlock = [self createNode:SQUARE withPoint:squarePoint];
+        BlockNode *squareBlock = [self createNodeWithType:SQUARE withPoint:squarePoint];
         [self addChild:squareBlock];
         
-        CGPoint squareLabelPoint = CGPointMake(squareBlock.position.x, squareBlock.position.y - 75);
-        squaresRemaining = [self labelNodeWithRemaining:self.squareCount at:squareLabelPoint];
+        squaresRemaining = [self labelNodeWithRemaining:shapeCount[SQUARE] at:squareLabelPoint];
         [self addChild:squaresRemaining];
     }
     
-    if (self.rhombusCount > 0) {
+    if (shapeCount[RHOMBUS] > 0) {
         // draw a rhombus
        
         // set rhomuses remaining
     }
 
-    if (self.trapezoidCount > 0) {
+    if (shapeCount[TRAPEZOID] > 0) {
         // draw a trapezoid
         
         // set trapezoids remaining
     }
 }
 
-- (BlockNode *)createNode:(BlockType)type withPoint:(CGPoint) point
+- (BlockNode *)createNodeWithType:(BlockType)type withPoint:(CGPoint) point
 {
+    
     BlockNode * block = [[BlockNode alloc] initWithBlockType:type];
     block.position = point;
     block.physicsBody.categoryBitMask = blockCategory;
@@ -210,18 +220,18 @@ static const uint32_t trashCategory = 0x1 << 3;
             int thisCount = -1;
             switch (_selectedNode.objectType) {
                 case TRIANGLE:
-                    thisCount = --self.triangleCount;
-                    trianglesRemaining.text =  [NSString stringWithFormat:@"%i", self.triangleCount];
+                    thisCount = --shapeCount[TRIANGLE];
+                    trianglesRemaining.text =  [NSString stringWithFormat:@"%i", shapeCount[TRIANGLE]];
                     break;
                 case SQUARE:
-                    thisCount = --self.squareCount;
-                    squaresRemaining.text = [NSString stringWithFormat:@"%i", self.squareCount];
+                    thisCount = --shapeCount[SQUARE];
+                    squaresRemaining.text = [NSString stringWithFormat:@"%i", shapeCount[SQUARE]];
                     break;
                 case RHOMBUS:
-                    thisCount = --self.rhombusCount;
+                    thisCount = --shapeCount[RHOMBUS];
                     break;
                 case TRAPEZOID:
-                    thisCount = --self.trapezoidCount;
+                    thisCount = --shapeCount[TRAPEZOID];
                     break;
                 default:
                     break;
