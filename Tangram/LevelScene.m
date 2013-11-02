@@ -13,15 +13,19 @@
 static const uint32_t blockCategory = 0x1 << 0;
 static const uint32_t wallCategory = 0x1 << 1;
 static const uint32_t targetCategory = 0x1 << 2;
+static const uint32_t trashCategory = 0x1 << 3;
 
-// TODO: change to a diction of levels (defined by level name strings? and arrays of 4 ints defining the number of each object type
-const float levelData[] = {0,1};
+// TODO: dictionary defined by level name strings? and arrays of 4 ints defining the number of each object type
+int levelData[] = {2,1,0,0};
 
 @interface LevelScene ()
 {
     CGPoint startPoint; // stores starting touch location if final block placement is incorrect
     CGFloat _rotation; //
-    SKNode *_selectedNode;
+    BlockNode *_selectedNode;
+    SKLabelNode *trianglesRemaining;
+    SKLabelNode *squaresRemaining;
+    //SKLabelNode *squaresRemaining;
 }
 
 @end
@@ -31,7 +35,6 @@ const float levelData[] = {0,1};
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
-        _selectedNode = [[SKNode alloc] init];
         
         [self setupPhysics];
         
@@ -46,58 +49,68 @@ const float levelData[] = {0,1};
 
 
 // TODO: change this so the initilization is from BlockNode rather than SKSpriteNode (takes one extra parameter specifying name or type)
+// TODO: move setup logic into BlockNode class rather than in these methods
 -(void)setupBlocksInScene
 {
 
     for (int i = 0; i < sizeof(levelData); i++)
     {
-        if (levelData[i] == 0)
-        {
-            SKSpriteNode *triangleBlock = [SKSpriteNode spriteNodeWithColor:[UIColor yellowColor] size:CGSizeMake(100.0, 100.0)];
-            triangleBlock.position = CGPointMake(self.size.width/ 5 + self.size.width / 5 * i, self.size.height / 3);
-            triangleBlock.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100.0, 100.0)];
-            triangleBlock.physicsBody.categoryBitMask = blockCategory;
-            triangleBlock.physicsBody.contactTestBitMask = blockCategory | targetCategory | wallCategory;
-            triangleBlock.physicsBody.collisionBitMask = 0;
-            triangleBlock.physicsBody.dynamic = YES;
-            triangleBlock.physicsBody.usesPreciseCollisionDetection = YES;
+        //
+        if (levelData[i] != 0){
+            if (i == 0)
+            {
+                // init, positions, and sets up collision logic
+                BlockNode *triangleBlock = [[BlockNode alloc] initWithBlockType:0];
+                triangleBlock.position = CGPointMake(self.size.width/ 5 + self.size.width / 5 * i, self.size.height / 3);
+                triangleBlock.physicsBody.categoryBitMask = blockCategory;
+                triangleBlock.physicsBody.contactTestBitMask = blockCategory | targetCategory | wallCategory;
+                triangleBlock.physicsBody.collisionBitMask = 0;
+                triangleBlock.objectType = 0;
+                triangleBlock.isButton = true;
+                
+                [self addChild:triangleBlock];
+                
+                trianglesRemaining = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
+                trianglesRemaining.fontColor = [UIColor greenColor];
+                trianglesRemaining.text =  [NSString stringWithFormat:@"%i", levelData[i]];
+                trianglesRemaining.position = CGPointMake(triangleBlock.position.x, triangleBlock.position.y - 75);
+                [self addChild:trianglesRemaining];
+            }
             
-            /* line below moves anchor but it needs a little fine tuning once we have final blocks made */
-            //[triangleBlock setAnchorPoint:CGPointMake(triangleBlock.size.width/3, triangleBlock.size.width/3)];
+            else if(i == 1)
+            {
+                BlockNode *squareBlock = [[BlockNode alloc] initWithBlockType:1];
+                squareBlock.position = CGPointMake(self.size.width/ 5 + self.size.width / 5 * i, self.size.height / 3);
+                squareBlock.physicsBody.categoryBitMask = blockCategory;
+                squareBlock.physicsBody.contactTestBitMask = blockCategory | targetCategory | wallCategory;
+                squareBlock.physicsBody.collisionBitMask = 0;
+                [self addChild:squareBlock];
+                
+                squaresRemaining = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
+                squaresRemaining.fontColor = [UIColor greenColor];
+                squaresRemaining.text =  [NSString stringWithFormat:@"%i", levelData[i]];
+                squaresRemaining.position = CGPointMake(squareBlock.position.x, squareBlock.position.y - 75);
+                [self addChild:squaresRemaining];
+                
+            }
             
-            [self addChild:triangleBlock];
-        }
-        
-        else if(levelData[i] == 1)
-        {
-            SKSpriteNode *squareBlock = [SKSpriteNode spriteNodeWithColor:[UIColor greenColor] size:CGSizeMake(100.0, 100.0)];
-            squareBlock.position = CGPointMake(self.size.width/ 5 + self.size.width / 5 * i, self.size.height / 3);
-            squareBlock.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100.0, 100.0)];
-            squareBlock.physicsBody.categoryBitMask = blockCategory;
-            squareBlock.physicsBody.contactTestBitMask = blockCategory | targetCategory | wallCategory;
-            squareBlock.physicsBody.collisionBitMask = 0;
-            squareBlock.physicsBody.dynamic = YES;
-            squareBlock.physicsBody.usesPreciseCollisionDetection = YES;
+            // drawing of rhombus TODO
+            else if (i == 2)
+            {
+                SKSpriteNode *rhombusBlock = [SKSpriteNode spriteNodeWithColor:[UIColor orangeColor] size:CGSizeMake(100.0, 100.0)];
+                rhombusBlock.position = CGPointMake(self.size.width/ 5 + self.size.width / 5 * i, self.size.height / 3);
+                [self addChild:rhombusBlock];
+            }
             
-            [self addChild:squareBlock];
-            
+            // TODO drawing of trapezoid block
+            else if (i == 3)
+            {
+                SKSpriteNode *trapezoidBlock = [SKSpriteNode spriteNodeWithColor:[UIColor blackColor] size:CGSizeMake(100.0, 100.0)];
+                trapezoidBlock.position = CGPointMake(self.size.width/ 5 + self.size.width / 5 * i, self.size.height / 3);
+                [self addChild:trapezoidBlock];
+            }
         }
-        
-        // drawing of rhombus TODO
-        else if (levelData[i] == 2)
-        {
-            SKSpriteNode *rhombusBlock = [SKSpriteNode spriteNodeWithColor:[UIColor orangeColor] size:CGSizeMake(100.0, 100.0)];
-            rhombusBlock.position = CGPointMake(self.size.width/ 5 + self.size.width / 5 * i, self.size.height / 3);
-            [self addChild:rhombusBlock];
-        }
-        
-        // TODO drawing of trapezoid block
-        else if (levelData[i] == 3)
-        {
-            SKSpriteNode *trapezoidBlock = [SKSpriteNode spriteNodeWithColor:[UIColor blackColor] size:CGSizeMake(100.0, 100.0)];
-            trapezoidBlock.position = CGPointMake(self.size.width/ 5 + self.size.width / 5 * i, self.size.height / 3);
-            [self addChild:trapezoidBlock];
-        }
+
     }
 }
 
@@ -105,7 +118,10 @@ const float levelData[] = {0,1};
 -(void)setupTargetInScene
 {
     SKSpriteNode *largeSquareTarget = [SKSpriteNode spriteNodeWithColor:[UIColor blackColor] size: CGSizeMake(200, 200)];
-    largeSquareTarget.position = CGPointMake(self.size.width, self.size.height/3 *2);
+    largeSquareTarget.position = CGPointMake(self.size.width/2, self.size.height/3 *2);
+    largeSquareTarget.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:CGRectMake(0.0, 0.0, 200, 200)];
+    largeSquareTarget.physicsBody.categoryBitMask = targetCategory;
+    largeSquareTarget.physicsBody.collisionBitMask = blockCategory;
     [self addChild:largeSquareTarget];
 }
 
@@ -141,7 +157,14 @@ const float levelData[] = {0,1};
 
 -(void)selectNodeForTouch:(CGPoint)touchLocation
 {
-    _selectedNode =  [self nodeAtPoint:touchLocation];
+    if ([[self nodeAtPoint:touchLocation] isKindOfClass:[BlockNode class]])
+    {
+        _selectedNode = (BlockNode *)[self nodeAtPoint:touchLocation];
+    }
+    else
+    {
+        _selectedNode = nil;
+    }
 }
 
 
@@ -162,7 +185,7 @@ const float levelData[] = {0,1};
         startPoint.y = startPoint.y + touchLocation.y - _selectedNode.position.y;
         _selectedNode.position = touchLocation;
         
-        [_selectedNode setScale:.5];
+        [_selectedNode setScale:.9];
         [_selectedNode setZPosition:100.0];
     }
     
@@ -182,20 +205,39 @@ const float levelData[] = {0,1};
         {
             [_selectedNode setPosition:CGPointMake(startPoint.x, self.size.height - startPoint.y)];
         }
+        else if (_selectedNode.isButton)
+        {
+            _selectedNode.isButton = false;
+            
+            levelData[_selectedNode.objectType] = levelData[_selectedNode.objectType] - 1;
+            
+            // change to dictionary
+            if(_selectedNode.objectType == 0)
+            {
+                trianglesRemaining.text =  [NSString stringWithFormat:@"%i", levelData[_selectedNode.objectType]];
+            }
+            else if (_selectedNode.objectType == 1)
+            {
+                squaresRemaining.text = [NSString stringWithFormat:@"%i", levelData[_selectedNode.objectType]];
+            }
+            
+            
+            // a block should be added if there is more than 1 block left
+            if (levelData[_selectedNode.objectType] > 0)
+            {
+                BlockNode *addBlock = [[BlockNode alloc] initWithBlockType:_selectedNode.objectType];
+                addBlock.position = CGPointMake(self.size.width/ 5 , self.size.height / 3);
+                addBlock.physicsBody.categoryBitMask = blockCategory;
+                addBlock.physicsBody.contactTestBitMask = blockCategory | targetCategory | wallCategory;
+                addBlock.physicsBody.collisionBitMask = 0;
+                [self addChild:addBlock];
+            }
+        }
         
         // set selected node scale back to default size and alpha and zPosition
         [_selectedNode setScale:1];
         [_selectedNode setAlpha:1];
         [_selectedNode setZPosition:1.0];
-        
-        /* a good way to add a block after it has been drug out of the block pallet */
-//        SKSpriteNode *addBlock = [[BlockNode alloc] init];
-//        addBlock.position = CGPointMake(self.size.width/2, self.size.height/2);
-//        
-//        addBlock.physicsBody.categoryBitMask = blockCategory; // type of physics objects
-//        addBlock.physicsBody.collisionBitMask = blockCategory | wallCategory; // collision with specified objects calls method
-//        addBlock.physicsBody.contactTestBitMask = blockCategory | wallCategory; // contact with specified object types calls method
-//       [self addChild:addBlock];
     }
 }
 
@@ -236,7 +278,6 @@ const float levelData[] = {0,1};
     
     if ((firstBody.categoryBitMask & blockCategory) != 0)
     {
-        
         [_selectedNode setAlpha:.4];
     }
     
