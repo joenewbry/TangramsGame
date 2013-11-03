@@ -5,16 +5,18 @@
 	<dict>
 		<key>physicsBodyCoords</key>
 		<array>
-			<string>117 159</string>
+			<string>19 182</string>
+			<string>186 17</string>
+			<string>18 16</string>
 		</array>
 		<key>outlineFilepath</key>
-		<string>firstlevel.png</string>
+		<string>tri-blink.png</string>
 		<key>shapeCount</key>
 		<array>
 			<integer>3</integer>
 			<integer>2</integer>
 			<integer>0</integer>
-			<integer>0</integer>
+			<integer>10</integer>
 		</array>
 	</dict>
 </array>
