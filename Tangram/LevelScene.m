@@ -24,11 +24,11 @@ static const uint32_t trashCategory = 0x1 << 3;
     
     int shapeCount[4];
     
-    CGPoint trianglePoint;
-    CGPoint triangleLabelPoint;
-    CGPoint squarePoint;
-    CGPoint squareLabelPoint;
-    
+//    CGPoint trianglePoint;
+      CGPoint triangleLabelPoint;
+//    CGPoint squarePoint;
+      CGPoint squareLabelPoint;
+    CGPoint shapeStartingPoints[4];
 }
 
 @end
@@ -48,10 +48,10 @@ static const uint32_t trashCategory = 0x1 << 3;
             shapeCount[i] = [self.levelModel.shapeCount[i] integerValue];
         }
         
-        trianglePoint = CGPointMake(self.size.width/ 5, self.size.height / 3);
-        triangleLabelPoint = CGPointMake(trianglePoint.x, trianglePoint.y - 75);
-        squarePoint = CGPointMake(self.size.width/ 5 + (self.size.width / 5), self.size.height / 3);
-        squareLabelPoint = CGPointMake(squarePoint.x, squarePoint.y - 75);
+        shapeStartingPoints[TRIANGLE] = CGPointMake(self.size.width/ 5, self.size.height / 3);
+        triangleLabelPoint = CGPointMake(shapeStartingPoints[TRIANGLE].x, shapeStartingPoints[TRIANGLE].y - 75);
+        shapeStartingPoints[SQUARE] = CGPointMake(self.size.width/ 5 + (self.size.width / 5), self.size.height / 3);
+        squareLabelPoint = CGPointMake(shapeStartingPoints[SQUARE].x, shapeStartingPoints[SQUARE].y - 75);
         
         [self setupPhysics];
         [self setupBlocksInScene];
@@ -70,7 +70,7 @@ static const uint32_t trashCategory = 0x1 << 3;
     
     if (shapeCount[TRIANGLE] > 0){
         
-        BlockNode *triangleBlock = [self createNodeWithType:TRIANGLE withPoint:trianglePoint];
+        BlockNode *triangleBlock = [self createNodeWithType:TRIANGLE withPoint:shapeStartingPoints[TRIANGLE]];
         [self addChild:triangleBlock];
       
         trianglesRemaining = [self labelNodeWithRemaining:shapeCount[TRIANGLE] at:triangleLabelPoint];
@@ -79,7 +79,7 @@ static const uint32_t trashCategory = 0x1 << 3;
     
     if (shapeCount[SQUARE] > 0) {
         
-        BlockNode *squareBlock = [self createNodeWithType:SQUARE withPoint:squarePoint];
+        BlockNode *squareBlock = [self createNodeWithType:SQUARE withPoint:shapeStartingPoints[SQUARE]];
         [self addChild:squareBlock];
         
         squaresRemaining = [self labelNodeWithRemaining:shapeCount[SQUARE] at:squareLabelPoint];
@@ -240,11 +240,9 @@ static const uint32_t trashCategory = 0x1 << 3;
             // a block should be added if there is more than 1 block left
             if (thisCount > 0)
             {
-                BlockNode *addBlock = [[BlockNode alloc] initWithBlockType:_selectedNode.objectType];
-                addBlock.position = CGPointMake(self.size.width/ 5 , self.size.height / 3);
-                addBlock.physicsBody.categoryBitMask = blockCategory;
-                addBlock.physicsBody.contactTestBitMask = blockCategory | targetCategory | wallCategory;
-                addBlock.physicsBody.collisionBitMask = 0;
+                BlockNode  *addBlock = [self createNodeWithType:_selectedNode.objectType
+                                                      withPoint:shapeStartingPoints[_selectedNode.objectType]];
+
                 [self addChild:addBlock];
             }
         }
