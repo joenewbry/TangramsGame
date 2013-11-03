@@ -19,16 +19,13 @@ static const uint32_t trashCategory = 0x1 << 3;
     CGPoint startPoint; // stores starting touch location if final block placement is incorrect
     CGFloat _rotation;
     BlockNode *_selectedNode;
-    SKLabelNode *trianglesRemaining;
-    SKLabelNode *squaresRemaining;
+    
+    SKLabelNode *shapesRemaining[4];
     
     int shapeCount[4];
     
-//    CGPoint trianglePoint;
-      CGPoint triangleLabelPoint;
-//    CGPoint squarePoint;
-      CGPoint squareLabelPoint;
     CGPoint shapeStartingPoints[4];
+    CGPoint shapeLabelPoints[4];
 }
 
 @end
@@ -49,9 +46,13 @@ static const uint32_t trashCategory = 0x1 << 3;
         }
         
         shapeStartingPoints[TRIANGLE] = CGPointMake(self.size.width/ 5, self.size.height / 3);
-        triangleLabelPoint = CGPointMake(shapeStartingPoints[TRIANGLE].x, shapeStartingPoints[TRIANGLE].y - 75);
+        shapeLabelPoints[TRIANGLE] = CGPointMake(shapeStartingPoints[TRIANGLE].x, shapeStartingPoints[TRIANGLE].y - 75);
         shapeStartingPoints[SQUARE] = CGPointMake(self.size.width/ 5 + (self.size.width / 5), self.size.height / 3);
-        squareLabelPoint = CGPointMake(shapeStartingPoints[SQUARE].x, shapeStartingPoints[SQUARE].y - 75);
+        shapeLabelPoints[SQUARE] = CGPointMake(shapeStartingPoints[SQUARE].x, shapeStartingPoints[SQUARE].y - 75);
+        shapeStartingPoints[RHOMBUS] = CGPointMake(self.size.width/ 5 + (self.size.width / 5) * 2, self.size.height / 3);
+        shapeLabelPoints[RHOMBUS] = CGPointMake(shapeStartingPoints[RHOMBUS].x, shapeStartingPoints[RHOMBUS].y - 75);
+        shapeStartingPoints[TRAPEZOID] = CGPointMake(self.size.width/ 5 + (self.size.width / 5) * 3, self.size.height / 3);
+        shapeLabelPoints[TRAPEZOID] = CGPointMake(shapeStartingPoints[TRAPEZOID].x, shapeStartingPoints[TRAPEZOID].y - 75);
         
         [self setupPhysics];
         [self setupBlocksInScene];
@@ -62,46 +63,22 @@ static const uint32_t trashCategory = 0x1 << 3;
     return self;
 }
 
-
-// TODO: change this so the initilization is from BlockNode rather than SKSpriteNode (takes one extra parameter specifying name or type)
-// TODO: move setup logic into BlockNode class rather than in these methods
 -(void)setupBlocksInScene
 {
-    
-    if (shapeCount[TRIANGLE] > 0){
-        
-        BlockNode *triangleBlock = [self createNodeWithType:TRIANGLE withPoint:shapeStartingPoints[TRIANGLE]];
-        [self addChild:triangleBlock];
-      
-        trianglesRemaining = [self labelNodeWithRemaining:shapeCount[TRIANGLE] at:triangleLabelPoint];
-        [self addChild:trianglesRemaining];
-    }
-    
-    if (shapeCount[SQUARE] > 0) {
-        
-        BlockNode *squareBlock = [self createNodeWithType:SQUARE withPoint:shapeStartingPoints[SQUARE]];
-        [self addChild:squareBlock];
-        
-        squaresRemaining = [self labelNodeWithRemaining:shapeCount[SQUARE] at:squareLabelPoint];
-        [self addChild:squaresRemaining];
-    }
-    
-    if (shapeCount[RHOMBUS] > 0) {
-        // draw a rhombus
-       
-        // set rhomuses remaining
-    }
-
-    if (shapeCount[TRAPEZOID] > 0) {
-        // draw a trapezoid
-        
-        // set trapezoids remaining
+    for (int i=0; i < 4; i++){
+        //NSLog(@"@%", i);
+        if (shapeCount[i] > 0){
+            BlockNode *block = [self createNodeWithType:i withPoint:shapeStartingPoints[i]];
+            [self addChild:block];
+            
+            shapesRemaining[i] = [self labelNodeWithRemaining:shapeCount[i] at:shapeLabelPoints[i]];
+            [self addChild:shapesRemaining[i]];
+        }
     }
 }
 
 - (BlockNode *)createNodeWithType:(BlockType)type withPoint:(CGPoint) point
 {
-    
     BlockNode * block = [[BlockNode alloc] initWithBlockType:type];
     block.position = point;
     block.physicsBody.categoryBitMask = blockCategory;
@@ -216,29 +193,11 @@ static const uint32_t trashCategory = 0x1 << 3;
         else if (_selectedNode.isButton)
         {
             _selectedNode.isButton = false;
-            
-            int thisCount = -1;
-            switch (_selectedNode.objectType) {
-                case TRIANGLE:
-                    thisCount = --shapeCount[TRIANGLE];
-                    trianglesRemaining.text =  [NSString stringWithFormat:@"%i", shapeCount[TRIANGLE]];
-                    break;
-                case SQUARE:
-                    thisCount = --shapeCount[SQUARE];
-                    squaresRemaining.text = [NSString stringWithFormat:@"%i", shapeCount[SQUARE]];
-                    break;
-                case RHOMBUS:
-                    thisCount = --shapeCount[RHOMBUS];
-                    break;
-                case TRAPEZOID:
-                    thisCount = --shapeCount[TRAPEZOID];
-                    break;
-                default:
-                    break;
-            }
+            shapeCount[_selectedNode.objectType]--;
+            shapesRemaining[_selectedNode.objectType].text = [NSString stringWithFormat:@"%i", shapeCount[_selectedNode.objectType]];
             
             // a block should be added if there is more than 1 block left
-            if (thisCount > 0)
+            if (shapeCount[_selectedNode.objectType] > 0)
             {
                 BlockNode  *addBlock = [self createNodeWithType:_selectedNode.objectType
                                                       withPoint:shapeStartingPoints[_selectedNode.objectType]];

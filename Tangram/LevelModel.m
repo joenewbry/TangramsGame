@@ -22,7 +22,7 @@
         // for w/e in plist's shapecount:
         //   if square: self.shapecount[0] = value
         
-        self.shapeCount = @[@(3),@(2),@(0),@(0)];
+        self.shapeCount = @[@(3),@(2),@(4),@(1)];
         self.outlineFilepath = @"tri-blink.png";
         
         // Store X and Y coordinates of each line segment comprising the physics body outline.

@@ -39,11 +39,17 @@
         }
         else if (blockType == TRAPEZOID)
         {
-            
+            self.isButton = true;
+            [self setColor:[UIColor purpleColor]];
+            [self setSize:CGSizeMake(100.0, 100.0)];
+            [self setPhysicsBody:[SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100.0, 100.0)]];
         }
         else if (blockType == RHOMBUS)
         {
-            
+            self.isButton = true;
+            [self setColor:[UIColor whiteColor]];
+            [self setSize:CGSizeMake(100.0, 100.0)];
+            [self setPhysicsBody:[SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100.0, 100.0)]];
         }
     }
     return self;
