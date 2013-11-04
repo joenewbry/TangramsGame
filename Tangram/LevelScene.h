@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) LevelModel *levelModel;
 
+
 -(void)rotate:(UIRotationGestureRecognizer *)gesture;
 -(void)pan:(UIPanGestureRecognizer *)gesture;
 

@@ -14,6 +14,8 @@ static const uint32_t wallCategory = 0x1 << 1;
 static const uint32_t targetCategory = 0x1 << 2;
 static const uint32_t trashCategory = 0x1 << 3;
 
+static const int NUM_BLOCKS = 4;
+
 @interface LevelScene ()
 {
     CGPoint startPoint; // stores starting touch location if final block placement is incorrect
@@ -26,7 +28,12 @@ static const uint32_t trashCategory = 0x1 << 3;
     
     CGPoint shapeStartingPoints[4];
     CGPoint shapeLabelPoints[4];
+
+
 }
+
+@property (strong, nonatomic) NSTimer *timeElapsed;
+@property (strong, nonatomic) NSDate *startDate;
 
 @end
 
@@ -35,7 +42,7 @@ static const uint32_t trashCategory = 0x1 << 3;
 
 - (id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-        
+    
         // TODO: change this sop that initiWithLevel passes the right level int
         // inialize the model
         self.levelModel = [[LevelModel alloc] initWithLevel:0];
@@ -44,7 +51,7 @@ static const uint32_t trashCategory = 0x1 << 3;
         for (int i = 0; i < self.levelModel.shapeCount.count; i++) {
             shapeCount[i] = [self.levelModel.shapeCount[i] integerValue];
         }
-        
+
         shapeStartingPoints[TRIANGLE] = CGPointMake(self.size.width/ 5, self.size.height / 3);
         shapeLabelPoints[TRIANGLE] = CGPointMake(shapeStartingPoints[TRIANGLE].x, shapeStartingPoints[TRIANGLE].y - 75);
         shapeStartingPoints[SQUARE] = CGPointMake(self.size.width/ 5 + (self.size.width / 5), self.size.height / 3);
@@ -59,13 +66,17 @@ static const uint32_t trashCategory = 0x1 << 3;
         [self setupTargetInScene];
         
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
+        
+        
+//        NSTimer *myTimer = [[NSTimer alloc] init];
+//        [myTimer ]
     }
     return self;
 }
 
 -(void)setupBlocksInScene
 {
-    for (int i=0; i < 4; i++){
+    for (int i=0; i < NUM_BLOCKS; i++){
         //NSLog(@"@%", i);
         if (shapeCount[i] > 0){
             BlockNode *block = [self createNodeWithType:i withPoint:shapeStartingPoints[i]];
@@ -250,6 +261,7 @@ static const uint32_t trashCategory = 0x1 << 3;
     
     if ((firstBody.categoryBitMask & blockCategory) != 0)
     {
+        NSLog(@"Collision");
         [_selectedNode setAlpha:.4];
     }
     

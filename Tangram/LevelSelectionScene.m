@@ -56,6 +56,7 @@
 
 -(void)tap:(UIGestureRecognizer*) gesture
 {
+    
     SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration:0.5];
     SKScene *levelSelctionScene = [[LevelScene alloc] initWithSize:CGSizeMake(1024, 768)];
     [self.view presentScene:levelSelctionScene transition:reveal];

@@ -25,6 +25,8 @@
         self.shapeCount = @[@(3),@(2),@(4),@(1)];
         self.outlineFilepath = @"tri-blink.png";
         
+        self.outlineNumberOfTriangles = 2;
+        
         // Store X and Y coordinates of each line segment comprising the physics body outline.
         self.physicsBodyCoords = @[ @[@(18), @(16)], @[@(186), @(17)], @[@(19), @(182)] ];
     }

@@ -23,6 +23,7 @@ typedef enum {
 @property (nonatomic) BOOL isButton;
 @property (nonatomic) BlockType blockType;
 @property (nonatomic) int objectType;
+@property (nonatomic) int objectValue;
 
 @end
 
