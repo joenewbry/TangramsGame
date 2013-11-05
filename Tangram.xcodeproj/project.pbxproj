@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D25777C1828BBF600CC65EE /* LevelSelectionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D25777B1828BBF600CC65EE /* LevelSelectionNode.m */; };
 		0D501B92181F716700870EB0 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D501B91181F716700870EB0 /* GameView.m */; };
 		0D501B95181F718400870EB0 /* LevelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D501B94181F718400870EB0 /* LevelModel.m */; };
 		724A600818259AB900852FDE /* levelsData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 724A600718259AB900852FDE /* levelsData.plist */; };
@@ -46,6 +47,8 @@
 
 /* Begin PBXFileReference section */
 		0D2577741828B05600CC65EE /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		0D25777A1828BBF600CC65EE /* LevelSelectionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelSelectionNode.h; sourceTree = "<group>"; };
+		0D25777B1828BBF600CC65EE /* LevelSelectionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelSelectionNode.m; sourceTree = "<group>"; };
 		0D501B90181F716700870EB0 /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
 		0D501B91181F716700870EB0 /* GameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
 		0D501B93181F718400870EB0 /* LevelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelModel.h; sourceTree = "<group>"; };
@@ -138,6 +141,8 @@
 			children = (
 				D8693E8B181B638A005EE51F /* BlockNode.h */,
 				D8693E8C181B638A005EE51F /* BlockNode.m */,
+				0D25777A1828BBF600CC65EE /* LevelSelectionNode.h */,
+				0D25777B1828BBF600CC65EE /* LevelSelectionNode.m */,
 			);
 			name = nodes;
 			sourceTree = "<group>";
@@ -339,6 +344,7 @@
 				D8693E84181B218B005EE51F /* LevelScene.m in Sources */,
 				0D501B95181F718400870EB0 /* LevelModel.m in Sources */,
 				D8693E8D181B638A005EE51F /* BlockNode.m in Sources */,
+				0D25777C1828BBF600CC65EE /* LevelSelectionNode.m in Sources */,
 				D81EA892182302BF00E33EA3 /* HomeScene.m in Sources */,
 				D8693E5F181B08AE005EE51F /* MainViewController.m in Sources */,
 				D81EA89518233DC300E33EA3 /* LevelSelectionScene.m in Sources */,

@@ -7,7 +7,10 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "LevelSelectionNode.h"
+#import "LevelScene.h"
+#import "Constants.h"
 
-@interface LevelSelectionScene : SKScene
+@interface LevelSelectionScene : SKScene <SKPhysicsContactDelegate>
 
 @end

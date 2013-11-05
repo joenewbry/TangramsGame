@@ -37,9 +37,9 @@
         }
         // Set property.
         self.physicsBodyCoords = physicsBodyCoords;
-        
-        NSLog(@"shapeCount: %@; outlineFP: %@; physicsBC: %@",
-              self.shapeCount, self.outlineFilepath, self.physicsBodyCoords);
+//        
+//        NSLog(@"shapeCount: %@; outlineFP: %@; physicsBC: %@",
+//              self.shapeCount, self.outlineFilepath, self.physicsBodyCoords);
         
         // import data from plist
         // take the level data at index `level`

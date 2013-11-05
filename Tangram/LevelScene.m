@@ -8,14 +8,6 @@
 
 #import "LevelScene.h"
 
-// the different categories used in collision detection
-static const uint32_t blockCategory = 0x1 << 0;
-static const uint32_t wallCategory = 0x1 << 1;
-static const uint32_t targetCategory = 0x1 << 2;
-static const uint32_t trashCategory = 0x1 << 3;
-
-static const int NUM_BLOCKS = 4;
-
 @interface LevelScene ()
 {
     CGPoint startPoint; // stores starting touch location if final block placement is incorrect
@@ -36,12 +28,10 @@ static const int NUM_BLOCKS = 4;
 @implementation LevelScene
 
 
-- (id)initWithSize:(CGSize)size {
+- (id)initWithLevel:(int)level AndSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         
-        // TODO: pass a level param into here
-        // initalize the model with the correct level
-        self.levelModel = [[LevelModel alloc] initWithLevel:0];
+        self.levelModel = [[LevelModel alloc] initWithLevel:level];
 
         // convert shapeCount to ints
         for (int i = 0; i < self.levelModel.shapeCount.count; i++) {
@@ -55,9 +45,6 @@ static const int NUM_BLOCKS = 4;
         
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
         
-        
-//        NSTimer *myTimer = [[NSTimer alloc] init];
-//        [myTimer ]
     }
     return self;
 }
@@ -157,12 +144,10 @@ static const int NUM_BLOCKS = 4;
 // TODO update so that node is only selected if touchLocation is within the physics body rather than bounds of object
 -(void)selectNodeForTouch:(CGPoint)touchLocation
 {
-    if ([[self nodeAtPoint:touchLocation] isKindOfClass:[BlockNode class]])
-    {
+    if ([[self nodeAtPoint:touchLocation] isKindOfClass:[BlockNode class]]) {
         _selectedNode = (BlockNode *)[self nodeAtPoint:touchLocation];
     }
-    else
-    {
+    else {
         _selectedNode = nil;
     }
 }
