@@ -9,6 +9,7 @@
 #import <SpriteKit/SpriteKit.h>
 #import "BlockNode.h"
 #import "LevelModel.h"
+#import "Constants.h"
 
 @interface LevelScene : SKScene <SKPhysicsContactDelegate>
 

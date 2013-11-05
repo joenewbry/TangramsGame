@@ -45,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0D2577741828B05600CC65EE /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		0D501B90181F716700870EB0 /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
 		0D501B91181F716700870EB0 /* GameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
 		0D501B93181F718400870EB0 /* LevelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelModel.h; sourceTree = "<group>"; };
@@ -177,6 +178,7 @@
 			children = (
 				D8693E91181C8166005EE51F /* art.atlas */,
 				D8693E57181B08AE005EE51F /* MainAppDelegate.h */,
+				0D2577741828B05600CC65EE /* Constants.h */,
 				D8693E58181B08AE005EE51F /* MainAppDelegate.m */,
 				D8693E5A181B08AE005EE51F /* Main.storyboard */,
 				D8693E5D181B08AE005EE51F /* MainViewController.h */,

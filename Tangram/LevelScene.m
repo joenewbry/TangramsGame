@@ -20,12 +20,10 @@ static const uint32_t trashCategory = 0x1 << 3;
     CGFloat _rotation;
     BlockNode *_selectedNode;
     
-    SKLabelNode *shapesRemaining[4];
-    
-    int shapeCount[4];
-    
-    CGPoint shapeStartingPoints[4];
-    CGPoint shapeLabelPoints[4];
+    int shapeCount[NUM_SHAPES];
+    SKLabelNode *shapesRemaining[NUM_SHAPES];
+    CGPoint shapeStartingPoints[NUM_SHAPES];
+    CGPoint shapeLabelPoints[NUM_SHAPES];
 }
 
 @end
@@ -65,7 +63,7 @@ static const uint32_t trashCategory = 0x1 << 3;
 
 -(void)setupBlocksInScene
 {
-    for (int i=0; i < 4; i++){
+    for (int i=0; i < NUM_SHAPES; i++){
         //NSLog(@"@%", i);
         if (shapeCount[i] > 0){
             BlockNode *block = [self createNodeWithType:i withPoint:shapeStartingPoints[i]];

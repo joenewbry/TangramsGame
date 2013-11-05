@@ -7,14 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-
-typedef enum {
-    TRIANGLE,
-    SQUARE,
-    TRAPEZOID,
-    RHOMBUS
-} BlockType;
-
+#import "Constants.h"
 
 @interface BlockNode : SKSpriteNode
 
