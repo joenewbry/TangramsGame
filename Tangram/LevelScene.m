@@ -33,6 +33,14 @@
         
         self.levelModel = [[LevelModel alloc] initWithLevel:level];
 
+        // create a level label -- this is mostly to prove that levels work, we might not want this
+        SKLabelNode * levelLabel = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
+        levelLabel.fontColor = [UIColor greenColor];
+        levelLabel.text =  [NSString stringWithFormat:@"Level %i", (level+1)];
+        levelLabel.position = CGPointMake(self.size.width / 2, self.size.height - 200);
+        [self addChild:levelLabel];
+        
+        
         // convert shapeCount to ints
         for (int i = 0; i < self.levelModel.shapeCount.count; i++) {
             shapeCount[i] = [self.levelModel.shapeCount[i] integerValue];
