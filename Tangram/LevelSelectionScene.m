@@ -30,36 +30,23 @@
 
 - (void)didMoveToView:(SKView *)view
 {
-    UIPanGestureRecognizer *gestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
-                                                                                        action:@selector(pan:)];
-    [[self view] addGestureRecognizer:gestureRecognizer];
-    
-    UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self
-                                                                                                   action:@selector(rotate:)];
-    [[self view] addGestureRecognizer:rotationRecognizer];
-    
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                           action:@selector(tap:)];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
     [[self view] addGestureRecognizer:tapGestureRecognizer];
-    
-}
-
--(void)pan:(UIGestureRecognizer*) gesture
-{
-    
-}
-
--(void)rotate:(UIGestureRecognizer*) gesture
-{
-    
 }
 
 -(void)tap:(UIGestureRecognizer*) gesture
 {
     
+    CGPoint touchLocation = [gesture locationInView:gesture.view];
+    //[self getSelectedNode:touchLocation];
     SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration:0.5];
-    SKScene *levelSelctionScene = [[LevelScene alloc] initWithSize:CGSizeMake(1024, 768)];
+    SKScene *levelSelctionScene = [[LevelScene alloc] initWithSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height)];
     [self.view presentScene:levelSelctionScene transition:reveal];
 }
+
+//-(SKNode*)getSelectedNode:(CGPoint)touchLocation
+//{
+//    
+//}
 
 @end
