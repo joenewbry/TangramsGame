@@ -186,7 +186,8 @@
 -(void)selectNodeForTouch:(CGPoint)touchLocation
 {
     if ([[self nodeAtPoint:touchLocation] isKindOfClass:[BlockNode class]]) {
-        _selectedNode = (BlockNode *)[self nodeAtPoint:touchLocation];
+        SKPhysicsBody *bodyAtPoint = [self.physicsWorld  bodyAtPoint:touchLocation];
+        _selectedNode = (BlockNode *)bodyAtPoint.node;
     }
     else {
         _selectedNode = nil;
