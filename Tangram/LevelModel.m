@@ -35,9 +35,12 @@
             // X coordinate is first, Y second.
             [physicsBodyCoords addObject:@[coords[0], coords[1]]];
         }
-        // Set property.
+        
+        // Set properties.
         self.physicsBodyCoords = physicsBodyCoords;
-//        
+        self.outlineNumberOfTriangles = 2;
+
+//
 //        NSLog(@"shapeCount: %@; outlineFP: %@; physicsBC: %@",
 //              self.shapeCount, self.outlineFilepath, self.physicsBodyCoords);
         
@@ -48,13 +51,12 @@
         // for w/e in plist's shapecount:
         //   if square: self.shapecount[0] = value
         
-        self.shapeCount = @[@(3),@(2),@(4),@(1)];
-        self.outlineFilepath = @"tri-blink.png";
+//        self.shapeCount = @[@(3),@(2),@(4),@(1)];
+//        self.outlineFilepath = @"tri-blink.png";
         
-        self.outlineNumberOfTriangles = 2;
         
         // Store X and Y coordinates of each line segment comprising the physics body outline.
-        self.physicsBodyCoords = @[ @[@(18), @(16)], @[@(186), @(17)], @[@(19), @(182)] ];
+//        self.physicsBodyCoords = @[ @[@(18), @(16)], @[@(186), @(17)], @[@(19), @(182)] ];
     }
     return self;
 }

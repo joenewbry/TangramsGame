@@ -119,12 +119,45 @@
 // TODO: this needs to come from the model
 -(void)setupTargetInScene
 {
-    SKSpriteNode *largeSquareTarget = [SKSpriteNode spriteNodeWithColor:[UIColor blackColor] size: CGSizeMake(200, 200)];
-    largeSquareTarget.position = CGPointMake(self.size.width/2, self.size.height/3 *2);
-    largeSquareTarget.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:CGRectMake(0.0, 0.0, 200, 200)];
-    largeSquareTarget.physicsBody.categoryBitMask = targetCategory;
-    largeSquareTarget.physicsBody.collisionBitMask = blockCategory;
-    [self addChild:largeSquareTarget];
+    SKSpriteNode *template = [SKSpriteNode spriteNodeWithImageNamed:self.levelModel.outlineFilepath];
+    template.position = CGPointMake(self.size.width/2, self.size.height/3 *2);
+    
+    CGFloat offsetX = template.frame.size.width * template.anchorPoint.x;
+    CGFloat offsetY = template.frame.size.height * template.anchorPoint.y;
+    
+    CGMutablePathRef path = CGPathCreateMutable();
+    
+    int length = self.levelModel.physicsBodyCoords.count;
+    
+    NSArray *coordPair = self.levelModel.physicsBodyCoords[0];
+    
+    CGPathMoveToPoint(path, NULL, [coordPair[0] floatValue] - offsetX, [coordPair[1] floatValue] - offsetY);
+    for (int i = 1; i < length; i++) {
+        coordPair = self.levelModel.physicsBodyCoords[i];
+        CGPathAddLineToPoint(path, NULL, [coordPair[0] floatValue] - offsetX, [coordPair[1] floatValue] - offsetY);
+    }
+    
+//    CGPathMoveToPoint(path, NULL, 19 - offsetX, 182 - offsetY);
+//    CGPathAddLineToPoint(path, NULL, 186 - offsetX, 17 - offsetY);
+//    CGPathAddLineToPoint(path, NULL, 18 - offsetX, 16 - offsetY);
+    
+    CGPathCloseSubpath(path);
+    
+    template.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:path];
+    
+//    SKSpriteNode *largeSquareTarget = [SKSpriteNode spriteNodeWithColor:[UIColor blackColor] size: CGSizeMake(200, 200)];
+//    largeSquareTarget.position = CGPointMake(self.size.width/2, self.size.height/3 *2);
+//    largeSquareTarget.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:CGRectMake(0.0, 0.0, 200, 200)];
+    
+    
+    template.physicsBody.categoryBitMask = targetCategory;
+    template.physicsBody.collisionBitMask = blockCategory;
+    
+    template.physicsBody.dynamic = NO;
+    
+    [self addChild:template];
+    
+    NSLog(@"template: %@", template);
 }
 
 // sets recognizers for pan, rotate, and tap gestures
