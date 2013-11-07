@@ -13,47 +13,110 @@
 
 -(id)initWithBlockType:(BlockType)blockType
 {
-    if (self = [super init])
-    {
+
+    NSArray *filePaths = @[TRIANGLE_FILE, SQUARE_FILE, TRAPEZOID_FILE, RHOMBUS_FILE];
+    
+    if (self = [super initWithImageNamed:filePaths[blockType]]) {
+
+        self.objectType = blockType;
+
         [self.physicsBody setDynamic:YES];
         [self.physicsBody setUsesPreciseCollisionDetection:YES];
         
-        // objectType is equal to blockType (an enum value) -- do we even need self.objectType?
-        self.objectType = blockType;
-        
-        // triangle is type 0
-        if (blockType == TRIANGLE)
-        {
+        if (blockType == TRIANGLE) {
             self.isButton = true;
-            [self setColor:[UIColor orangeColor]];
-            [self setSize:CGSizeMake(100.0, 100.0)];
-            [self setPhysicsBody:[SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100.0, 100.0)]];
-
+            [self setPhysicsBody:[self createTriangleBody]];
         }
-        // square is type 1
-        else if (blockType == SQUARE)
-        {
+        else if (blockType == SQUARE) {
             self.isButton = true;
-            [self setColor:[UIColor greenColor]];
-            [self setSize:CGSizeMake(100.0, 100.0)];
-            [self setPhysicsBody:[SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100.0, 100.0)]];
+            [self setPhysicsBody:[self createSquareBody]];
         }
-        else if (blockType == TRAPEZOID)
-        {
+        else if (blockType == TRAPEZOID) {
             self.isButton = true;
-            [self setColor:[UIColor purpleColor]];
-            [self setSize:CGSizeMake(100.0, 100.0)];
-            [self setPhysicsBody:[SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100.0, 100.0)]];
+            [self setPhysicsBody:[self createTrapezoidBody]];
         }
-        else if (blockType == RHOMBUS)
-        {
+        else if (blockType == RHOMBUS) {
             self.isButton = true;
-            [self setColor:[UIColor whiteColor]];
-            [self setSize:CGSizeMake(100.0, 100.0)];
-            [self setPhysicsBody:[SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100.0, 100.0)]];
+            [self setPhysicsBody:[self createRhombusBody]];
         }
     }
     return self;
+}
+
+
+-(SKPhysicsBody *)createTriangleBody
+{
+    CGFloat offsetX = self.frame.size.width * self.anchorPoint.x;
+    CGFloat offsetY = self.frame.size.height * self.anchorPoint.y;
+    
+    CGMutablePathRef path = CGPathCreateMutable();
+    
+    CGPathMoveToPoint(path, NULL, 0 - offsetX, 50 - offsetY);
+    CGPathAddLineToPoint(path, NULL, 50 - offsetX, 0 - offsetY);
+    CGPathAddLineToPoint(path, NULL, 0 - offsetX, 0 - offsetY);
+    
+    CGPathCloseSubpath(path);
+
+    SKPhysicsBody * body = [SKPhysicsBody bodyWithPolygonFromPath:path];
+    return body;
+}
+
+-(SKPhysicsBody *)createSquareBody
+{
+    
+    CGFloat offsetX = self.frame.size.width * self.anchorPoint.x;
+    CGFloat offsetY = self.frame.size.height * self.anchorPoint.y;
+    
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, 0 - offsetX, 50 - offsetY);
+    CGPathAddLineToPoint(path, NULL, 50 - offsetX, 50 - offsetY);
+    CGPathAddLineToPoint(path, NULL, 50 - offsetX, 0 - offsetY);
+    CGPathAddLineToPoint(path, NULL, 0 - offsetX, 0 - offsetY);
+    CGPathCloseSubpath(path);
+    
+    SKPhysicsBody * body = [SKPhysicsBody bodyWithPolygonFromPath:path];
+    return body;
+    
+}
+
+-(SKPhysicsBody *)createTrapezoidBody
+{
+    
+    CGFloat offsetX = self.frame.size.width * self.anchorPoint.x;
+    CGFloat offsetY = self.frame.size.height * self.anchorPoint.y;
+    
+    CGMutablePathRef path = CGPathCreateMutable();
+    
+    CGPathMoveToPoint(path, NULL, 0 - offsetX, 50 - offsetY);
+    CGPathAddLineToPoint(path, NULL, 150 - offsetX, 50 - offsetY);
+    CGPathAddLineToPoint(path, NULL, 100 - offsetX, 0 - offsetY);
+    CGPathAddLineToPoint(path, NULL, 50 - offsetX, 0 - offsetY);
+    
+    CGPathCloseSubpath(path);
+    
+    SKPhysicsBody * body = [SKPhysicsBody bodyWithPolygonFromPath:path];
+    return body;
+    
+}
+
+-(SKPhysicsBody *)createRhombusBody
+{
+    
+    CGFloat offsetX = self.frame.size.width * self.anchorPoint.x;
+    CGFloat offsetY = self.frame.size.height * self.anchorPoint.y;
+    
+    CGMutablePathRef path = CGPathCreateMutable();
+    
+    CGPathMoveToPoint(path, NULL, 35 - offsetX, 34 - offsetY);
+    CGPathAddLineToPoint(path, NULL, 104 - offsetX, 34 - offsetY);
+    CGPathAddLineToPoint(path, NULL, 69 - offsetX, 0 - offsetY);
+    CGPathAddLineToPoint(path, NULL, 0 - offsetX, 0 - offsetY);
+    
+    CGPathCloseSubpath(path);
+    
+    SKPhysicsBody * body = [SKPhysicsBody bodyWithPolygonFromPath:path];
+    return body;
+    
 }
 
 @end
