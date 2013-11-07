@@ -179,7 +179,12 @@
 // TODO navigation objects added and recognized/responded to here
 -(void)tap:(UITapGestureRecognizer *)gesture
 {
+    SKNode *node = [self nodeAtPoint:[self convertPointFromView:[gesture locationInView:gesture.view]]];
     
+    if ([node isKindOfClass:[BlockNode class]]) {
+        SKAction *rotate = [SKAction rotateByAngle:M_PI_4 duration:0.25];
+        [node runAction:rotate];
+    }
 }
 
 // TODO update so that node is only selected if touchLocation is within the physics body rather than bounds of object
