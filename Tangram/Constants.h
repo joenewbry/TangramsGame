@@ -15,6 +15,11 @@ typedef enum {
     RHOMBUS
 } BlockType;
 
+#define TRIANGLE_FILE @"tri-open.png"
+#define SQUARE_FILE @"sq-open.png"
+#define TRAPEZOID_FILE @"trap-open.png"
+#define RHOMBUS_FILE @"para-open.png"
+
 #define NUM_SHAPES 4
 #define NUM_LEVELS 3
 
