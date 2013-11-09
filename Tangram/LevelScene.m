@@ -27,7 +27,6 @@
 
 @implementation LevelScene
 
-
 - (id)initWithLevel:(int)level AndSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         
@@ -160,7 +159,6 @@
         _selectedNode = nil;
     }
 }
-
 
 // TODO: check to see if object location is over the trash can, if it is remove the object
 // TODO: add in block counting functionality so on drop from pallet a new block is added
