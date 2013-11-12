@@ -187,25 +187,25 @@
     [self addChild:backButton];
 }
 
-// sets recognizers for pan, rotate, and tap gestures
+/*
+ * Set recognizers for pan, rotate and tap gestures
+ */
 - (void)didMoveToView:(SKView *)view
 {
     UIPanGestureRecognizer *gestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                         action:@selector(pan:)];
-    [[self view] addGestureRecognizer:gestureRecognizer];
-    
     UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self
                                                                                                    action:@selector(rotate:)];
-    [[self view] addGestureRecognizer:rotationRecognizer];
-    
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(tap:)];
+    
+    [[self view] addGestureRecognizer:rotationRecognizer];
+    [[self view] addGestureRecognizer:gestureRecognizer];
     [[self view] addGestureRecognizer:tapGestureRecognizer];
 }
 
 /*
- * Rotate notes when they are tapped.
- *
+ * Rotate tangrams when they are tapped.
  */
 -(void)tap:(UITapGestureRecognizer *)gesture
 {
@@ -223,8 +223,9 @@
     }
 }
 
-
-// TODO (not critical): fix initial point calculation stuff
+/*
+ * Handle a pan gesture. This is complex, so its handled in sub-cases.
+ */
 -(void)pan:(UIPanGestureRecognizer *)gesture
 {
     if (gesture.state == UIGestureRecognizerStateBegan) {
@@ -289,6 +290,7 @@
  */
 -(void)handleEndingPan:(UIPanGestureRecognizer *)gesture
 {
+    // TODO: we need to check some other property for being over a shape
     if (_selectedNode.alpha != 1.0) {
         [_selectedNode setPosition:CGPointMake(startPoint.x, self.size.height - startPoint.y)];
     }
