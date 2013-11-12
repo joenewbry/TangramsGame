@@ -18,10 +18,19 @@
     SKLabelNode *shapesRemaining[NUM_SHAPES];
     CGPoint shapeStartingPoints[NUM_SHAPES];
     CGPoint shapeLabelPoints[NUM_SHAPES];
+
+    // back button
+    SKSpriteNode *backButton;
 }
 
 @property (strong, nonatomic) NSTimer *timeElapsed;
 @property (strong, nonatomic) NSDate *startDate;
+
+- (void) setupPhysics;
+- (void) setupTangramDrawer;
+- (void) setupTargetInScene;
+- (void) setupBackButton;
+- (CGFloat) nearestAngleFromAngle :(CGFloat)angle;
 
 @end
 
@@ -49,6 +58,7 @@
         [self setupPhysics];
         [self setupTangramDrawer];
         [self setupTargetInScene];
+        [self setupBackButton];
         
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
         
@@ -159,6 +169,13 @@
     NSLog(@"template: %@", template);
 }
 
+-(void) setupBackButton
+{
+    backButton = [[SKSpriteNode alloc] initWithColor:[UIColor purpleColor] size:CGSizeMake(100.0, 100.0)];
+    backButton.position = CGPointMake(250.0, 250.0);
+    [self addChild:backButton];
+}
+
 // sets recognizers for pan, rotate, and tap gestures
 - (void)didMoveToView:(SKView *)view
 {
@@ -184,12 +201,20 @@
         SKAction *rotate = [SKAction rotateByAngle:M_PI_4 duration:0.25];
         [node runAction:rotate];
     }
+    if ([node isEqual:backButton]){
+            NSLog(@"Hit the thang");
+            SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration:0.5];
+            SKScene *levelSelctionScene = [[LevelSelectionScene alloc] initWithSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height)];
+            [self.view presentScene:levelSelctionScene transition:reveal];
+    }
 }
 
 // TODO update so that node is only selected if touchLocation is within the physics body rather than bounds of object
 -(void)selectNodeForTouch:(CGPoint)touchLocation
 {
-    if ([[self nodeAtPoint:touchLocation] isKindOfClass:[BlockNode class]]) {
+    SKNode *nodeAtPoint = [self nodeAtPoint:touchLocation];
+
+    if ([nodeAtPoint isKindOfClass:[BlockNode class]]) {
         SKPhysicsBody *bodyAtPoint = [self.physicsWorld  bodyAtPoint:touchLocation];
         _selectedNode = (BlockNode *)bodyAtPoint.node;
     }
@@ -271,11 +296,22 @@
         gesture.state == UIGestureRecognizerStateEnded)
     {
         _rotation = _rotation - gesture.rotation;
-        _selectedNode.zRotation = _rotation;
+        _selectedNode.zRotation = [self nearestAngleFromAngle:_rotation];
+
+
+
         gesture.rotation = 0.0;
     }
     
 
+}
+
+#pragma warning need to implement rotation modulo
+- (CGFloat) nearestAngleFromAngle:(CGFloat) angle
+{
+    // mod angle by pi / 4 to get the number of 45 degreee rotations to move
+    return angle;
+    //return (M_2_PI/8) * fmodf(angle, M_2_PI);
 }
 
 
