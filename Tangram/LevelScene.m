@@ -203,7 +203,10 @@
     [[self view] addGestureRecognizer:tapGestureRecognizer];
 }
 
-// TODO navigation objects added and recognized/responded to here
+/*
+ * Rotate notes when they are tapped.
+ *
+ */
 -(void)tap:(UITapGestureRecognizer *)gesture
 {
     SKNode *node = [self nodeAtPoint:[self convertPointFromView:[gesture locationInView:gesture.view]]];
@@ -217,6 +220,22 @@
             SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration:0.5];
             SKScene *levelSelctionScene = [[LevelSelectionScene alloc] initWithSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height)];
             [self.view presentScene:levelSelctionScene transition:reveal];
+    }
+}
+
+
+// TODO (not critical): fix initial point calculation stuff
+-(void)pan:(UIPanGestureRecognizer *)gesture
+{
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        [self handleBeginningPan:gesture];
+    }
+    else if (gesture.state == UIGestureRecognizerStateChanged) {
+        [self handleContinuingPan:gesture];
+    }
+    else if (gesture.state == UIGestureRecognizerStateEnded) {
+        [self handleContinuingPan:gesture];
+        [self handleEndingPan:gesture];
     }
 }
 
@@ -234,87 +253,82 @@
     }
 }
 
-// TODO: check to see if object location is over the trash can, if it is remove the object
-// TODO: add in block counting functionality so on drop from pallet a new block is added
-// TODO (not critical): fix initial point calculation stuff
--(void)pan:(UIPanGestureRecognizer *)gesture
+/*
+ * Handle a pan begining: set _selectedNode to the one we are grabbing.
+ */
+-(void)handleBeginningPan:(UIPanGestureRecognizer *)gesture
 {
-    if (gesture.state == UIGestureRecognizerStateBegan)
-    {
-        CGPoint touchLocation = [gesture locationInView:gesture.view];
-        startPoint = touchLocation;
-        
-        touchLocation = [self convertPointFromView:touchLocation];
-        [self selectNodeForTouch:touchLocation];
-        
-        startPoint.x = startPoint.x + _selectedNode.position.x - touchLocation.x;
-        startPoint.y = startPoint.y + touchLocation.y - _selectedNode.position.y;
-        _selectedNode.position = touchLocation;
-        
-        [_selectedNode setScale:.9];
-        [_selectedNode setZPosition:100.0];
-    }
-    
-    else if ((gesture.state == UIGestureRecognizerStateChanged) ||
-        gesture.state == UIGestureRecognizerStateEnded)
-    {
-        
-        CGPoint translation = [gesture translationInView:self.view];
-        _selectedNode.position = CGPointMake(_selectedNode.position.x + translation.x,
-                                          _selectedNode.position.y - translation.y);
-        [gesture setTranslation:CGPointMake(0, 0) inView:self.view];
-    }
-    
-    if (gesture.state == UIGestureRecognizerStateEnded)
-    {
-        
-        if (_selectedNode.alpha != 1.0)
-        {
-            [_selectedNode setPosition:CGPointMake(startPoint.x, self.size.height - startPoint.y)];
-        }
-        else if (_selectedNode.isButton)
-        {
-            _selectedNode.isButton = false;
-            shapeCount[_selectedNode.objectType]--;
-            shapesRemaining[_selectedNode.objectType].text = [NSString stringWithFormat:@"%i", shapeCount[_selectedNode.objectType]];
-            
-            // a block should be added if there is more than 1 block left
-            if (shapeCount[_selectedNode.objectType] > 0)
-            {
-                BlockNode  *addBlock = [self createNodeWithType:_selectedNode.objectType
-                                                      withPoint:shapeStartingPoints[_selectedNode.objectType]];
+    startPoint = [gesture locationInView:gesture.view];
 
-                [self addChild:addBlock];
-            }
-        }
-        
-        // set selected node scale back to default size and alpha and zPosition
-        [_selectedNode setScale:1];
-        [_selectedNode setAlpha:1];
-        [_selectedNode setZPosition:1.0];
-    }
+    CGPoint touchLocation = [self convertPointFromView:startPoint];
+    [self selectNodeForTouch:touchLocation];
+
+    // set startPoint based on touchLocation
+    startPoint.x = startPoint.x + _selectedNode.position.x - touchLocation.x;
+    startPoint.y = startPoint.y + touchLocation.y - _selectedNode.position.y;
+    
+    [_selectedNode setScale:.9];
+    [_selectedNode setZPosition:100.0];
 }
 
+/*
+ * Handle a continuing pan: move the _selectedNode to the location the gesture has moved to.
+ */
+-(void)handleContinuingPan:(UIPanGestureRecognizer *)gesture
+{
+    CGPoint translation = [gesture translationInView:self.view];
+    _selectedNode.position = CGPointMake(_selectedNode.position.x + translation.x,
+                                         _selectedNode.position.y - translation.y);
+    // set translation back to zero, or else it compounds
+    [gesture setTranslation:CGPointMake(0, 0) inView:self.view];
+}
+
+/*
+ * Handle ending pan. This is where we should handle when a tangram is over the tangram drawer,
+ * the target shape, or something else that it needs special behavior when it is dropped into.
+ */
+-(void)handleEndingPan:(UIPanGestureRecognizer *)gesture
+{
+    if (_selectedNode.alpha != 1.0) {
+        [_selectedNode setPosition:CGPointMake(startPoint.x, self.size.height - startPoint.y)];
+    }
+    else if (_selectedNode.isButton) {
+        _selectedNode.isButton = false;
+        shapeCount[_selectedNode.objectType]--;
+        shapesRemaining[_selectedNode.objectType].text = [NSString stringWithFormat:@"%i", shapeCount[_selectedNode.objectType]];
+        
+        // a block should be added if there is more than 1 block left
+        if (shapeCount[_selectedNode.objectType] > 0) {
+            BlockNode  *addBlock = [self createNodeWithType:_selectedNode.objectType
+                                                  withPoint:shapeStartingPoints[_selectedNode.objectType]];
+            [self addChild:addBlock];
+        }
+    }
+    
+    // set selected node scale back to default size and alpha and zPosition
+    [_selectedNode setScale:1];
+    [_selectedNode setAlpha:1];
+    [_selectedNode setZPosition:1.0];
+}
+
+
+/*
+ * Two finger rotate.
+ *
+ */
 -(void)rotate:(UIRotationGestureRecognizer *)gesture
 {
-    if (gesture.state == UIGestureRecognizerStateBegan)
-    {
+    if (gesture.state == UIGestureRecognizerStateBegan) {
         CGPoint touchLocation = [gesture locationInView:gesture.view];
         touchLocation = [self convertPointFromView:touchLocation];
         [self selectNodeForTouch:touchLocation];
     }
-    if ((gesture.state == UIGestureRecognizerStateChanged) ||
-        gesture.state == UIGestureRecognizerStateEnded)
-    {
+    else if ((gesture.state == UIGestureRecognizerStateChanged) || gesture.state == UIGestureRecognizerStateEnded) {
         _rotation = _rotation - gesture.rotation;
         _selectedNode.zRotation = [self nearestAngleFromAngle:_rotation];
 
-
-
         gesture.rotation = 0.0;
     }
-    
-
 }
 
 #pragma warning need to implement rotation modulo
