@@ -11,7 +11,7 @@
 
 @interface BlockNode : SKSpriteNode
 
--(id)initWithBlockType:(BlockType)blockType;
+-(id)initWithBlockType:(BlockType)blockType deviceIsRetina:(BOOL)isRetina;
 
 @property (nonatomic) BOOL isButton;
 @property (nonatomic) BlockType blockType;

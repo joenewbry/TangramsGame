@@ -11,7 +11,7 @@
 @implementation BlockNode
 
 
--(id)initWithBlockType:(BlockType)blockType
+-(id)initWithBlockType:(BlockType)blockType deviceIsRetina:(BOOL)isRetina
 {
 
     NSArray *filePaths = @[TRIANGLE_FILE, SQUARE_FILE, TRAPEZOID_FILE, RHOMBUS_FILE];
@@ -19,41 +19,44 @@
     if (self = [super initWithImageNamed:filePaths[blockType]]) {
 
         self.objectType = blockType;
+        
+        int scale = isRetina ? 1 : 2;
 
         [self.physicsBody setDynamic:YES];
         [self.physicsBody setUsesPreciseCollisionDetection:YES];
         
         if (blockType == TRIANGLE) {
-            self.isButton = true;
-            [self setPhysicsBody:[self createTriangleBody]];
+            self.isButton = YES;
+            [self setPhysicsBody:[self createTriangleBodyScale:scale]];
         }
         else if (blockType == SQUARE) {
-            self.isButton = true;
-            [self setPhysicsBody:[self createSquareBody]];
+            self.isButton = YES;
+            [self setPhysicsBody:[self createSquareBodyScale:scale]];
         }
         else if (blockType == TRAPEZOID) {
-            self.isButton = true;
-            [self setPhysicsBody:[self createTrapezoidBody]];
+            self.isButton = YES;
+            [self setPhysicsBody:[self createTrapezoidBodyScale:scale]];
         }
         else if (blockType == RHOMBUS) {
-            self.isButton = true;
-            [self setPhysicsBody:[self createRhombusBody]];
+            NSLog(@"blockType: %d", blockType);
+            self.isButton = YES;
+            [self setPhysicsBody:[self createRhombusBodyScale:scale]];
         }
     }
     return self;
 }
 
 
--(SKPhysicsBody *)createTriangleBody
+-(SKPhysicsBody *)createTriangleBodyScale:(int)scale
 {
     CGFloat offsetX = self.frame.size.width * self.anchorPoint.x;
     CGFloat offsetY = self.frame.size.height * self.anchorPoint.y;
     
     CGMutablePathRef path = CGPathCreateMutable();
     
-    CGPathMoveToPoint(path, NULL, 0 - offsetX, 50 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 50 - offsetX, 0 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 0 - offsetX, 0 - offsetY);
+    CGPathMoveToPoint(path, NULL, (0 * scale) - offsetX, (50 * scale) - offsetY);
+    CGPathAddLineToPoint(path, NULL, (50 * scale) - offsetX, (0 * scale) - offsetY);
+    CGPathAddLineToPoint(path, NULL, (0 * scale) - offsetX, (0 * scale) - offsetY);
     
     CGPathCloseSubpath(path);
 
@@ -61,17 +64,17 @@
     return body;
 }
 
--(SKPhysicsBody *)createSquareBody
+-(SKPhysicsBody *)createSquareBodyScale:(int)scale
 {
     
     CGFloat offsetX = self.frame.size.width * self.anchorPoint.x;
     CGFloat offsetY = self.frame.size.height * self.anchorPoint.y;
     
     CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, NULL, 0 - offsetX, 50 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 50 - offsetX, 50 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 50 - offsetX, 0 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 0 - offsetX, 0 - offsetY);
+    CGPathMoveToPoint(path, NULL, (0 * scale) - offsetX, (50 * scale) - offsetY);
+    CGPathAddLineToPoint(path, NULL, (50 * scale) - offsetX, (50 * scale) - offsetY);
+    CGPathAddLineToPoint(path, NULL, (50 * scale) - offsetX, (0 * scale) - offsetY);
+    CGPathAddLineToPoint(path, NULL, (0 * scale) - offsetX, (0 * scale) - offsetY);
     CGPathCloseSubpath(path);
     
     SKPhysicsBody * body = [SKPhysicsBody bodyWithPolygonFromPath:path];
@@ -79,7 +82,7 @@
     
 }
 
--(SKPhysicsBody *)createTrapezoidBody
+-(SKPhysicsBody *)createTrapezoidBodyScale:(int)scale
 {
     
     CGFloat offsetX = self.frame.size.width * self.anchorPoint.x;
@@ -87,10 +90,10 @@
     
     CGMutablePathRef path = CGPathCreateMutable();
     
-    CGPathMoveToPoint(path, NULL, 0 - offsetX, 50 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 150 - offsetX, 50 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 100 - offsetX, 0 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 50 - offsetX, 0 - offsetY);
+    CGPathMoveToPoint(path, NULL, (0 * scale) - offsetX, (50 * scale) - offsetY);
+    CGPathAddLineToPoint(path, NULL, (150 * scale) - offsetX, (50 * scale) - offsetY);
+    CGPathAddLineToPoint(path, NULL, (100 * scale) - offsetX, (0 * scale) - offsetY);
+    CGPathAddLineToPoint(path, NULL, (50 * scale) - offsetX, (0 * scale) - offsetY);
     
     CGPathCloseSubpath(path);
     
@@ -99,7 +102,7 @@
     
 }
 
--(SKPhysicsBody *)createRhombusBody
+-(SKPhysicsBody *)createRhombusBodyScale:(int)scale
 {
     
     CGFloat offsetX = self.frame.size.width * self.anchorPoint.x;
@@ -107,10 +110,10 @@
     
     CGMutablePathRef path = CGPathCreateMutable();
     
-    CGPathMoveToPoint(path, NULL, 35 - offsetX, 34 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 104 - offsetX, 34 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 69 - offsetX, 0 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 0 - offsetX, 0 - offsetY);
+    CGPathMoveToPoint(path, NULL, (0 * scale) - offsetX, (0 * scale) - offsetY);
+    CGPathAddLineToPoint(path, NULL, (35 * scale) - offsetX, (34 * scale) - offsetY);
+    CGPathAddLineToPoint(path, NULL, (103 * scale) - offsetX, (34 * scale) - offsetY);
+    CGPathAddLineToPoint(path, NULL, (70 * scale) - offsetX, (0 * scale) - offsetY);
     
     CGPathCloseSubpath(path);
     

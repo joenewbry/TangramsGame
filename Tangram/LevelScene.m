@@ -18,6 +18,8 @@
     SKLabelNode *shapesRemaining[NUM_SHAPES];
     CGPoint shapeStartingPoints[NUM_SHAPES];
     CGPoint shapeLabelPoints[NUM_SHAPES];
+    
+    BOOL isRetina;  // device has a Retina display.
 }
 
 @property (strong, nonatomic) NSTimer *timeElapsed;
@@ -52,6 +54,14 @@
         [self setupTargetInScene];
         
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
+        
+        // Figure out if device has Retina display.
+        if ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
+            ([UIScreen mainScreen].scale == 2.0)) {
+            isRetina = YES;
+        } else {
+            isRetina = NO;
+        }
         
     }
     return self;
@@ -96,9 +106,10 @@
     }
 }
 
-- (BlockNode *)createNodeWithType:(BlockType)type withPoint:(CGPoint) point
+
+- (BlockNode *)createNodeWithType:(BlockType)type withPoint:(CGPoint)point
 {
-    BlockNode * block = [[BlockNode alloc] initWithBlockType:type];
+    BlockNode *block = [[BlockNode alloc] initWithBlockType:type deviceIsRetina:isRetina];
     block.position = point;
     block.physicsBody.categoryBitMask = blockCategory;
     block.physicsBody.contactTestBitMask = blockCategory | targetCategory | wallCategory;
@@ -106,6 +117,7 @@
     block.isButton = true;
     return block;
 }
+
 
 - (SKLabelNode *)labelNodeWithRemaining:(int)numRemaining at:(CGPoint)labelPoint
 {
@@ -116,8 +128,8 @@
     return shapeRemaining;
 }
 
-// TODO: this needs to come from the model
--(void)setupTargetInScene
+
+- (void)setupTargetInScene
 {
     SKSpriteNode *template = [SKSpriteNode spriteNodeWithImageNamed:self.levelModel.outlineFilepath];
     template.position = CGPointMake(self.size.width/2, self.size.height/3 *2);
