@@ -10,6 +10,7 @@
 #import "BlockNode.h"
 #import "LevelModel.h"
 #import "Constants.h"
+#import "LevelSelectionScene.h"
 
 @interface LevelScene : SKScene <SKPhysicsContactDelegate>
 
