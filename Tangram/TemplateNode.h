@@ -12,8 +12,8 @@
 
 @interface TemplateNode : SKSpriteNode
 
-@property (nonatomic) int numberOfTriangles;
 // Max number of "unit" triangles that can fit inside the template outline.
+@property (nonatomic) int numberOfTriangles;
 
 
 - (id)initWithModel:(LevelModel *)levelModel;

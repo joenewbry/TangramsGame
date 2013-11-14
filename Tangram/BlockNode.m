@@ -44,6 +44,11 @@
             [self setPhysicsBody:[self createRhombusBodyScale:scale]];
         }
     }
+    
+    self.physicsBody.categoryBitMask = blockCategory;
+    self.physicsBody.contactTestBitMask = blockCategory | targetCategory | wallCategory;
+    self.physicsBody.collisionBitMask = 0;
+    
     return self;
 }
 

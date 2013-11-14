@@ -34,6 +34,7 @@
         
         self.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:path];
         
+        // set bitmask
         self.physicsBody.categoryBitMask = targetCategory;
         self.physicsBody.collisionBitMask = blockCategory;
         

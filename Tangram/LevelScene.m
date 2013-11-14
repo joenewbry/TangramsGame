@@ -139,10 +139,6 @@
 {
     BlockNode *block = [[BlockNode alloc] initWithBlockType:type deviceIsRetina:isRetina];
     block.position = point;
-    block.physicsBody.categoryBitMask = blockCategory;
-    block.physicsBody.contactTestBitMask = blockCategory | targetCategory | wallCategory;
-    block.physicsBody.collisionBitMask = 0;
-    block.inDrawer = true;
     return block;
 }
 
@@ -266,6 +262,8 @@
     // set startPoint based on touchLocation
     startPoint.x = startPoint.x + _selectedNode.position.x - touchLocation.x;
     startPoint.y = startPoint.y + touchLocation.y - _selectedNode.position.y;
+
+    [_selectedNode setZPosition:100];
 }
 
 /*
@@ -286,6 +284,9 @@
  */
 - (void)handleEndingPan:(UIPanGestureRecognizer *)gesture
 {
+    
+    [_selectedNode setZPosition:1];
+    
     // unsuccessful placement
     if (_selectedNode.contactType == TOUCHING_TANGRAM) {
         // in the case of unsuccessful placement, the selected node still be tranparent
@@ -371,16 +372,14 @@
     }
     
     // handle two blocks touching
-    if ((firstBody.categoryBitMask & blockCategory) != 0) {
-        if ((secondBody.categoryBitMask & blockCategory) != 0) {
-            _selectedNode.contactType = TOUCHING_TANGRAM;
-            [_selectedNode setAlpha:.4];
-        }
+    if ((secondBody.categoryBitMask & blockCategory) != 0) {
+        _selectedNode.contactType = TOUCHING_TANGRAM;
+        [_selectedNode setAlpha:.4];
     }
     
     // handle a block and a template touching
     // TODO: do we need another check here?
-    if ((firstBody.categoryBitMask & targetCategory) != 0) {
+    if ((secondBody.categoryBitMask & targetCategory) != 0) {
         _selectedNode.contactType = TOUCHING_TARGET;
     }
 }
