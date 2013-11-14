@@ -7,6 +7,7 @@
 //
 
 #import "LevelScene.h"
+#import "TemplateNode.h"
 
 @interface LevelScene ()
 {
@@ -29,7 +30,7 @@
 
 - (void) setupPhysics;
 - (void) setupTangramDrawer;
-- (void) setupTargetInScene;
+- (void) setupTemplateWithModel;
 - (void) setupBackButton;
 - (void) selectNodeForTouch:(CGPoint)touchLocation;
 - (void) handleBeginningPan:(UIPanGestureRecognizer *)gesture;
@@ -40,6 +41,7 @@
 - (CGFloat) nearestAngleFromAngle :(CGFloat)angle;
 
 @end
+
 
 @implementation LevelScene
 
@@ -64,7 +66,7 @@
         // call setup methods
         [self setupPhysics];
         [self setupTangramDrawer];
-        [self setupTargetInScene];
+        [self setupTemplateWithModel:self.levelModel];
         [self setupBackButton];
         
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
@@ -155,54 +157,15 @@
     return shapeRemaining;
 }
 
-
-/*
- * Add the target into the scene.
- *
- * We should be pulling from a XML file and initializing a sprite.
- * TODO: we should have a "TemplateNode" class that handles template initialization details.
- */
-- (void)setupTargetInScene
+- (void)setupTemplateWithModel:(LevelModel *)levelModel
 {
-    SKSpriteNode *template = [SKSpriteNode spriteNodeWithImageNamed:self.levelModel.outlineFilepath];
+    SKSpriteNode *template = [[TemplateNode alloc] initWithModel:levelModel];
+    
     template.position = CGPointMake(self.size.width/2, self.size.height/3 *2);
-    
-    CGFloat offsetX = template.frame.size.width * template.anchorPoint.x;
-    CGFloat offsetY = template.frame.size.height * template.anchorPoint.y;
-    
-    CGMutablePathRef path = CGPathCreateMutable();
-    
-    int length = self.levelModel.physicsBodyCoords.count;
-    
-    NSArray *coordPair = self.levelModel.physicsBodyCoords[0];
-    
-    CGPathMoveToPoint(path, NULL, [coordPair[0] floatValue] - offsetX, [coordPair[1] floatValue] - offsetY);
-    for (int i = 1; i < length; i++) {
-        coordPair = self.levelModel.physicsBodyCoords[i];
-        CGPathAddLineToPoint(path, NULL, [coordPair[0] floatValue] - offsetX, [coordPair[1] floatValue] - offsetY);
-    }
-    
-//    CGPathMoveToPoint(path, NULL, 19 - offsetX, 182 - offsetY);
-//    CGPathAddLineToPoint(path, NULL, 186 - offsetX, 17 - offsetY);
-//    CGPathAddLineToPoint(path, NULL, 18 - offsetX, 16 - offsetY);
-    
-    CGPathCloseSubpath(path);
-    
-    template.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:path];
-    
-//    SKSpriteNode *largeSquareTarget = [SKSpriteNode spriteNodeWithColor:[UIColor blackColor] size: CGSizeMake(200, 200)];
-//    largeSquareTarget.position = CGPointMake(self.size.width/2, self.size.height/3 *2);
-//    largeSquareTarget.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:CGRectMake(0.0, 0.0, 200, 200)];
-    
-    
-    template.physicsBody.categoryBitMask = targetCategory;
-    template.physicsBody.collisionBitMask = blockCategory;
-    
-    template.physicsBody.dynamic = NO;
-    
+
     [self addChild:template];
     
-    NSLog(@"template: %@", template);
+    NSLog(@"template physics body: %@", template.physicsBody);
 }
 
 /*
@@ -238,7 +201,7 @@
  * TODO: we also need to rotate physics body with spite. CRITICAL.
  *
  */
--(void)tap:(UITapGestureRecognizer *)gesture
+- (void)tap:(UITapGestureRecognizer *)gesture
 {
     SKNode *node = [self nodeAtPoint:[self convertPointFromView:[gesture locationInView:gesture.view]]];
     
@@ -257,7 +220,7 @@
 /*
  * Handle a pan gesture. This is complex, so its handled in sub-cases.
  */
--(void)pan:(UIPanGestureRecognizer *)gesture
+- (void)pan:(UIPanGestureRecognizer *)gesture
 {
     if (gesture.state == UIGestureRecognizerStateBegan) {
         [self handleBeginningPan:gesture];
@@ -304,7 +267,7 @@
 /*
  * Handle a continuing pan: move the _selectedNode to the location the gesture has moved to.
  */
--(void)handleContinuingPan:(UIPanGestureRecognizer *)gesture
+- (void)handleContinuingPan:(UIPanGestureRecognizer *)gesture
 {
     CGPoint translation = [gesture translationInView:self.view];
     _selectedNode.position = CGPointMake(_selectedNode.position.x + translation.x,
@@ -317,7 +280,7 @@
  * Handle ending pan. This is where we should handle when a tangram is over the tangram drawer,
  * the target shape, or something else that it needs special behavior when it is dropped into.
  */
--(void)handleEndingPan:(UIPanGestureRecognizer *)gesture
+- (void)handleEndingPan:(UIPanGestureRecognizer *)gesture
 {
     // unsuccessful placement
     if (_selectedNode.contactType == TOUCHING_TANGRAM) {

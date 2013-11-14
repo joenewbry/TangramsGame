@@ -11,7 +11,7 @@
 
 @interface BlockNode : SKSpriteNode
 
--(id)initWithBlockType:(BlockType)blockType deviceIsRetina:(BOOL)isRetina;
+- (id)initWithBlockType:(BlockType)blockType deviceIsRetina:(BOOL)isRetina;
 
 // inDrawer is true if this node has not been removed from the drawer yet.
 @property (nonatomic) BOOL inDrawer;

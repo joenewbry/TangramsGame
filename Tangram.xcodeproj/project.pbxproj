@@ -15,6 +15,7 @@
 		0DBB59BA182C1742002353CF /* tri-open.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBB59B9182C1742002353CF /* tri-open.png */; };
 		0DBB59BE182C18CE002353CF /* trap-open.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBB59BD182C18CE002353CF /* trap-open.png */; };
 		724A600818259AB900852FDE /* levelsData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 724A600718259AB900852FDE /* levelsData.plist */; };
+		725B2AD6183544540049214F /* TemplateNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 725B2AD5183544540049214F /* TemplateNode.m */; };
 		D81EA892182302BF00E33EA3 /* HomeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D81EA891182302BF00E33EA3 /* HomeScene.m */; };
 		D81EA89518233DC300E33EA3 /* LevelSelectionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D81EA89418233DC300E33EA3 /* LevelSelectionScene.m */; };
 		D8693E47181B08AD005EE51F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8693E46181B08AD005EE51F /* Foundation.framework */; };
@@ -59,6 +60,8 @@
 		0DBB59B9182C1742002353CF /* tri-open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tri-open.png"; sourceTree = "<group>"; };
 		0DBB59BD182C18CE002353CF /* trap-open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trap-open.png"; sourceTree = "<group>"; };
 		724A600718259AB900852FDE /* levelsData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = levelsData.plist; sourceTree = "<group>"; };
+		725B2AD4183544540049214F /* TemplateNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemplateNode.h; sourceTree = "<group>"; };
+		725B2AD5183544540049214F /* TemplateNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TemplateNode.m; sourceTree = "<group>"; };
 		D81EA890182302BF00E33EA3 /* HomeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScene.h; sourceTree = "<group>"; };
 		D81EA891182302BF00E33EA3 /* HomeScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScene.m; sourceTree = "<group>"; };
 		D81EA89318233DC200E33EA3 /* LevelSelectionScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelSelectionScene.h; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 				D8693E8C181B638A005EE51F /* BlockNode.m */,
 				0D25777A1828BBF600CC65EE /* LevelSelectionNode.h */,
 				0D25777B1828BBF600CC65EE /* LevelSelectionNode.m */,
+				725B2AD4183544540049214F /* TemplateNode.h */,
+				725B2AD5183544540049214F /* TemplateNode.m */,
 			);
 			name = nodes;
 			sourceTree = "<group>";
@@ -347,6 +352,7 @@
 				D8693E55181B08AE005EE51F /* main.m in Sources */,
 				D8693E84181B218B005EE51F /* LevelScene.m in Sources */,
 				0D501B95181F718400870EB0 /* LevelModel.m in Sources */,
+				725B2AD6183544540049214F /* TemplateNode.m in Sources */,
 				D8693E8D181B638A005EE51F /* BlockNode.m in Sources */,
 				0D25777C1828BBF600CC65EE /* LevelSelectionNode.m in Sources */,
 				D81EA892182302BF00E33EA3 /* HomeScene.m in Sources */,
