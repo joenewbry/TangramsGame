@@ -19,6 +19,7 @@
     if (self = [super initWithImageNamed:filePaths[blockType]]) {
 
         self.objectType = blockType;
+        self.contactType = NO_CONTACT;
         
         int scale = isRetina ? 1 : 2;
 
@@ -26,20 +27,20 @@
         [self.physicsBody setUsesPreciseCollisionDetection:YES];
         
         if (blockType == TRIANGLE) {
-            self.isButton = YES;
+            self.inDrawer = YES;
             [self setPhysicsBody:[self createTriangleBodyScale:scale]];
         }
         else if (blockType == SQUARE) {
-            self.isButton = YES;
+            self.inDrawer = YES;
             [self setPhysicsBody:[self createSquareBodyScale:scale]];
         }
         else if (blockType == TRAPEZOID) {
-            self.isButton = YES;
+            self.inDrawer = YES;
             [self setPhysicsBody:[self createTrapezoidBodyScale:scale]];
         }
         else if (blockType == RHOMBUS) {
             NSLog(@"blockType: %d", blockType);
-            self.isButton = YES;
+            self.inDrawer = YES;
             [self setPhysicsBody:[self createRhombusBodyScale:scale]];
         }
     }

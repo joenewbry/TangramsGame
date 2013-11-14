@@ -31,6 +31,12 @@
 - (void) setupTangramDrawer;
 - (void) setupTargetInScene;
 - (void) setupBackButton;
+- (void) selectNodeForTouch:(CGPoint)touchLocation;
+- (void) handleBeginningPan:(UIPanGestureRecognizer *)gesture;
+- (void) handleContinuingPan:(UIPanGestureRecognizer *)gesture;
+- (void) handleEndingPan:(UIPanGestureRecognizer *)gesture;
+- (void) updateDrawerWithBlockType:(BlockType) type;
+- (void) rotate:(UIRotationGestureRecognizer *)gesture;
 - (CGFloat) nearestAngleFromAngle :(CGFloat)angle;
 
 @end
@@ -83,8 +89,10 @@
 
 -(void)setupTangramDrawer
 {
-    // set tangram starting points
-    float placementWidth = self.size.width / 5;
+    // McQueen 11/13: I changed the divisor from 5 to 4 so that tangrams are not touching when
+    // the drawer is initialized. This is a hack. Good enough for now, but we need to make sure
+    // the shapes and the drawer are initialized without sprite contact.
+    float placementWidth = self.size.width / 4;
     float placementHeight = self.size.height / 6;
     shapeStartingPoints[TRIANGLE] = CGPointMake(placementWidth, placementHeight);
     shapeStartingPoints[SQUARE] = CGPointMake(2 * placementWidth, placementHeight);
@@ -122,7 +130,7 @@
     block.physicsBody.categoryBitMask = blockCategory;
     block.physicsBody.contactTestBitMask = blockCategory | targetCategory | wallCategory;
     block.physicsBody.collisionBitMask = 0;
-    block.isButton = true;
+    block.inDrawer = true;
     return block;
 }
 
@@ -206,6 +214,9 @@
 
 /*
  * Rotate tangrams when they are tapped.
+ *
+ * TODO: we also need to rotate physics body with spite. Critical.
+ *
  */
 -(void)tap:(UITapGestureRecognizer *)gesture
 {
@@ -240,7 +251,9 @@
     }
 }
 
-// TODO update so that node is only selected if touchLocation is within the physics body rather than bounds of object
+/*
+ * Set the _selectedNode to the one being touched at a given location.
+ */
 -(void)selectNodeForTouch:(CGPoint)touchLocation
 {
     SKNode *nodeAtPoint = [self nodeAtPoint:touchLocation];
@@ -255,21 +268,17 @@
 }
 
 /*
- * Handle a pan begining: set _selectedNode to the one we are grabbing.
+ * Handle a pan begining
  */
 -(void)handleBeginningPan:(UIPanGestureRecognizer *)gesture
 {
     startPoint = [gesture locationInView:gesture.view];
-
     CGPoint touchLocation = [self convertPointFromView:startPoint];
     [self selectNodeForTouch:touchLocation];
 
     // set startPoint based on touchLocation
     startPoint.x = startPoint.x + _selectedNode.position.x - touchLocation.x;
     startPoint.y = startPoint.y + touchLocation.y - _selectedNode.position.y;
-    
-    [_selectedNode setScale:.9];
-    [_selectedNode setZPosition:100.0];
 }
 
 /*
@@ -290,33 +299,52 @@
  */
 -(void)handleEndingPan:(UIPanGestureRecognizer *)gesture
 {
-    // TODO: we need to check some other property for being over a shape
-    if (_selectedNode.alpha != 1.0) {
+    // unsuccessful placement
+    if (_selectedNode.contactType == TOUCHING_TANGRAM) {
+        // in the case of unsuccessful placement, the selected node still be tranparent
+        [_selectedNode setAlpha:1];
         [_selectedNode setPosition:CGPointMake(startPoint.x, self.size.height - startPoint.y)];
     }
-    else if (_selectedNode.isButton) {
-        _selectedNode.isButton = false;
-        shapeCount[_selectedNode.objectType]--;
-        shapesRemaining[_selectedNode.objectType].text = [NSString stringWithFormat:@"%i", shapeCount[_selectedNode.objectType]];
+    
+    // successful placement
+    else {
         
-        // a block should be added if there is more than 1 block left
-        if (shapeCount[_selectedNode.objectType] > 0) {
-            BlockNode  *addBlock = [self createNodeWithType:_selectedNode.objectType
-                                                  withPoint:shapeStartingPoints[_selectedNode.objectType]];
-            [self addChild:addBlock];
+        if (_selectedNode.contactType == TOUCHING_TARGET) {
+            // TODO: deal with this case
+        }
+        
+        if (_selectedNode.contactType == TOUCHING_DRAWER) {
+            // TODO: deal with this case
+        }
+        
+        // if the tangram came from the drawer, update the drawer
+        if (_selectedNode.inDrawer) {
+            _selectedNode.inDrawer = false;
+            [self updateDrawerWithBlockType:_selectedNode.objectType];
         }
     }
-    
-    // set selected node scale back to default size and alpha and zPosition
-    [_selectedNode setScale:1];
-    [_selectedNode setAlpha:1];
-    [_selectedNode setZPosition:1.0];
+}
+
+
+/*
+ * Update the drawer because a block was removed.
+ */
+-(void) updateDrawerWithBlockType:(BlockType) type
+{
+    // remove one node of this type
+    shapeCount[type]--;
+    shapesRemaining[type].text = [NSString stringWithFormat:@"%i", shapeCount[type]];
+        
+    // a block should be added if there is more than 1 block of this type left
+    if (shapeCount[type] > 0) {
+        BlockNode * addBlock = [self createNodeWithType:type withPoint:shapeStartingPoints[type]];
+        [self addChild:addBlock];
+    }
 }
 
 
 /*
  * Two finger rotate.
- *
  */
 -(void)rotate:(UIRotationGestureRecognizer *)gesture
 {
@@ -328,7 +356,6 @@
     else if ((gesture.state == UIGestureRecognizerStateChanged) || gesture.state == UIGestureRecognizerStateEnded) {
         _rotation = _rotation - gesture.rotation;
         _selectedNode.zRotation = [self nearestAngleFromAngle:_rotation];
-
         gesture.rotation = 0.0;
     }
 }
@@ -342,7 +369,9 @@
 }
 
 
-// TODO: block collision with target handled
+/*
+ * Handle when two physics bodies begin touching.
+ */
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
     SKPhysicsBody *firstBody, *secondBody;
@@ -354,35 +383,48 @@
         secondBody = contact.bodyA;
     }
     
+    // handle two blocks touching
     if ((firstBody.categoryBitMask & blockCategory) != 0) {
-        [_selectedNode setAlpha:.4];
+        if ((secondBody.categoryBitMask & blockCategory) != 0) {
+            _selectedNode.contactType = TOUCHING_TANGRAM;
+            [_selectedNode setAlpha:.4];
+        }
     }
     
+    // handle a block and a template touching
+    // TODO: do we need another check here?
     if ((firstBody.categoryBitMask & targetCategory) != 0) {
-        NSLog(@"Hit block");
+        _selectedNode.contactType = TOUCHING_TARGET;
     }
 }
 
+/*
+ * Handle when two physics bodies stop touching.
+ */
 - (void)didEndContact:(SKPhysicsContact *)contact
 {
     SKPhysicsBody *firstBody, *secondBody;
-    if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask)
-    {
+    if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask) {
         firstBody = contact.bodyA;
         secondBody = contact.bodyB;
     }
-    else
-    {
+    else {
         firstBody = contact.bodyB;
         secondBody = contact.bodyA;
     }
-    if ((firstBody.categoryBitMask & blockCategory) != 0)
-    {
-        [_selectedNode setAlpha:1];
+
+    // handle two blocks ending contact with each other
+    if ((firstBody.categoryBitMask & blockCategory) != 0) {
+        if ((secondBody.categoryBitMask & blockCategory) != 0) {
+            _selectedNode.contactType = NO_CONTACT;
+            [_selectedNode setAlpha:1];
+        }
     }
 }
 
 // TODO: Maybe check for win condition in here??
+// McQueen: Other option is checking for win condtion after every blocknode is placed. That might
+// be nicer, so we don't continuously check for wins while the game is idle? Maybe it doesn't matter.
 -(void)update:(CFTimeInterval)currentTime
 {
     /* Called before each frame is rendered */

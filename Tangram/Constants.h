@@ -15,6 +15,13 @@ typedef enum {
     RHOMBUS
 } BlockType;
 
+typedef enum {
+    NO_CONTACT,
+    TOUCHING_DRAWER,
+    TOUCHING_TANGRAM,
+    TOUCHING_TARGET
+} ContactType;
+
 #define TRIANGLE_FILE @"tri-open.png"
 #define SQUARE_FILE @"sq-open.png"
 #define TRAPEZOID_FILE @"trap-open.png"

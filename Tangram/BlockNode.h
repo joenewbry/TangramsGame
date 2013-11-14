@@ -13,10 +13,12 @@
 
 -(id)initWithBlockType:(BlockType)blockType deviceIsRetina:(BOOL)isRetina;
 
-@property (nonatomic) BOOL isButton;
+// inDrawer is true if this node has not been removed from the drawer yet.
+@property (nonatomic) BOOL inDrawer;
 @property (nonatomic) BlockType blockType;
 @property (nonatomic) int objectType;
 @property (nonatomic) int objectValue;
+@property (nonatomic) ContactType contactType;
 
 @end
 
