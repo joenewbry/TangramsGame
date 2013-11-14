@@ -49,10 +49,10 @@
         self.levelModel = [[LevelModel alloc] initWithLevel:level];
 
         // create a level label -- this is mostly to prove that levels work, we might not want this
-        SKLabelNode * levelLabel = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
-        levelLabel.fontColor = [UIColor greenColor];
+        SKLabelNode * levelLabel = [[SKLabelNode alloc] initWithFontNamed:@"HelveticaNeue-Bold"];
+        levelLabel.fontColor = [UIColor colorWithHue:0.000 saturation:0.000 brightness:0.224 alpha:1];
         levelLabel.text =  [NSString stringWithFormat:@"Level %i", (level+1)];
-        levelLabel.position = CGPointMake(self.size.width / 2, self.size.height - 200);
+        levelLabel.position = CGPointMake(self.size.width / 2, self.size.height - 87);
         [self addChild:levelLabel];
         
         
@@ -67,7 +67,7 @@
         [self setupTargetInScene];
         [self setupBackButton];
         
-        self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
+        self.backgroundColor = [UIColor whiteColor];
         
         // Figure out if device has Retina display.
         if ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
@@ -98,19 +98,21 @@
     // McQueen 11/13: I changed the divisor from 5 to 4 so that tangrams are not touching when
     // the drawer is initialized. This is a hack. Good enough for now, but we need to make sure
     // the shapes and the drawer are initialized without sprite contact.
-    float placementWidth = self.size.width / 4;
-    float placementHeight = self.size.height / 6;
-    shapeStartingPoints[TRIANGLE] = CGPointMake(placementWidth, placementHeight);
-    shapeStartingPoints[SQUARE] = CGPointMake(2 * placementWidth, placementHeight);
-    shapeStartingPoints[RHOMBUS] = CGPointMake(3 * placementWidth, placementHeight);
-    shapeStartingPoints[TRAPEZOID] = CGPointMake(4 *placementWidth, placementHeight);
+    float blockOffset = 20;
+    float placementHeight = self.size.height / 10;
+    shapeStartingPoints[TRIANGLE] = CGPointMake(blockOffset + 100, placementHeight);
+    shapeStartingPoints[TRAPEZOID] = CGPointMake(blockOffset + 240, placementHeight);
+    shapeStartingPoints[RHOMBUS] = CGPointMake(blockOffset + 450, self.size.height / 9);
+    shapeStartingPoints[SQUARE] = CGPointMake(blockOffset + 630, placementHeight);
+    
     
     // set tangram label starting points
     int offset = 75;
-    shapeLabelPoints[TRIANGLE] = CGPointMake(shapeStartingPoints[TRIANGLE].x, shapeStartingPoints[TRIANGLE].y - offset);
-    shapeLabelPoints[SQUARE] = CGPointMake(shapeStartingPoints[SQUARE].x, shapeStartingPoints[SQUARE].y - offset);
-    shapeLabelPoints[RHOMBUS] = CGPointMake(shapeStartingPoints[RHOMBUS].x, shapeStartingPoints[RHOMBUS].y - offset);
-    shapeLabelPoints[TRAPEZOID] = CGPointMake(shapeStartingPoints[TRAPEZOID].x, shapeStartingPoints[TRAPEZOID].y - offset);
+    shapeLabelPoints[TRIANGLE] = CGPointMake(shapeStartingPoints[TRIANGLE].x - 30, shapeStartingPoints[TRIANGLE].y + offset);
+    shapeLabelPoints[TRAPEZOID] = CGPointMake(shapeStartingPoints[TRAPEZOID].x, shapeStartingPoints[TRAPEZOID].y + offset);
+    shapeLabelPoints[RHOMBUS] = CGPointMake(shapeStartingPoints[RHOMBUS].x, placementHeight + offset);
+    shapeLabelPoints[SQUARE] = CGPointMake(shapeStartingPoints[SQUARE].x, shapeStartingPoints[SQUARE].y + offset);
+
     
     // initialize the tangrams as sprites and add them to the scene
     for (int i=0; i < NUM_SHAPES; i++){
@@ -207,11 +209,13 @@
 
 /*
  * Create the back button for the current level.
+ * This will likely need to be refactored to bring up a pause screen.
  */
 -(void) setupBackButton
 {
-    backButton = [[SKSpriteNode alloc] initWithColor:[UIColor purpleColor] size:CGSizeMake(100.0, 100.0)];
-    backButton.position = CGPointMake(250.0, 250.0);
+    backButton = [[SKSpriteNode alloc] initWithImageNamed:@"pause.png"];
+    // backButton = [[SKSpriteNode alloc] initWithColor:[UIColor purpleColor] size:CGSizeMake(100.0, 100.0)];
+    backButton.position = CGPointMake(60.0, 950.0);
     [self addChild:backButton];
 }
 

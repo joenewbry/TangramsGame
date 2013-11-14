@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03581B92183548FF0015E22B /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 03581B91183548FF0015E22B /* pause.png */; };
 		0D25777C1828BBF600CC65EE /* LevelSelectionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D25777B1828BBF600CC65EE /* LevelSelectionNode.m */; };
 		0D501B92181F716700870EB0 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D501B91181F716700870EB0 /* GameView.m */; };
 		0D501B95181F718400870EB0 /* LevelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D501B94181F718400870EB0 /* LevelModel.m */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03581B91183548FF0015E22B /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pause.png; path = "../../../../../Google Drive/Courses/cs121/121 Pattern Game/assets/menu.v1/pause.png"; sourceTree = "<group>"; };
 		0D2577741828B05600CC65EE /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		0D25777A1828BBF600CC65EE /* LevelSelectionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelSelectionNode.h; sourceTree = "<group>"; };
 		0D25777B1828BBF600CC65EE /* LevelSelectionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelSelectionNode.m; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				0DBB59BD182C18CE002353CF /* trap-open.png */,
+				03581B91183548FF0015E22B /* pause.png */,
 				0DBB59B9182C1742002353CF /* tri-open.png */,
 				0DBB59B5182C1734002353CF /* sq-open.png */,
 				0DBB59B3182C0F5F002353CF /* para-open.png */,
@@ -322,6 +325,7 @@
 				724A600818259AB900852FDE /* levelsData.plist in Resources */,
 				D8693E66181B08AE005EE51F /* Images.xcassets in Resources */,
 				0DBB59B4182C0F5F002353CF /* para-open.png in Resources */,
+				03581B92183548FF0015E22B /* pause.png in Resources */,
 				0DBB59BA182C1742002353CF /* tri-open.png in Resources */,
 				0DBB59BE182C18CE002353CF /* trap-open.png in Resources */,
 				D8693E5C181B08AE005EE51F /* Main.storyboard in Resources */,
