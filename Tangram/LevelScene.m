@@ -81,12 +81,18 @@
     return self;
 }
 
+/*
+ * Setup physicsWorld. Make sure gravity is off.
+ */
 - (void)setupPhysics
 {
     self.physicsWorld.gravity = CGVectorMake(0.0, -0.0);
     self.physicsWorld.contactDelegate = self;
 }
 
+/*
+ * Position and place all tangrams in their respective locations in the drawer.
+ */
 -(void)setupTangramDrawer
 {
     // McQueen 11/13: I changed the divisor from 5 to 4 so that tangrams are not touching when
@@ -122,7 +128,9 @@
     }
 }
 
-
+/*
+ * Create one new BlockNode with a given type at a given location.
+ */
 - (BlockNode *)createNodeWithType:(BlockType)type withPoint:(CGPoint)point
 {
     BlockNode *block = [[BlockNode alloc] initWithBlockType:type deviceIsRetina:isRetina];
@@ -135,6 +143,9 @@
 }
 
 
+/*
+ * Add one drawer label at a given location.
+ */
 - (SKLabelNode *)labelNodeWithRemaining:(int)numRemaining at:(CGPoint)labelPoint
 {
     SKLabelNode * shapeRemaining = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
@@ -145,6 +156,12 @@
 }
 
 
+/*
+ * Add the target into the scene.
+ *
+ * We should be pulling from a XML file and initializing a sprite.
+ * TODO: we should have a "TemplateNode" class that handles template initialization details.
+ */
 - (void)setupTargetInScene
 {
     SKSpriteNode *template = [SKSpriteNode spriteNodeWithImageNamed:self.levelModel.outlineFilepath];
@@ -188,6 +205,9 @@
     NSLog(@"template: %@", template);
 }
 
+/*
+ * Create the back button for the current level.
+ */
 -(void) setupBackButton
 {
     backButton = [[SKSpriteNode alloc] initWithColor:[UIColor purpleColor] size:CGSizeMake(100.0, 100.0)];
@@ -215,7 +235,7 @@
 /*
  * Rotate tangrams when they are tapped.
  *
- * TODO: we also need to rotate physics body with spite. Critical.
+ * TODO: we also need to rotate physics body with spite. CRITICAL.
  *
  */
 -(void)tap:(UITapGestureRecognizer *)gesture
