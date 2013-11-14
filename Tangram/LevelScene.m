@@ -30,7 +30,7 @@
 
 - (void) setupPhysics;
 - (void) setupTangramDrawer;
-- (void) setupTemplateWithModel;
+- (void)setupTemplateWithModel:(LevelModel *)levelModel;
 - (void) setupBackButton;
 - (void) selectNodeForTouch:(CGPoint)touchLocation;
 - (void) handleBeginningPan:(UIPanGestureRecognizer *)gesture;

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03581B92183548FF0015E22B /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 03581B91183548FF0015E22B /* pause.png */; };
 		03581B941835547A0015E22B /* level-selection.png in Resources */ = {isa = PBXBuildFile; fileRef = 03581B931835547A0015E22B /* level-selection.png */; };
 		0D25777C1828BBF600CC65EE /* LevelSelectionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D25777B1828BBF600CC65EE /* LevelSelectionNode.m */; };
 		0D501B92181F716700870EB0 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D501B91181F716700870EB0 /* GameView.m */; };
@@ -16,6 +15,8 @@
 		0DBB59B6182C1734002353CF /* sq-open.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBB59B5182C1734002353CF /* sq-open.png */; };
 		0DBB59BA182C1742002353CF /* tri-open.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBB59B9182C1742002353CF /* tri-open.png */; };
 		0DBB59BE182C18CE002353CF /* trap-open.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBB59BD182C18CE002353CF /* trap-open.png */; };
+		0DEC65051835558B006AB966 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DEC65041835558B006AB966 /* pause.png */; };
+		0DEC650718355611006AB966 /* level-one.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DEC650618355611006AB966 /* level-one.png */; };
 		724A600818259AB900852FDE /* levelsData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 724A600718259AB900852FDE /* levelsData.plist */; };
 		725B2AD6183544540049214F /* TemplateNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 725B2AD5183544540049214F /* TemplateNode.m */; };
 		D81EA892182302BF00E33EA3 /* HomeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D81EA891182302BF00E33EA3 /* HomeScene.m */; };
@@ -50,7 +51,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		03581B91183548FF0015E22B /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pause.png; path = "../../../../../Google Drive/Courses/cs121/121 Pattern Game/assets/menu.v1/pause.png"; sourceTree = "<group>"; };
 		03581B931835547A0015E22B /* level-selection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-selection.png"; sourceTree = "<group>"; };
 		0D2577741828B05600CC65EE /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		0D25777A1828BBF600CC65EE /* LevelSelectionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelSelectionNode.h; sourceTree = "<group>"; };
@@ -63,6 +63,8 @@
 		0DBB59B5182C1734002353CF /* sq-open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sq-open.png"; sourceTree = "<group>"; };
 		0DBB59B9182C1742002353CF /* tri-open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tri-open.png"; sourceTree = "<group>"; };
 		0DBB59BD182C18CE002353CF /* trap-open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trap-open.png"; sourceTree = "<group>"; };
+		0DEC65041835558B006AB966 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
+		0DEC650618355611006AB966 /* level-one.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-one.png"; sourceTree = "<group>"; };
 		724A600718259AB900852FDE /* levelsData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = levelsData.plist; sourceTree = "<group>"; };
 		725B2AD4183544540049214F /* TemplateNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemplateNode.h; sourceTree = "<group>"; };
 		725B2AD5183544540049214F /* TemplateNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TemplateNode.m; sourceTree = "<group>"; };
@@ -241,9 +243,10 @@
 		D8693E91181C8166005EE51F /* art.atlas */ = {
 			isa = PBXGroup;
 			children = (
+				0DEC650618355611006AB966 /* level-one.png */,
+				0DEC65041835558B006AB966 /* pause.png */,
 				0DBB59BD182C18CE002353CF /* trap-open.png */,
 				03581B931835547A0015E22B /* level-selection.png */,
-				03581B91183548FF0015E22B /* pause.png */,
 				0DBB59B9182C1742002353CF /* tri-open.png */,
 				0DBB59B5182C1734002353CF /* sq-open.png */,
 				0DBB59B3182C0F5F002353CF /* para-open.png */,
@@ -328,13 +331,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DEC650718355611006AB966 /* level-one.png in Resources */,
 				D8693E53181B08AE005EE51F /* InfoPlist.strings in Resources */,
 				0DBB59B6182C1734002353CF /* sq-open.png in Resources */,
+				0DEC65051835558B006AB966 /* pause.png in Resources */,
 				724A600818259AB900852FDE /* levelsData.plist in Resources */,
 				D8693E66181B08AE005EE51F /* Images.xcassets in Resources */,
 				0DBB59B4182C0F5F002353CF /* para-open.png in Resources */,
 				03581B941835547A0015E22B /* level-selection.png in Resources */,
-				03581B92183548FF0015E22B /* pause.png in Resources */,
 				0DBB59BA182C1742002353CF /* tri-open.png in Resources */,
 				0DBB59BE182C18CE002353CF /* trap-open.png in Resources */,
 				D8693E5C181B08AE005EE51F /* Main.storyboard in Resources */,

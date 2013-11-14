@@ -10,7 +10,7 @@
 			<string>18 16</string>
 		</array>
 		<key>outlineFilepath</key>
-		<string>tri-blink.png</string>
+		<string>level-one.png</string>
 		<key>shapeCount</key>
 		<array>
 			<integer>3</integer>
@@ -27,7 +27,7 @@
 			<string>18 16</string>
 		</array>
 		<key>outlineFilepath</key>
-		<string>tri-blink.png</string>
+		<string>level-one.png</string>
 		<key>shapeCount</key>
 		<array>
 			<integer>5</integer>
@@ -44,7 +44,7 @@
 			<string>18 16</string>
 		</array>
 		<key>outlineFilepath</key>
-		<string>tri-blink.png</string>
+		<string>level-one.png</string>
 		<key>shapeCount</key>
 		<array>
 			<integer>3</integer>
