@@ -10,6 +10,7 @@
 #import "LevelWonScene.h"
 #import "TemplateNode.h"
 
+
 @interface LevelScene ()
 {
     CGPoint startPoint; // stores starting touch location if final block placement is incorrect
@@ -114,7 +115,6 @@
     shapeStartingPoints[RHOMBUS] = CGPointMake(blockOffset + 450, self.size.height / 9);
     shapeStartingPoints[SQUARE] = CGPointMake(blockOffset + 630, placementHeight);
     
-    
     // set tangram label starting points
     int offset = 75;
     shapeLabelPoints[TRIANGLE] = CGPointMake(shapeStartingPoints[TRIANGLE].x - 30, shapeStartingPoints[TRIANGLE].y + offset);
@@ -190,15 +190,16 @@
  */
 - (void)didMoveToView:(SKView *)view
 {
-    UIPanGestureRecognizer *gestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
-                                                                                        action:@selector(pan:)];
+    
+    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                                    action:@selector(pan:)];
     UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self
                                                                                                    action:@selector(rotate:)];
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(tap:)];
     
     [[self view] addGestureRecognizer:rotationRecognizer];
-    [[self view] addGestureRecognizer:gestureRecognizer];
+    [[self view] addGestureRecognizer:panRecognizer];
     [[self view] addGestureRecognizer:tapGestureRecognizer];
 }
 
@@ -241,16 +242,23 @@
     }
 }
 
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint touchLocation = [touch locationInNode:self];
+    [self selectNodeForTouch:touchLocation];
+}
+
 /*
  * Set the _selectedNode to the one being touched at a given location.
  */
 -(void)selectNodeForTouch:(CGPoint)touchLocation
 {
     SKNode *nodeAtPoint = [self nodeAtPoint:touchLocation];
-
+    
     if ([nodeAtPoint isKindOfClass:[BlockNode class]]) {
-        SKPhysicsBody *bodyAtPoint = [self.physicsWorld  bodyAtPoint:touchLocation];
-        _selectedNode = (BlockNode *)bodyAtPoint.node;
+        _selectedNode = (BlockNode *)nodeAtPoint;
     }
     else {
         _selectedNode = nil;
@@ -264,7 +272,6 @@
 {
     startPoint = [gesture locationInView:gesture.view];
     CGPoint touchLocation = [self convertPointFromView:startPoint];
-    [self selectNodeForTouch:touchLocation];
 
     // set startPoint based on touchLocation
     startPoint.x = startPoint.x + _selectedNode.position.x - touchLocation.x;
