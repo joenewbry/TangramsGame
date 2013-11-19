@@ -64,9 +64,6 @@
 {
     LevelSelectionNode * node = [[LevelSelectionNode alloc] initWithLevel:level];
     node.position = point;
-    node.physicsBody.categoryBitMask = blockCategory;
-    node.physicsBody.contactTestBitMask = blockCategory | targetCategory | wallCategory;
-    node.physicsBody.collisionBitMask = 0;
     return node;
 }
 
@@ -83,9 +80,6 @@
 
     // only if we actually tapped a level selection node
     if (_selectedNode != nil) {
-        
-        NSLog(@"Level selected by user: %i", _selectedNode.level);
-        
         // initialize the correct level
         CGSize size = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height);
         LevelScene * level = [[LevelScene alloc] initWithLevel:_selectedNode.level AndSize:size];

@@ -36,7 +36,9 @@
         
         // set bitmask
         self.physicsBody.categoryBitMask = targetCategory;
+        self.physicsBody.contactTestBitMask = blockCategory;
         self.physicsBody.collisionBitMask = blockCategory;
+        //self.physicsBody.collisionBitMask = 0;
         
         self.physicsBody.dynamic = NO;
     }

@@ -7,6 +7,7 @@
 //
 
 #import "LevelScene.h"
+#import "LevelWonScene.h"
 #import "TemplateNode.h"
 
 @interface LevelScene ()
@@ -23,6 +24,9 @@
 
     // back button
     SKSpriteNode *backButton;
+
+    // triangles remaining
+    int templateTriRemaining;
 }
 
 @property (strong, nonatomic) NSTimer *timeElapsed;
@@ -78,6 +82,9 @@
         } else {
             isRetina = NO;
         }
+
+        // should get passed in triangles in shape, or it should be a property on the template node
+        templateTriRemaining = 1;
         
     }
     return self;
@@ -290,7 +297,7 @@
     // unsuccessful placement
     if (_selectedNode.contactType == TOUCHING_TANGRAM) {
         // in the case of unsuccessful placement, the selected node still be tranparent
-        [_selectedNode setAlpha:1];
+        [_selectedNode setAlpha:.5];
         [_selectedNode setPosition:CGPointMake(startPoint.x, self.size.height - startPoint.y)];
     }
     
@@ -309,6 +316,11 @@
         if (_selectedNode.inDrawer) {
             _selectedNode.inDrawer = false;
             [self updateDrawerWithBlockType:_selectedNode.objectType];
+        }
+
+        // win condition check
+        if ([self isGameWon]){
+            [self gameWon];
         }
     }
 }
@@ -346,6 +358,11 @@
         _selectedNode.zRotation = [self nearestAngleFromAngle:_rotation];
         gesture.rotation = 0.0;
     }
+    if (gesture.state == UIGestureRecognizerStateEnded){
+        if ([self isGameWon]){
+            [self gameWon];
+        }
+    }
 }
 
 #pragma warning need to implement rotation modulo
@@ -356,6 +373,22 @@
     //return (M_2_PI/8) * fmodf(angle, M_2_PI);
 }
 
+- (BOOL) isGameWon
+{
+    return templateTriRemaining < 1;
+}
+
+- (void) gameWon
+{
+    // initialize the correct level
+    CGSize size = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height);
+    LevelWonScene * levelWonScene = [[LevelWonScene alloc] initWithSize:size];
+
+    // present the level with a nice transition
+    //SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration:0.5];
+    [self.view presentScene:levelWonScene transition:nil];
+
+}
 
 /*
  * Handle when two physics bodies begin touching.
@@ -381,6 +414,8 @@
     // TODO: do we need another check here?
     if ((secondBody.categoryBitMask & targetCategory) != 0) {
         _selectedNode.contactType = TOUCHING_TARGET;
+        _selectedNode.alpha = 0.5;
+        templateTriRemaining--;
     }
 }
 
@@ -400,20 +435,21 @@
     }
 
     // handle two blocks ending contact with each other
-    if ((firstBody.categoryBitMask & blockCategory) != 0) {
-        if ((secondBody.categoryBitMask & blockCategory) != 0) {
+    if ((secondBody.categoryBitMask & blockCategory) != 0) {
             _selectedNode.contactType = NO_CONTACT;
             [_selectedNode setAlpha:1];
-        }
+    }
+    // must be contact between a tangram and the target
+    else {
+        _selectedNode.contactType = NO_CONTACT;
+        [_selectedNode setAlpha:1];
+        templateTriRemaining++;
     }
 }
 
-// TODO: Maybe check for win condition in here??
-// McQueen: Other option is checking for win condtion after every blocknode is placed. That might
-// be nicer, so we don't continuously check for wins while the game is idle? Maybe it doesn't matter.
--(void)update:(CFTimeInterval)currentTime
-{
-    /* Called before each frame is rendered */
+
+-(void)update:(NSTimeInterval)currentTime{
+
 }
 
 @end

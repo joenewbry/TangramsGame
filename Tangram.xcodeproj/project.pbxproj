@@ -21,6 +21,7 @@
 		725B2AD6183544540049214F /* TemplateNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 725B2AD5183544540049214F /* TemplateNode.m */; };
 		D81EA892182302BF00E33EA3 /* HomeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D81EA891182302BF00E33EA3 /* HomeScene.m */; };
 		D81EA89518233DC300E33EA3 /* LevelSelectionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D81EA89418233DC300E33EA3 /* LevelSelectionScene.m */; };
+		D8287F981839896F0073C2AB /* LevelWonScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D8287F971839896F0073C2AB /* LevelWonScene.m */; };
 		D8693E47181B08AD005EE51F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8693E46181B08AD005EE51F /* Foundation.framework */; };
 		D8693E49181B08AE005EE51F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8693E48181B08AE005EE51F /* CoreGraphics.framework */; };
 		D8693E4B181B08AE005EE51F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8693E4A181B08AE005EE51F /* UIKit.framework */; };
@@ -72,6 +73,8 @@
 		D81EA891182302BF00E33EA3 /* HomeScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScene.m; sourceTree = "<group>"; };
 		D81EA89318233DC200E33EA3 /* LevelSelectionScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelSelectionScene.h; sourceTree = "<group>"; };
 		D81EA89418233DC300E33EA3 /* LevelSelectionScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelSelectionScene.m; sourceTree = "<group>"; };
+		D8287F961839896F0073C2AB /* LevelWonScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelWonScene.h; sourceTree = "<group>"; };
+		D8287F971839896F0073C2AB /* LevelWonScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelWonScene.m; sourceTree = "<group>"; };
 		D8693E43181B08AD005EE51F /* Tangram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tangram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8693E46181B08AD005EE51F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D8693E48181B08AE005EE51F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -139,6 +142,8 @@
 			children = (
 				D8693E82181B218B005EE51F /* LevelScene.h */,
 				D8693E83181B218B005EE51F /* LevelScene.m */,
+				D8287F961839896F0073C2AB /* LevelWonScene.h */,
+				D8287F971839896F0073C2AB /* LevelWonScene.m */,
 				D81EA890182302BF00E33EA3 /* HomeScene.h */,
 				D81EA891182302BF00E33EA3 /* HomeScene.m */,
 				D81EA89318233DC200E33EA3 /* LevelSelectionScene.h */,
@@ -364,6 +369,7 @@
 				D8693E55181B08AE005EE51F /* main.m in Sources */,
 				D8693E84181B218B005EE51F /* LevelScene.m in Sources */,
 				0D501B95181F718400870EB0 /* LevelModel.m in Sources */,
+				D8287F981839896F0073C2AB /* LevelWonScene.m in Sources */,
 				725B2AD6183544540049214F /* TemplateNode.m in Sources */,
 				D8693E8D181B638A005EE51F /* BlockNode.m in Sources */,
 				0D25777C1828BBF600CC65EE /* LevelSelectionNode.m in Sources */,

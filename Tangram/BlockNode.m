@@ -23,6 +23,8 @@
         
         int scale = isRetina ? 1 : 2;
 
+        //NSLog(<#NSString *format, ...#>)
+
         [self.physicsBody setDynamic:YES];
         [self.physicsBody setUsesPreciseCollisionDetection:YES];
         
