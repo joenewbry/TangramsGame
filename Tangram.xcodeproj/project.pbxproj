@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		03581B941835547A0015E22B /* level-selection.png in Resources */ = {isa = PBXBuildFile; fileRef = 03581B931835547A0015E22B /* level-selection.png */; };
+		03F47FB2183BEC6D00FDB580 /* hoffman.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F47FB1183BEC6D00FDB580 /* hoffman.png */; };
+		03F47FB4183BEDC100FDB580 /* geometry.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F47FB3183BEDC100FDB580 /* geometry.png */; };
 		0D25777C1828BBF600CC65EE /* LevelSelectionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D25777B1828BBF600CC65EE /* LevelSelectionNode.m */; };
 		0D501B92181F716700870EB0 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D501B91181F716700870EB0 /* GameView.m */; };
 		0D501B95181F718400870EB0 /* LevelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D501B94181F718400870EB0 /* LevelModel.m */; };
@@ -53,6 +55,8 @@
 
 /* Begin PBXFileReference section */
 		03581B931835547A0015E22B /* level-selection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-selection.png"; sourceTree = "<group>"; };
+		03F47FB1183BEC6D00FDB580 /* hoffman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hoffman.png; sourceTree = "<group>"; };
+		03F47FB3183BEDC100FDB580 /* geometry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = geometry.png; sourceTree = "<group>"; };
 		0D2577741828B05600CC65EE /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		0D25777A1828BBF600CC65EE /* LevelSelectionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelSelectionNode.h; sourceTree = "<group>"; };
 		0D25777B1828BBF600CC65EE /* LevelSelectionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelSelectionNode.m; sourceTree = "<group>"; };
@@ -219,6 +223,8 @@
 			isa = PBXGroup;
 			children = (
 				D8693E50181B08AE005EE51F /* Tangram-Info.plist */,
+				03F47FB3183BEDC100FDB580 /* geometry.png */,
+				03F47FB1183BEC6D00FDB580 /* hoffman.png */,
 				D8693E51181B08AE005EE51F /* InfoPlist.strings */,
 				D8693E54181B08AE005EE51F /* main.m */,
 				D8693E56181B08AE005EE51F /* Tangram-Prefix.pch */,
@@ -341,12 +347,14 @@
 				0DBB59B6182C1734002353CF /* sq-open.png in Resources */,
 				0DEC65051835558B006AB966 /* pause.png in Resources */,
 				724A600818259AB900852FDE /* levelsData.plist in Resources */,
+				03F47FB2183BEC6D00FDB580 /* hoffman.png in Resources */,
 				D8693E66181B08AE005EE51F /* Images.xcassets in Resources */,
 				0DBB59B4182C0F5F002353CF /* para-open.png in Resources */,
 				03581B941835547A0015E22B /* level-selection.png in Resources */,
 				0DBB59BA182C1742002353CF /* tri-open.png in Resources */,
 				0DBB59BE182C18CE002353CF /* trap-open.png in Resources */,
 				D8693E5C181B08AE005EE51F /* Main.storyboard in Resources */,
+				03F47FB4183BEDC100FDB580 /* geometry.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

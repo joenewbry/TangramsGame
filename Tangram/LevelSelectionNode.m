@@ -17,7 +17,7 @@
         self.level = level;
         
         // create shape
-        [self setColor:[UIColor orangeColor]];
+        [self setColor:[UIColor colorWithHue:0.315 saturation:0.220 brightness:0.875 alpha:1]];
         [self setSize:CGSizeMake(100.0, 100.0)];
         [self setPhysicsBody:[SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100.0, 100.0)]];
     }

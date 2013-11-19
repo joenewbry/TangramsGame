@@ -19,7 +19,10 @@
 {
      if (self = [super initWithSize:size])
     {
-        self.backgroundColor = [UIColor blueColor];
+        // It would be nice to have a background pattern, can't figure
+        // it out at the moment though. - Josh 11/19
+        //UIImage *patternImage = [UIImage imageNamed:@"geometry.png"];
+        self.backgroundColor = [UIColor whiteColor];
         
         // call setup methods
         [self setupPhysics];
@@ -50,11 +53,11 @@
         LevelSelectionNode * levelNode = [self createLevelNodeOfLevel:i At:levelStartPoints[i]];
         [self addChild:levelNode];
         
-        SKLabelNode * levelLabel = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
+        SKLabelNode * levelLabel = [[SKLabelNode alloc] initWithFontNamed:@"HelveticaNeue-Bold"];
         levelLabel.position = levelLabelStartPoints[i];
-        levelLabel.fontColor = [UIColor whiteColor];
+        levelLabel.fontColor = [UIColor colorWithHue:0.000 saturation:0.000 brightness:0.224 alpha:1];
         levelLabel.fontSize = 20;
-        levelLabel.text = [NSString stringWithFormat:@"Level: %i", (i+1)];
+        levelLabel.text = [NSString stringWithFormat:@"Level %i", (i+1)];
         [self addChild:levelLabel];
     }
 }
