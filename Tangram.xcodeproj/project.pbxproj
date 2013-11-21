@@ -18,7 +18,6 @@
 		0DBB59BA182C1742002353CF /* tri-open.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBB59B9182C1742002353CF /* tri-open.png */; };
 		0DBB59BE182C18CE002353CF /* trap-open.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBB59BD182C18CE002353CF /* trap-open.png */; };
 		0DEC65051835558B006AB966 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DEC65041835558B006AB966 /* pause.png */; };
-		0DEC650718355611006AB966 /* level-one.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DEC650618355611006AB966 /* level-one.png */; };
 		724A600818259AB900852FDE /* levelsData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 724A600718259AB900852FDE /* levelsData.plist */; };
 		725B2AD6183544540049214F /* TemplateNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 725B2AD5183544540049214F /* TemplateNode.m */; };
 		D81EA892182302BF00E33EA3 /* HomeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D81EA891182302BF00E33EA3 /* HomeScene.m */; };
@@ -41,6 +40,8 @@
 		D8693E79181B08AE005EE51F /* TangramTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D8693E78181B08AE005EE51F /* TangramTests.m */; };
 		D8693E84181B218B005EE51F /* LevelScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D8693E83181B218B005EE51F /* LevelScene.m */; };
 		D8693E8D181B638A005EE51F /* BlockNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D8693E8C181B638A005EE51F /* BlockNode.m */; };
+		D8D9034F183DD8AF005A6562 /* Final-Level-One-Template-01.png in Resources */ = {isa = PBXBuildFile; fileRef = D8D9034E183DD8AF005A6562 /* Final-Level-One-Template-01.png */; };
+		D8D90351183DD99D005A6562 /* template_level_1-01.png in Resources */ = {isa = PBXBuildFile; fileRef = D8D90350183DD99D005A6562 /* template_level_1-01.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +70,6 @@
 		0DBB59B9182C1742002353CF /* tri-open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tri-open.png"; sourceTree = "<group>"; };
 		0DBB59BD182C18CE002353CF /* trap-open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trap-open.png"; sourceTree = "<group>"; };
 		0DEC65041835558B006AB966 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
-		0DEC650618355611006AB966 /* level-one.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-one.png"; sourceTree = "<group>"; };
 		724A600718259AB900852FDE /* levelsData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = levelsData.plist; sourceTree = "<group>"; };
 		725B2AD4183544540049214F /* TemplateNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemplateNode.h; sourceTree = "<group>"; };
 		725B2AD5183544540049214F /* TemplateNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TemplateNode.m; sourceTree = "<group>"; };
@@ -103,6 +103,8 @@
 		D8693E83181B218B005EE51F /* LevelScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelScene.m; sourceTree = "<group>"; };
 		D8693E8B181B638A005EE51F /* BlockNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockNode.h; sourceTree = "<group>"; };
 		D8693E8C181B638A005EE51F /* BlockNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockNode.m; sourceTree = "<group>"; };
+		D8D9034E183DD8AF005A6562 /* Final-Level-One-Template-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Final-Level-One-Template-01.png"; sourceTree = "<group>"; };
+		D8D90350183DD99D005A6562 /* template_level_1-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "template_level_1-01.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,7 +256,8 @@
 		D8693E91181C8166005EE51F /* art.atlas */ = {
 			isa = PBXGroup;
 			children = (
-				0DEC650618355611006AB966 /* level-one.png */,
+				D8D90350183DD99D005A6562 /* template_level_1-01.png */,
+				D8D9034E183DD8AF005A6562 /* Final-Level-One-Template-01.png */,
 				0DEC65041835558B006AB966 /* pause.png */,
 				0DBB59BD182C18CE002353CF /* trap-open.png */,
 				03581B931835547A0015E22B /* level-selection.png */,
@@ -342,10 +345,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0DEC650718355611006AB966 /* level-one.png in Resources */,
 				D8693E53181B08AE005EE51F /* InfoPlist.strings in Resources */,
+				D8D90351183DD99D005A6562 /* template_level_1-01.png in Resources */,
 				0DBB59B6182C1734002353CF /* sq-open.png in Resources */,
 				0DEC65051835558B006AB966 /* pause.png in Resources */,
+				D8D9034F183DD8AF005A6562 /* Final-Level-One-Template-01.png in Resources */,
 				724A600818259AB900852FDE /* levelsData.plist in Resources */,
 				03F47FB2183BEC6D00FDB580 /* hoffman.png in Resources */,
 				D8693E66181B08AE005EE51F /* Images.xcassets in Resources */,
