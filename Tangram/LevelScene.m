@@ -47,7 +47,6 @@
 - (void) handleContinuingPan:(UIPanGestureRecognizer *)gesture;
 - (void) handleEndingPan:(UIPanGestureRecognizer *)gesture;
 - (void) updateDrawerWithBlockType:(BlockType) type;
-- (void) rotate:(UIRotationGestureRecognizer *)gesture;
 - (CGFloat) nearestAngleFromAngle :(CGFloat)angle;
 
 @end
@@ -197,22 +196,13 @@
     
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                     action:@selector(pan:)];
-    UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self
-                                                                                                   action:@selector(rotate:)];
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(tap:)];
-    
-    [[self view] addGestureRecognizer:rotationRecognizer];
+
     [[self view] addGestureRecognizer:panRecognizer];
     [[self view] addGestureRecognizer:tapGestureRecognizer];
 }
 
-/*
- * Rotate tangrams when they are tapped.
- *
- * TODO: we also need to rotate physics body with spite. CRITICAL.
- *
- */
 - (void)tap:(UITapGestureRecognizer *)gesture
 {
     SKNode *node = [self nodeAtPoint:[self convertPointFromView:[gesture locationInView:gesture.view]]];
@@ -354,37 +344,6 @@
         BlockNode * addBlock = [self createNodeWithType:type withPoint:shapeStartingPoints[type]];
         [self addChild:addBlock];
     }
-}
-
-
-/*
- * Two finger rotate.
- */
--(void)rotate:(UIRotationGestureRecognizer *)gesture
-{
-    if (gesture.state == UIGestureRecognizerStateBegan) {
-        CGPoint touchLocation = [gesture locationInView:gesture.view];
-        touchLocation = [self convertPointFromView:touchLocation];
-        [self selectNodeForTouch:touchLocation];
-    }
-    else if ((gesture.state == UIGestureRecognizerStateChanged) || gesture.state == UIGestureRecognizerStateEnded) {
-        _rotation = _rotation - gesture.rotation;
-        _selectedNode.zRotation = [self nearestAngleFromAngle:_rotation];
-        gesture.rotation = 0.0;
-    }
-    if (gesture.state == UIGestureRecognizerStateEnded){
-        if ([self isGameWon]){
-            [self gameWon];
-        }
-    }
-}
-
-#pragma warning need to implement rotation modulo
-- (CGFloat) nearestAngleFromAngle:(CGFloat) angle
-{
-    // mod angle by pi / 4 to get the number of 45 degreee rotations to move
-    return angle;
-    //return (M_2_PI/8) * fmodf(angle, M_2_PI);
 }
 
 - (BOOL) isGameWon
