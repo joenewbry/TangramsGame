@@ -25,10 +25,15 @@
 
     // back button
     SKSpriteNode *backButton;
+    
+    // Template
+    SKSpriteNode *_template;
 
     // triangles remaining
     int templateTriRemaining;
 }
+
+
 
 @property (strong, nonatomic) NSTimer *timeElapsed;
 @property (strong, nonatomic) NSDate *startDate;
@@ -164,13 +169,13 @@
 
 - (void)setupTemplateWithModel:(LevelModel *)levelModel
 {
-    SKSpriteNode *template = [[TemplateNode alloc] initWithModel:levelModel];
+    _template = [[TemplateNode alloc] initWithModel:levelModel];
     
-    template.position = CGPointMake(self.size.width/2, self.size.height/3 *2);
+    _template.position = CGPointMake(self.size.width/2, self.size.height/3 *2);
 
-    [self addChild:template];
+    [self addChild:_template];
     
-    NSLog(@"template physics body: %@", template.physicsBody);
+    NSLog(@"template physics body: %@", _template.physicsBody);
 }
 
 /*
@@ -180,7 +185,6 @@
 -(void) setupBackButton
 {
     backButton = [[SKSpriteNode alloc] initWithImageNamed:@"pause.png"];
-    // backButton = [[SKSpriteNode alloc] initWithColor:[UIColor purpleColor] size:CGSizeMake(100.0, 100.0)];
     backButton.position = CGPointMake(60.0, 950.0);
     [self addChild:backButton];
 }
@@ -324,6 +328,10 @@
             _selectedNode.inDrawer = false;
             [self updateDrawerWithBlockType:_selectedNode.objectType];
         }
+        
+        if (CGRectContainsRect(_template.frame, _selectedNode.frame)) {
+            templateTriRemaining--;
+        }
 
         // win condition check
         if ([self isGameWon]){
@@ -422,7 +430,6 @@
     if ((secondBody.categoryBitMask & targetCategory) != 0) {
         _selectedNode.contactType = TOUCHING_TARGET;
         _selectedNode.alpha = 0.5;
-        templateTriRemaining--;
     }
 }
 

@@ -25,13 +25,13 @@
      {
         /* Setup your scene here */
         
-        self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
+        self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
          
-         SKLabelNode *playButton = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
-         playButton.fontSize = 20;
+         SKLabelNode *playButton = [[SKLabelNode alloc] initWithFontNamed:@"HelveticaBold"];
+         playButton.fontSize = 80;
          playButton.fontColor = [UIColor blueColor];
          playButton.position = CGPointMake(self.size.width/2, self.size.height/2);
-         playButton.text = @"Click to Play Game";
+         playButton.text = @"Tangrams";  //todo:  change title
          [self addChild:playButton];
     }
     return self;
