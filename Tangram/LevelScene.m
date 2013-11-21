@@ -185,7 +185,7 @@
 -(void) setupBackButton
 {
     backButton = [[SKSpriteNode alloc] initWithImageNamed:@"level-selection.png"];
-    backButton.position = CGPointMake(60.0, 950.0);
+    backButton.position = CGPointMake(40.0, 815.0);
     [self addChild:backButton];
 }
 
@@ -222,7 +222,6 @@
         [node runAction:rotate];
     }
     if ([node isEqual:backButton]){
-            NSLog(@"Hit the thang");
             SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration:0.5];
             SKScene *levelSelctionScene = [[LevelSelectionScene alloc] initWithSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height)];
             [self.view presentScene:levelSelctionScene transition:reveal];
