@@ -16,7 +16,7 @@
 @property (nonatomic) int numberOfTriangles;
 
 
-- (id)initWithModel:(LevelModel *)levelModel;
+- (id)initWithModel:(LevelModel *)levelModel deviceIsRetina:(BOOL)isRetina;
 
 
 @end

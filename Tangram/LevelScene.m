@@ -169,7 +169,7 @@
 
 - (void)setupTemplateWithModel:(LevelModel *)levelModel
 {
-    _template = [[TemplateNode alloc] initWithModel:levelModel];
+    _template = [[TemplateNode alloc] initWithModel:levelModel deviceIsRetina:isRetina];
     
     _template.position = CGPointMake(self.size.width/2, self.size.height/3 *2);
 

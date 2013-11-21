@@ -5,9 +5,9 @@
 	<dict>
 		<key>physicsBodyCoords</key>
 		<array>
-			<string>19 182</string>
-			<string>186 17</string>
-			<string>18 16</string>
+			<string>9 63</string>
+			<string>9 10</string>
+			<string>60 10</string>
 		</array>
 		<key>outlineFilepath</key>
 		<string>level-one.png</string>
