@@ -185,7 +185,7 @@
 -(void) setupBackButton
 {
     backButton = [[SKSpriteNode alloc] initWithImageNamed:@"level-selection.png"];
-    backButton.position = CGPointMake(40.0, 815.0);
+    backButton.position = CGPointMake(60.0, 950.0);
     [self addChild:backButton];
 }
 

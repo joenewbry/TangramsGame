@@ -21,7 +21,15 @@
 {
     if (self = [super initWithSize:size])
     {
+
         self.backgroundColor = [UIColor whiteColor];
+        
+        SKLabelNode *playButton = [[SKLabelNode alloc] initWithFontNamed:@"HelveticaNeue-Bold"];
+        playButton.fontSize = 80;
+        playButton.fontColor = [UIColor colorWithHue:0.000 saturation:0.000 brightness:0.224 alpha:1];
+        playButton.position = CGPointMake(self.size.width/2, self.size.height/2);
+        playButton.text = @"woohoo :)";
+        [self addChild:playButton];
 
         // call setup methods
 
@@ -44,7 +52,7 @@
 -(void) setupBackButton
 {
     backButton = [[SKSpriteNode alloc] initWithImageNamed:@"level-selection.png"];
-    backButton.position = CGPointMake(40.0, 815.0);
+    backButton.position = CGPointMake(60.0, 950.0);
     [self addChild:backButton];
 }
 
