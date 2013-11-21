@@ -48,7 +48,6 @@
 - (void) handleEndingPan:(UIPanGestureRecognizer *)gesture;
 - (void) updateDrawerWithBlockType:(BlockType) type;
 - (void) rotate:(UIRotationGestureRecognizer *)gesture;
-- (CGFloat) nearestAngleFromAngle :(CGFloat)angle;
 
 @end
 
@@ -362,29 +361,8 @@
  */
 -(void)rotate:(UIRotationGestureRecognizer *)gesture
 {
-    if (gesture.state == UIGestureRecognizerStateBegan) {
-        CGPoint touchLocation = [gesture locationInView:gesture.view];
-        touchLocation = [self convertPointFromView:touchLocation];
-        [self selectNodeForTouch:touchLocation];
-    }
-    else if ((gesture.state == UIGestureRecognizerStateChanged) || gesture.state == UIGestureRecognizerStateEnded) {
-        _rotation = _rotation - gesture.rotation;
-        _selectedNode.zRotation = [self nearestAngleFromAngle:_rotation];
-        gesture.rotation = 0.0;
-    }
-    if (gesture.state == UIGestureRecognizerStateEnded){
-        if ([self isGameWon]){
-            [self gameWon];
-        }
-    }
-}
-
-#pragma warning need to implement rotation modulo
-- (CGFloat) nearestAngleFromAngle:(CGFloat) angle
-{
-    // mod angle by pi / 4 to get the number of 45 degreee rotations to move
-    return angle;
-    //return (M_2_PI/8) * fmodf(angle, M_2_PI);
+    // do noting on rotate. can we remove this method?
+    // when we remove it, shit breaks -- we should figure that out eventually.
 }
 
 - (BOOL) isGameWon
