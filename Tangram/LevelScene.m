@@ -160,8 +160,8 @@
  */
 - (SKLabelNode *)labelNodeWithRemaining:(int)numRemaining at:(CGPoint)labelPoint
 {
-    SKLabelNode * shapeRemaining = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
-    shapeRemaining.fontColor = [UIColor greenColor];
+    SKLabelNode * shapeRemaining = [[SKLabelNode alloc] initWithFontNamed:@"HelveticaNeue-Bold"];
+    shapeRemaining.fontColor = [UIColor colorWithHue:0.000 saturation:0.000 brightness:0.224 alpha:1];
     shapeRemaining.text =  [NSString stringWithFormat:@"%i", numRemaining];
     shapeRemaining.position = labelPoint;
     return shapeRemaining;
@@ -184,7 +184,7 @@
  */
 -(void) setupBackButton
 {
-    backButton = [[SKSpriteNode alloc] initWithImageNamed:@"pause.png"];
+    backButton = [[SKSpriteNode alloc] initWithImageNamed:@"level-selection.png"];
     backButton.position = CGPointMake(60.0, 950.0);
     [self addChild:backButton];
 }

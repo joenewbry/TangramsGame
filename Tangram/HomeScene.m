@@ -27,11 +27,11 @@
         
         self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
          
-         SKLabelNode *playButton = [[SKLabelNode alloc] initWithFontNamed:@"HelveticaBold"];
+         SKLabelNode *playButton = [[SKLabelNode alloc] initWithFontNamed:@"HelveticaNeue-Bold"];
          playButton.fontSize = 80;
-         playButton.fontColor = [UIColor blueColor];
+         playButton.fontColor = [UIColor colorWithHue:0.000 saturation:0.000 brightness:0.224 alpha:1];
          playButton.position = CGPointMake(self.size.width/2, self.size.height/2);
-         playButton.text = @"Tangrams";  //todo:  change title
+         playButton.text = @"Tangrams";
          [self addChild:playButton];
     }
     return self;
