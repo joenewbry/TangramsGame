@@ -47,7 +47,7 @@
 - (void) handleContinuingPan:(UIPanGestureRecognizer *)gesture;
 - (void) handleEndingPan:(UIPanGestureRecognizer *)gesture;
 - (void) updateDrawerWithBlockType:(BlockType) type;
-- (CGFloat) nearestAngleFromAngle :(CGFloat)angle;
+- (void) rotate:(UIRotationGestureRecognizer *)gesture;
 
 @end
 
@@ -344,6 +344,15 @@
         BlockNode * addBlock = [self createNodeWithType:type withPoint:shapeStartingPoints[type]];
         [self addChild:addBlock];
     }
+}
+
+/*
+ * Two finger rotate.
+ */
+-(void)rotate:(UIRotationGestureRecognizer *)gesture
+{
+    // do noting on rotate. can we remove this method?
+    // when we remove it, shit breaks -- we should figure that out eventually.
 }
 
 - (BOOL) isGameWon
