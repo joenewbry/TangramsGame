@@ -194,11 +194,15 @@
 - (void)didMoveToView:(SKView *)view
 {
     
+    UIRotationGestureRecognizer *rotateRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self
+                                                                                    action:@selector(rotate:)];
+    
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                     action:@selector(pan:)];
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(tap:)];
 
+    [[self view] addGestureRecognizer:rotateRecognizer];
     [[self view] addGestureRecognizer:panRecognizer];
     [[self view] addGestureRecognizer:tapGestureRecognizer];
 }
