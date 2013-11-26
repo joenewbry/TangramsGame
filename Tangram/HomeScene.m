@@ -27,12 +27,18 @@
         
         self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
          
-         SKLabelNode *playButton = [[SKLabelNode alloc] initWithFontNamed:@"HelveticaNeue-Bold"];
-         playButton.fontSize = 80;
-         playButton.fontColor = [UIColor colorWithHue:0.000 saturation:0.000 brightness:0.224 alpha:1];
-         playButton.position = CGPointMake(self.size.width/2, self.size.height/2);
-         playButton.text = @"Tangrams";
-         [self addChild:playButton];
+         SKLabelNode *startText = [[SKLabelNode alloc] initWithFontNamed:@"HelveticaNeue-Bold"];
+         startText.fontSize = 80;
+         startText.fontColor = [UIColor colorWithHue:0.000 saturation:0.000 brightness:0.224 alpha:1];
+         startText.position = CGPointMake(self.size.width/2, self.size.height/2);
+         startText.text = @"Geopets";
+         [self addChild:startText];
+         
+         // start button
+         SKSpriteNode *startButton = [[SKSpriteNode alloc] initWithImageNamed:@"resume.png"];
+         startButton.position = CGPointMake(self.size.width/2, self.size.height/2 - 80);
+         [self addChild:startButton];
+         
     }
     return self;
 }

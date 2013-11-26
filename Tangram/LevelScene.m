@@ -192,8 +192,7 @@
  * Set recognizers for pan, rotate and tap gestures
  */
 - (void)didMoveToView:(SKView *)view
-{
-    
+{    
     UIRotationGestureRecognizer *rotateRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self
                                                                                     action:@selector(rotate:)];
     
@@ -217,7 +216,8 @@
     }
     if ([node isEqual:backButton]){
             SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration:0.5];
-            SKScene *levelSelctionScene = [[LevelSelectionScene alloc] initWithSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height)];
+            SKScene *levelSelctionScene = [[LevelSelectionScene alloc] initWithSize:CGSizeMake(self.view.bounds.size.width,
+                                                                                               self.view.bounds.size.height)];
             [self.view presentScene:levelSelctionScene transition:reveal];
     }
 }

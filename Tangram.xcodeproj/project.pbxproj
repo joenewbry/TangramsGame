@@ -13,6 +13,7 @@
 		0D25777C1828BBF600CC65EE /* LevelSelectionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D25777B1828BBF600CC65EE /* LevelSelectionNode.m */; };
 		0D501B92181F716700870EB0 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D501B91181F716700870EB0 /* GameView.m */; };
 		0D501B95181F718400870EB0 /* LevelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D501B94181F718400870EB0 /* LevelModel.m */; };
+		0DB9771018445B2700FB7A9C /* resume.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DB9770F18445B2700FB7A9C /* resume.png */; };
 		0DBB59B4182C0F5F002353CF /* para-open.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBB59B3182C0F5F002353CF /* para-open.png */; };
 		0DBB59B6182C1734002353CF /* sq-open.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBB59B5182C1734002353CF /* sq-open.png */; };
 		0DBB59BA182C1742002353CF /* tri-open.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBB59B9182C1742002353CF /* tri-open.png */; };
@@ -65,6 +66,7 @@
 		0D501B91181F716700870EB0 /* GameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
 		0D501B93181F718400870EB0 /* LevelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelModel.h; sourceTree = "<group>"; };
 		0D501B94181F718400870EB0 /* LevelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelModel.m; sourceTree = "<group>"; };
+		0DB9770F18445B2700FB7A9C /* resume.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = resume.png; sourceTree = "<group>"; };
 		0DBB59B3182C0F5F002353CF /* para-open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "para-open.png"; sourceTree = "<group>"; };
 		0DBB59B5182C1734002353CF /* sq-open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sq-open.png"; sourceTree = "<group>"; };
 		0DBB59B9182C1742002353CF /* tri-open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tri-open.png"; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 		D8693E91181C8166005EE51F /* art.atlas */ = {
 			isa = PBXGroup;
 			children = (
+				0DB9770F18445B2700FB7A9C /* resume.png */,
 				D8D90350183DD99D005A6562 /* template_level_1-01.png */,
 				D8D9034E183DD8AF005A6562 /* Final-Level-One-Template-01.png */,
 				0DEC65041835558B006AB966 /* pause.png */,
@@ -357,6 +360,7 @@
 				03F47FB2183BEC6D00FDB580 /* hoffman.png in Resources */,
 				D8693E66181B08AE005EE51F /* Images.xcassets in Resources */,
 				0DBB59B4182C0F5F002353CF /* para-open.png in Resources */,
+				0DB9771018445B2700FB7A9C /* resume.png in Resources */,
 				03581B941835547A0015E22B /* level-selection.png in Resources */,
 				0DBB59BA182C1742002353CF /* tri-open.png in Resources */,
 				0DBB59BE182C18CE002353CF /* trap-open.png in Resources */,
