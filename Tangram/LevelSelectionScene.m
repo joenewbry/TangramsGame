@@ -62,7 +62,6 @@
     }
 }
 
-
 -(LevelSelectionNode*)createLevelNodeOfLevel:(int)level At:(CGPoint) point
 {
     LevelSelectionNode * node = [[LevelSelectionNode alloc] initWithLevel:level];
@@ -90,6 +89,7 @@
         // present the level with a nice transition
         SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration:0.5];
         [self.view presentScene:level transition:reveal];
+
     }
 }
 

@@ -43,6 +43,8 @@
     return self;
 }
 
+
+
 // TODO: remove unnecessary gesture recognizers
 - (void)didMoveToView:(SKView *)view
 {
@@ -57,6 +59,7 @@
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(tap:)];
     [[self view] addGestureRecognizer:tapGestureRecognizer];
+
 }
 
 -(void)pan:(UIGestureRecognizer*) gesture

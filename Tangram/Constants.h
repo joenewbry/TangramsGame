@@ -36,6 +36,10 @@ static const uint32_t wallCategory = 0x1 << 1;
 static const uint32_t targetCategory = 0x1 << 2;
 static const uint32_t trashCategory = 0x1 << 3;
 
+// keys for testflight and lookback
+#define LOOK_BACK_KEY @"QbWwzjHmCSWqJJRTB"
+#define TESTFLIGHT_KEY @"84039049-e473-4dce-9965-b3ae71a59692"
+
 
 @interface Constants : NSObject
 
