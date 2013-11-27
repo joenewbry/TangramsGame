@@ -10,6 +10,7 @@
 #import "LevelWonScene.h"
 #import "TemplateNode.h"
 
+#define ROTATE_DURATION 0.25
 
 @interface LevelScene ()
 {
@@ -211,8 +212,21 @@
     SKNode *node = [self nodeAtPoint:[self convertPointFromView:[gesture locationInView:gesture.view]]];
     
     if ([node isKindOfClass:[BlockNode class]]) {
-        SKAction *rotate = [SKAction rotateByAngle:M_PI_4 duration:0.25];
-        [node runAction:rotate];
+        BlockNode *blockNode = (BlockNode *)node;
+        SKAction *rotate = [SKAction rotateByAngle:M_PI_4 duration:ROTATE_DURATION];
+        [blockNode runAction:rotate];
+        
+        // Check if collision occurs. If so, rotate back.
+        // Need to do this in another thread b/c rotate takes 0.25 sec to register contact.
+        
+        dispatch_async(dispatch_queue_create("check contact", nil), ^{
+            [NSThread sleepForTimeInterval:ROTATE_DURATION];
+            if (blockNode.contactType == TOUCHING_TANGRAM) {
+                SKAction *rotateBack = [SKAction rotateByAngle:-M_PI_4 duration:0.25];
+                [blockNode runAction:rotateBack];
+            }
+        });
+        
     }
     if ([node isEqual:backButton]){
             SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration:0.5];
