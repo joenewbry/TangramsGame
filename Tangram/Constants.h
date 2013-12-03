@@ -36,6 +36,9 @@ static const uint32_t wallCategory = 0x1 << 1;
 static const uint32_t targetCategory = 0x1 << 2;
 static const uint32_t trashCategory = 0x1 << 3;
 
+// debug mode for template
+static const BOOL debugMode = true;
+
 @interface Constants : NSObject
 
 @end

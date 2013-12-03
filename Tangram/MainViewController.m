@@ -10,6 +10,9 @@
 #import "LevelScene.h"
 #import "HomeScene.h"
 
+#import "YMCPhysicsDebugger.h"
+#import <YMCPhysicsDebugger.h>
+
 @implementation MainViewController
 
 - (void)viewDidLoad

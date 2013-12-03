@@ -7,8 +7,12 @@
 //
 
 #import "LevelScene.h"
+
+#import "YMCPhysicsDebugger.h"
+
 #import "LevelWonScene.h"
 #import "TemplateNode.h"
+
 
 #define ROTATE_DURATION 0.25
 
@@ -57,7 +61,9 @@
 
 - (id)initWithLevel:(int)level AndSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-        
+        [YMCPhysicsDebugger init];
+
+
         self.levelModel = [[LevelModel alloc] initWithLevel:level];
 
         // create a level label -- this is mostly to prove that levels work, we might not want this
@@ -91,8 +97,10 @@
 
         // should get passed in triangles in shape, or it should be a property on the template node
         templateTriRemaining = 1;
-        
+        [self drawPhysicsBodies];
+
     }
+
     return self;
 }
 
@@ -209,8 +217,14 @@
 
 - (void)tap:(UITapGestureRecognizer *)gesture
 {
-    SKNode *node = [self nodeAtPoint:[self convertPointFromView:[gesture locationInView:gesture.view]]];
-    
+    SKNode *node = [[SKNode alloc] init];
+    if (debugMode) {
+        node = [self nodesAtPoint:[self convertPointFromView:[gesture locationInView:gesture.view]]][0];
+
+    } else {
+        node = [self nodeAtPoint:[self convertPointFromView:[gesture locationInView:gesture.view]]];
+    }
+
     if ([node isKindOfClass:[BlockNode class]]) {
         BlockNode *blockNode = (BlockNode *)node;
         SKAction *rotate = [SKAction rotateByAngle:M_PI_4 duration:ROTATE_DURATION];
@@ -266,14 +280,26 @@
  */
 -(void)selectNodeForTouch:(CGPoint)touchLocation
 {
-    SKNode *nodeAtPoint = [self nodeAtPoint:touchLocation];
-    
-    if ([nodeAtPoint isKindOfClass:[BlockNode class]]) {
-        _selectedNode = (BlockNode *)nodeAtPoint;
+    if (!debugMode){
+        SKNode *nodeAtPoint = [self nodeAtPoint:touchLocation];
+
+        if ([nodeAtPoint isKindOfClass:[BlockNode class]]) {
+            _selectedNode = (BlockNode *)nodeAtPoint;
+        }
+        else {
+            _selectedNode = nil;
+        }
+    } else {
+        SKNode *nodeAtPoint = [self nodesAtPoint:touchLocation][0];
+
+        if ([nodeAtPoint isKindOfClass:[BlockNode class]]) {
+            _selectedNode = (BlockNode *)nodeAtPoint;
+        }
+        else {
+            _selectedNode = nil;
+        }
     }
-    else {
-        _selectedNode = nil;
-    }
+
 }
 
 /*

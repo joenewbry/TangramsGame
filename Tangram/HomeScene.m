@@ -9,6 +9,7 @@
 #import "HomeScene.h"
 #import "LevelSelectionScene.h"
 #import "LevelScene.h"
+#import <YMCPhysicsDebugger.h>
 
 @interface HomeScene ()
 {
