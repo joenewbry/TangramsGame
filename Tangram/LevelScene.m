@@ -342,9 +342,8 @@
     [_selectedNode setZPosition:1];
     
     // unsuccessful placement
-    if (_selectedNode.touchingTangram == YES) {
-        // in the case of unsuccessful placement, the selected node still be tranparent
-        [_selectedNode setAlpha:.5];
+    if (_selectedNode.touchingTangram) {
+        _selectedNode.alpha = 1;
         [_selectedNode setPosition:CGPointMake(startPoint.x, self.size.height - startPoint.y)];
     }
     
@@ -354,30 +353,25 @@
         // if the tangram started inside the template
         if (_selectedNode.isInsideTemplate) {
             
-            
-            // THIS LOGIC NEEDS WORK
-            
             if (!(_selectedNode.touchingTemplateVolumn) || _selectedNode.touchingTemplateEdge) {
+                _selectedNode.isInsideTemplate = NO;
                 // then we are placing it outside the template, decrement triangle counter
-                NSLog(@"decrement");
                 template.numberOfTrianglesInside -= _selectedNode.tangramTriangleNumber;
-                _selectedNode.isInsideTemplate = NO;
-            } else {
-                _selectedNode.isInsideTemplate = NO;
+                
+                NSLog(@"Node of value %d triangles is now inside the template", _selectedNode.tangramTriangleNumber);
+                NSLog(@"template is %d triangles away from being full", template.triangleNumber - template.numberOfTrianglesInside);
             }
-            
-            
             
         // otherwise tangram started outside the template
         } else {
-            // if it is touching the volumn, but not the edge, it is being placed in the money zone
+            // if it is touching the volumn, but not the edge, it is being placed in the templates
             if (_selectedNode.touchingTemplateVolumn && !(_selectedNode.touchingTemplateEdge)) {
-                NSLog(@"now inside shape!");
-                
                 _selectedNode.isInsideTemplate = YES;
-                
                 // we are placing it inside the template (from outside), increment triangle counter
                 template.numberOfTrianglesInside += _selectedNode.tangramTriangleNumber;
+                
+                NSLog(@"Node of value %d triangles is now inside the template", _selectedNode.tangramTriangleNumber);
+                NSLog(@"template is %d triangles away from being full", template.triangleNumber - template.numberOfTrianglesInside);
             }
         }
         

@@ -12,6 +12,7 @@
 #define kShapeCount @"shapeCount"
 #define kOutlineFilepath @"outlineFilepath"
 #define kPhysicsBodyCoords @"physicsBodyCoords"
+#define kTriangleNumber @"triangleNumber"
 
 @implementation LevelModel
 
@@ -27,6 +28,8 @@
         
         self.shapeCount = [levelData objectForKey:kShapeCount];
         self.outlineFilepath = [levelData objectForKey:kOutlineFilepath];
+        self.triangleNumber = [[levelData objectForKey:kTriangleNumber] intValue];
+
         
         // Parse string fields in physicsBodyCoords into sub-arrays of NSNumbers.
         NSMutableArray *physicsBodyCoords = [[NSMutableArray alloc] init];
@@ -38,10 +41,7 @@
         
         // Set properties.
         self.physicsBodyCoords = physicsBodyCoords;
-        
-        // TODO: this needs to get read from the plist
-        self.triangleNumber = 1;
-    }
+            }
     return self;
 }
 

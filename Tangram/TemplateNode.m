@@ -34,10 +34,14 @@
         
         for (int i = 1; i < length; i++) {
             coordPair = levelModel.physicsBodyCoords[i];
+
             CGPathAddLineToPoint(path, NULL, ([coordPair[0] floatValue] * scale) - offsetX,
                                  ([coordPair[1] floatValue] * scale) - offsetY);
         }
         CGPathCloseSubpath(path);
+
+
+
         
         self.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:path];
         
