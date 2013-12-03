@@ -13,8 +13,8 @@
 @interface TemplateNode : SKSpriteNode
 
 // Max number of "unit" triangles that can fit inside the template outline.
-@property (nonatomic) int numberOfTriangles;
-
+@property (nonatomic) int triangleNumber;
+@property (nonatomic) int numberOfTrianglesInside;
 
 - (id)initWithModel:(LevelModel *)levelModel deviceIsRetina:(BOOL)isRetina;
 

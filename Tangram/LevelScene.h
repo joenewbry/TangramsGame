@@ -11,6 +11,9 @@
 #import "LevelModel.h"
 #import "Constants.h"
 #import "LevelSelectionScene.h"
+#import "TemplateNode.h"
+#import "TemplateEdgeNode.h"
+
 
 @interface LevelScene : SKScene <SKPhysicsContactDelegate>
 

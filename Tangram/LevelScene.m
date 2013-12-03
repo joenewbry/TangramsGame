@@ -11,7 +11,6 @@
 #import "YMCPhysicsDebugger.h"
 
 #import "LevelWonScene.h"
-#import "TemplateNode.h"
 
 
 #define ROTATE_DURATION 0.25
@@ -32,10 +31,11 @@
     SKSpriteNode *backButton;
     
     // Template
-    SKSpriteNode *_template;
+    TemplateNode *template;
+    
+    // Template edge
+    TemplateEdgeNode *templateEdge;
 
-    // triangles remaining
-    int templateTriRemaining;
 }
 
 
@@ -45,7 +45,7 @@
 
 - (void) setupPhysics;
 - (void) setupTangramDrawer;
-- (void)setupTemplateWithModel:(LevelModel *)levelModel;
+- (void) setupTemplateWithModel:(LevelModel *)levelModel;
 - (void) setupBackButton;
 - (void) selectNodeForTouch:(CGPoint)touchLocation;
 - (void) handleBeginningPan:(UIPanGestureRecognizer *)gesture;
@@ -83,6 +83,7 @@
         [self setupPhysics];
         [self setupTangramDrawer];
         [self setupTemplateWithModel:self.levelModel];
+        [self setupTemplateEdgeWithModel:self.levelModel];
         [self setupBackButton];
         
         self.backgroundColor = [UIColor whiteColor];
@@ -95,10 +96,7 @@
             isRetina = NO;
         }
 
-        // should get passed in triangles in shape, or it should be a property on the template node
-        templateTriRemaining = 1;
         [self drawPhysicsBodies];
-
     }
 
     return self;
@@ -177,14 +175,19 @@
 
 - (void)setupTemplateWithModel:(LevelModel *)levelModel
 {
-    _template = [[TemplateNode alloc] initWithModel:levelModel deviceIsRetina:isRetina];
-    
-    _template.position = CGPointMake(self.size.width/2, self.size.height/3 *2);
-
-    [self addChild:_template];
-    
-    NSLog(@"template physics body: %@", _template.physicsBody);
+    template = [[TemplateNode alloc] initWithModel:levelModel deviceIsRetina:isRetina];
+    template.position = CGPointMake(self.size.width/2, self.size.height/3 *2);
+    [self addChild:template];
 }
+
+- (void)setupTemplateEdgeWithModel:(LevelModel *)levelModel
+{
+    templateEdge = [[TemplateEdgeNode alloc] initWithModel:levelModel deviceIsRetina:isRetina];
+    templateEdge.position = CGPointMake(self.size.width/2, self.size.height/3 *2);
+    [self addChild:templateEdge];
+}
+
+
 
 /*
  * Create the back button for the current level.
@@ -235,7 +238,7 @@
         
         dispatch_async(dispatch_queue_create("check contact", nil), ^{
             [NSThread sleepForTimeInterval:ROTATE_DURATION];
-            if (blockNode.contactType == TOUCHING_TANGRAM) {
+            if (blockNode.touchingTangram == YES) {
                 SKAction *rotateBack = [SKAction rotateByAngle:-M_PI_4 duration:0.25];
                 [blockNode runAction:rotateBack];
             }
@@ -339,7 +342,7 @@
     [_selectedNode setZPosition:1];
     
     // unsuccessful placement
-    if (_selectedNode.contactType == TOUCHING_TANGRAM) {
+    if (_selectedNode.touchingTangram == YES) {
         // in the case of unsuccessful placement, the selected node still be tranparent
         [_selectedNode setAlpha:.5];
         [_selectedNode setPosition:CGPointMake(startPoint.x, self.size.height - startPoint.y)];
@@ -348,22 +351,44 @@
     // successful placement
     else {
         
-        if (_selectedNode.contactType == TOUCHING_TARGET) {
-            // TODO: deal with this case
+        // if the tangram started inside the template
+        if (_selectedNode.isInsideTemplate) {
+            
+            
+            // THIS LOGIC NEEDS WORK
+            
+            if (!(_selectedNode.touchingTemplateVolumn) || _selectedNode.touchingTemplateEdge) {
+                // then we are placing it outside the template, decrement triangle counter
+                NSLog(@"decrement");
+                template.numberOfTrianglesInside -= _selectedNode.tangramTriangleNumber;
+                _selectedNode.isInsideTemplate = NO;
+            } else {
+                _selectedNode.isInsideTemplate = NO;
+            }
+            
+            
+            
+        // otherwise tangram started outside the template
+        } else {
+            // if it is touching the volumn, but not the edge, it is being placed in the money zone
+            if (_selectedNode.touchingTemplateVolumn && !(_selectedNode.touchingTemplateEdge)) {
+                NSLog(@"now inside shape!");
+                
+                _selectedNode.isInsideTemplate = YES;
+                
+                // we are placing it inside the template (from outside), increment triangle counter
+                template.numberOfTrianglesInside += _selectedNode.tangramTriangleNumber;
+            }
         }
         
-        if (_selectedNode.contactType == TOUCHING_DRAWER) {
+        if (_selectedNode.touchingDrawer) {
             // TODO: deal with this case
         }
         
         // if the tangram came from the drawer, update the drawer
         if (_selectedNode.inDrawer) {
-            _selectedNode.inDrawer = false;
+            _selectedNode.inDrawer = NO;
             [self updateDrawerWithBlockType:_selectedNode.objectType];
-        }
-        
-        if (CGRectContainsRect(_template.frame, _selectedNode.frame)) {
-            templateTriRemaining--;
         }
 
         // win condition check
@@ -401,7 +426,8 @@
 
 - (BOOL) isGameWon
 {
-    return templateTriRemaining < 1;
+    // if the number of triangles in the template equals its triangle number, it is full
+    return (template.numberOfTrianglesInside == template.triangleNumber);
 }
 
 - (void) gameWon
@@ -432,16 +458,23 @@
     
     // handle two blocks touching
     if ((secondBody.categoryBitMask & blockCategory) != 0) {
-        _selectedNode.contactType = TOUCHING_TANGRAM;
+        _selectedNode.touchingTangram = YES;
         [_selectedNode setAlpha:.4];
     }
     
     // handle a block and a template touching
-    // TODO: do we need another check here?
     if ((secondBody.categoryBitMask & targetCategory) != 0) {
-        _selectedNode.contactType = TOUCHING_TARGET;
+        _selectedNode.touchingTemplateVolumn = YES;
         _selectedNode.alpha = 0.5;
     }
+    
+    // handle a block and a edge touching
+    if ((secondBody.categoryBitMask & edgeCategory) != 0) {
+        _selectedNode.touchingTemplateEdge = YES;
+        _selectedNode.alpha = 0.5;
+    }
+    
+    
 }
 
 /*
@@ -453,22 +486,27 @@
     if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask) {
         firstBody = contact.bodyA;
         secondBody = contact.bodyB;
-    }
-    else {
+    } else {
         firstBody = contact.bodyB;
         secondBody = contact.bodyA;
     }
 
     // handle two blocks ending contact with each other
     if ((secondBody.categoryBitMask & blockCategory) != 0) {
-            _selectedNode.contactType = NO_CONTACT;
-            [_selectedNode setAlpha:1];
-    }
-    // must be contact between a tangram and the target
-    else {
-        _selectedNode.contactType = NO_CONTACT;
+        _selectedNode.touchingTangram = NO;
         [_selectedNode setAlpha:1];
-        templateTriRemaining++;
+    }
+    
+    // handle tangram ending contact with volumn
+    if ((secondBody.categoryBitMask & targetCategory) != 0){
+        _selectedNode.touchingTemplateVolumn = NO;
+        [_selectedNode setAlpha:1];
+    }
+    
+    // handle tangram ending contact with edge
+    if ((secondBody.categoryBitMask & edgeCategory) != 0){
+        _selectedNode.touchingTemplateEdge = NO;
+        [_selectedNode setAlpha:1];
     }
 }
 

@@ -13,7 +13,7 @@
 @property (nonatomic, strong) NSArray *shapeCount;
 @property (nonatomic, strong) NSString *outlineFilepath;
 @property (nonatomic, strong) NSArray *physicsBodyCoords;
-@property (nonatomic) int outlineNumberOfTriangles;
+@property (nonatomic) int triangleNumber;
 
 - (id)initWithLevel:(int)level;
 
