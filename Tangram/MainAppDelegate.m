@@ -7,18 +7,12 @@
 //
 
 #import "MainAppDelegate.h"
-#import <TestFlight.h>
-#import <LookBack.h>
 
 @implementation MainAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-
-    [TestFlight takeOff:@"84039049-e473-4dce-9965-b3ae71a59692"];
-    [LookBack setupWithAppToken:@"QbWwzjHmCSWqJJRTB"];
-    [LookBack lookback].shakeToRecord = YES;
 
     return YES;
 }
