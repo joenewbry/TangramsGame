@@ -27,6 +27,8 @@ typedef enum {
 #define NUM_SHAPES 4
 #define NUM_LEVELS 3
 
+#define ROTATE_DURATION 0.25
+
 // the different categories used in collision detection
 static const uint32_t blockCategory = 0x1 << 0;
 static const uint32_t wallCategory = 0x1 << 1;

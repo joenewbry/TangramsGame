@@ -7,13 +7,7 @@
 //
 
 #import "LevelScene.h"
-
-#import "YMCPhysicsDebugger.h"
-
 #import "LevelWonScene.h"
-
-
-#define ROTATE_DURATION 0.25
 
 @interface LevelScene ()
 {
