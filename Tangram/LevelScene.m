@@ -61,7 +61,7 @@
 
 - (id)initWithLevel:(int)level AndSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-        [YMCPhysicsDebugger init];
+        if (debugMode) [YMCPhysicsDebugger init];
 
 
         self.levelModel = [[LevelModel alloc] initWithLevel:level];
@@ -97,7 +97,7 @@
 
         // should get passed in triangles in shape, or it should be a property on the template node
         templateTriRemaining = 1;
-        [self drawPhysicsBodies];
+        if (debugMode) [self drawPhysicsBodies];
 
     }
 
