@@ -3,14 +3,18 @@
 <plist version="1.0">
 <array>
 	<dict>
+		<key>triangleNumber</key>
+		<integer>9</integer>
 		<key>physicsBodyCoords</key>
 		<array>
-			<string>9 63</string>
-			<string>9 10</string>
-			<string>60 10</string>
+			<string>16 188</string>
+			<string>17 21</string>
+			<string>185 21</string>
+			<string>190 82</string>
+			<string>84 192</string>
 		</array>
 		<key>outlineFilepath</key>
-		<string>template_level_1-01.png</string>
+		<string>level-six.png</string>
 		<key>shapeCount</key>
 		<array>
 			<integer>3</integer>
@@ -20,6 +24,8 @@
 		</array>
 	</dict>
 	<dict>
+		<key>triangleNumber</key>
+		<integer>5</integer>
 		<key>physicsBodyCoords</key>
 		<array>
 			<string>9 63</string>
@@ -37,6 +43,8 @@
 		</array>
 	</dict>
 	<dict>
+		<key>triangleNumber</key>
+		<integer>2</integer>
 		<key>physicsBodyCoords</key>
 		<array>
 			<string>9 63</string>

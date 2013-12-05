@@ -19,8 +19,11 @@
     if (self = [super initWithImageNamed:filePaths[blockType]]) {
 
         self.objectType = blockType;
-        self.contactType = NO_CONTACT;
-        
+        self.touchingTangram = NO;
+        self.touchingTemplateEdge = NO;
+        self.touchingTemplateVolumn = NO;
+        self.isInsideTemplate = NO;
+    
         int scale = isRetina ? 1 : 2;
 
         [self.physicsBody setDynamic:YES];
@@ -29,19 +32,23 @@
         if (blockType == TRIANGLE) {
             self.inDrawer = YES;
             [self setPhysicsBody:[self createTriangleBodyScale:scale]];
+            self.tangramTriangleNumber = 1;
         }
         else if (blockType == SQUARE) {
             self.inDrawer = YES;
             [self setPhysicsBody:[self createSquareBodyScale:scale]];
+            self.tangramTriangleNumber = 2;
         }
         else if (blockType == TRAPEZOID) {
             self.inDrawer = YES;
             [self setPhysicsBody:[self createTrapezoidBodyScale:scale]];
+            self.tangramTriangleNumber = 4;
+            
         }
         else if (blockType == RHOMBUS) {
-            NSLog(@"blockType: %d", blockType);
             self.inDrawer = YES;
             [self setPhysicsBody:[self createRhombusBodyScale:scale]];
+            self.tangramTriangleNumber = 2;
         }
     }
     

@@ -15,12 +15,6 @@ typedef enum {
     RHOMBUS
 } BlockType;
 
-typedef enum {
-    NO_CONTACT,
-    TOUCHING_DRAWER,
-    TOUCHING_TANGRAM,
-    TOUCHING_TARGET
-} ContactType;
 
 #define TRIANGLE_FILE @"tri-open.png"
 #define SQUARE_FILE @"sq-open.png"
@@ -35,9 +29,10 @@ static const uint32_t blockCategory = 0x1 << 0;
 static const uint32_t wallCategory = 0x1 << 1;
 static const uint32_t targetCategory = 0x1 << 2;
 static const uint32_t trashCategory = 0x1 << 3;
+static const uint32_t edgeCategory = 0x1 << 4;
 
 // debug mode for template
-static const BOOL debugMode = false;
+static const BOOL debugMode = true;
 
 @interface Constants : NSObject
 
