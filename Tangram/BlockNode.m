@@ -62,6 +62,7 @@
     return self;
 }
 
+
 -(SKPhysicsBody *)createTriangleBodyScale:(int)scale
 {
     CGFloat offsetX = self.frame.size.width * self.anchorPoint.x;

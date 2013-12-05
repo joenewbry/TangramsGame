@@ -63,7 +63,6 @@
     if (self = [super initWithSize:size]) {
         if (debugMode) [YMCPhysicsDebugger init];
 
-
         self.levelModel = [[LevelModel alloc] initWithLevel:level];
 
         // create a level label -- this is mostly to prove that levels work, we might not want this
@@ -72,7 +71,6 @@
         levelLabel.text =  [NSString stringWithFormat:@"Level %i", (level+1)];
         levelLabel.position = CGPointMake(self.size.width / 2, self.size.height - 87);
         [self addChild:levelLabel];
-        
         
         // convert shapeCount to ints
         for (int i = 0; i < self.levelModel.shapeCount.count; i++) {
@@ -96,7 +94,6 @@
             isRetina = NO;
         }
 
-        // should get passed in triangles in shape, or it should be a property on the template node
         if (debugMode) [self drawPhysicsBodies];
     }
 
@@ -172,6 +169,7 @@
     return shapeRemaining;
 }
 
+
 - (void)setupTemplateWithModel:(LevelModel *)levelModel
 {
     template = [[TemplateNode alloc] initWithModel:levelModel deviceIsRetina:isRetina];
@@ -179,13 +177,13 @@
     [self addChild:template];
 }
 
+
 - (void)setupTemplateEdgeWithModel:(LevelModel *)levelModel
 {
     templateEdge = [[TemplateEdgeNode alloc] initWithModel:levelModel deviceIsRetina:isRetina];
     templateEdge.position = CGPointMake(self.size.width/2, self.size.height/3 *2);
     [self addChild:templateEdge];
 }
-
 
 
 /*
@@ -198,6 +196,7 @@
     backButton.position = CGPointMake(60.0, 950.0);
     [self addChild:backButton];
 }
+
 
 /*
  * Set recognizers for pan, rotate and tap gestures
@@ -217,6 +216,7 @@
     [[self view] addGestureRecognizer:tapGestureRecognizer];
 }
 
+
 - (void)tap:(UITapGestureRecognizer *)gesture
 {
     if ([_selectedNode isKindOfClass:[BlockNode class]]) {
@@ -224,12 +224,9 @@
         SKAction *rotate = [SKAction rotateByAngle:M_PI_4 duration:ROTATE_DURATION];
         [blockNode runAction:rotate];
         [blockNode blinkAnimation];
-
-        
         
         // Check if collision occurs. If so, rotate back.
         // Need to do this in another thread b/c rotate takes 0.25 sec to register contact.
-        
         dispatch_async(dispatch_queue_create("check contact", nil), ^{
             [NSThread sleepForTimeInterval:ROTATE_DURATION];
             if (blockNode.touchingTangram == YES) {
@@ -237,9 +234,10 @@
                 [blockNode runAction:rotateBack];
             }
         });
-        
     }
-    if ([_selectedNode isEqual:backButton]){
+    
+    // Handle backbutton
+    else if ([_selectedNode isEqual:backButton]){
             SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration:0.5];
             SKScene *levelSelctionScene = [[LevelSelectionScene alloc] initWithSize:CGSizeMake(self.view.bounds.size.width,
                                                                                                self.view.bounds.size.height)];
@@ -252,22 +250,25 @@
  */
 - (void)pan:(UIPanGestureRecognizer *)gesture
 {
-    if (gesture.state == UIGestureRecognizerStateBegan) {
-        [self handleBeginningPan:gesture];
-    }
-    else if (gesture.state == UIGestureRecognizerStateChanged) {
-        [self handleContinuingPan:gesture];
-    }
-    else if (gesture.state == UIGestureRecognizerStateEnded) {
-        [self handleContinuingPan:gesture];
-        [self handleEndingPan:gesture];
+    // if _selectedNode is a BlockNode, handle panning
+    // this allows us to assume _selectedNode is a tangram in all subsequent handle methods
+    if (_selectedNode && [_selectedNode isKindOfClass:[BlockNode class]]) {
+        if (gesture.state == UIGestureRecognizerStateBegan) {
+            [self handleBeginningPan:gesture];
+        }
+        else if (gesture.state == UIGestureRecognizerStateChanged) {
+            [self handleContinuingPan:gesture];
+        }
+        else if (gesture.state == UIGestureRecognizerStateEnded) {
+            [self handleContinuingPan:gesture];
+            [self handleEndingPan:gesture];
+        }
     }
 }
 
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
     UITouch *touch = [touches anyObject];
     CGPoint touchLocation = [touch locationInNode:self];
     [self selectNodeForTouch:touchLocation];
@@ -278,11 +279,15 @@
  */
 -(void)selectNodeForTouch:(CGPoint)touchLocation
 {
+    // in debugMode, we have a physicsbody outline/overlay that we don't want to accidentally grab
     if (debugMode) {
-        // update _selectedNode only if possibleNodes is not empty
         NSArray * possibleNodes = [self nodesAtPoint:touchLocation];
+
+        // update _selectedNode only if possibleNodes is not empty
         if (possibleNodes.count != 0) {
             _selectedNode = (BlockNode *)possibleNodes[0];
+        } else {
+            _selectedNode = nil;
         }
     } else {
         // if no node at location, this does not update _selectedNode
@@ -301,7 +306,7 @@
     // set startPoint based on touchLocation
     startPoint.x = startPoint.x + _selectedNode.position.x - touchLocation.x;
     startPoint.y = startPoint.y + touchLocation.y - _selectedNode.position.y;
-
+        
     [_selectedNode setZPosition:100];
     [_selectedNode shouldBlink];
 }
@@ -324,7 +329,6 @@
  */
 - (void)handleEndingPan:(UIPanGestureRecognizer *)gesture
 {
-    
     [_selectedNode setZPosition:1];
     [_selectedNode shouldUnblink];
     
@@ -332,6 +336,7 @@
     if (_selectedNode.touchingTangram) {
         _selectedNode.alpha = 1;
         [_selectedNode setPosition:CGPointMake(startPoint.x, self.size.height - startPoint.y)];
+        _selectedNode.touchingTangram = NO;
     }
     
     // successful placement
@@ -339,25 +344,21 @@
         
         // if the tangram started inside the template
         if (_selectedNode.isInsideTemplate) {
-            
+            // if the tangram ends up outside the template
             if (!(_selectedNode.touchingTemplateVolumn) || _selectedNode.touchingTemplateEdge) {
                 _selectedNode.isInsideTemplate = NO;
-                // then we are placing it outside the template, decrement triangle counter
-                template.numberOfTrianglesInside -= _selectedNode.tangramTriangleNumber;
                 
-                NSLog(@"Node of value %d triangles is now inside the template", _selectedNode.tangramTriangleNumber);
+                template.numberOfTrianglesInside -= _selectedNode.tangramTriangleNumber;
                 NSLog(@"template is %d triangles away from being full", template.triangleNumber - template.numberOfTrianglesInside);
             }
             
         // otherwise tangram started outside the template
         } else {
-            // if it is touching the volumn, but not the edge, it is being placed in the templates
+            // if the tangram ends up inside the template
             if (_selectedNode.touchingTemplateVolumn && !(_selectedNode.touchingTemplateEdge)) {
                 _selectedNode.isInsideTemplate = YES;
-                // we are placing it inside the template (from outside), increment triangle counter
-                template.numberOfTrianglesInside += _selectedNode.tangramTriangleNumber;
                 
-                NSLog(@"Node of value %d triangles is now inside the template", _selectedNode.tangramTriangleNumber);
+                template.numberOfTrianglesInside += _selectedNode.tangramTriangleNumber;
                 NSLog(@"template is %d triangles away from being full", template.triangleNumber - template.numberOfTrianglesInside);
             }
         }
@@ -394,6 +395,7 @@
         BlockNode * addBlock = [self createNodeWithType:type withPoint:shapeStartingPoints[type]];
         [self addChild:addBlock];
     }
+    
 }
 
 /*

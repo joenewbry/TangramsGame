@@ -36,7 +36,7 @@ static const uint32_t trashCategory = 0x1 << 3;
 static const uint32_t edgeCategory = 0x1 << 4;
 
 // debug mode for template
-static const BOOL debugMode = true;
+static const BOOL debugMode = false;
 
 @interface Constants : NSObject
 
