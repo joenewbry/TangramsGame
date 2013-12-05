@@ -117,9 +117,6 @@
  */
 -(void)setupTangramDrawer
 {
-    // McQueen 11/13: I changed the divisor from 5 to 4 so that tangrams are not touching when
-    // the drawer is initialized. This is a hack. Good enough for now, but we need to make sure
-    // the shapes and the drawer are initialized without sprite contact.
     float blockOffset = 20;
     float placementHeight = self.size.height / 10;
     shapeStartingPoints[TRIANGLE] = CGPointMake(blockOffset + 100, placementHeight);
@@ -141,6 +138,7 @@
             
             // add tangram
             BlockNode *block = [self createNodeWithType:i withPoint:shapeStartingPoints[i]];
+            block.physicsBody.usesPreciseCollisionDetection = YES;
             [self addChild:block];
             
             // add label
@@ -221,16 +219,8 @@
 
 - (void)tap:(UITapGestureRecognizer *)gesture
 {
-    SKNode *node = [[SKNode alloc] init];
-    if (debugMode) {
-        node = [self nodesAtPoint:[self convertPointFromView:[gesture locationInView:gesture.view]]][0];
-
-    } else {
-        node = [self nodeAtPoint:[self convertPointFromView:[gesture locationInView:gesture.view]]];
-    }
-
-    if ([node isKindOfClass:[BlockNode class]]) {
-        BlockNode *blockNode = (BlockNode *)node;
+    if ([_selectedNode isKindOfClass:[BlockNode class]]) {
+        BlockNode *blockNode = (BlockNode *)_selectedNode;
         SKAction *rotate = [SKAction rotateByAngle:M_PI_4 duration:ROTATE_DURATION];
         [blockNode runAction:rotate];
         [blockNode blinkAnimation];
@@ -249,7 +239,7 @@
         });
         
     }
-    if ([node isEqual:backButton]){
+    if ([_selectedNode isEqual:backButton]){
             SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration:0.5];
             SKScene *levelSelctionScene = [[LevelSelectionScene alloc] initWithSize:CGSizeMake(self.view.bounds.size.width,
                                                                                                self.view.bounds.size.height)];
@@ -277,6 +267,7 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    
     UITouch *touch = [touches anyObject];
     CGPoint touchLocation = [touch locationInNode:self];
     [self selectNodeForTouch:touchLocation];
@@ -287,19 +278,16 @@
  */
 -(void)selectNodeForTouch:(CGPoint)touchLocation
 {
-    SKNode *nodeAtPoint = [[SKNode alloc] init];
-    if (!debugMode){
-         nodeAtPoint = [self nodeAtPoint:touchLocation];
+    if (debugMode) {
+        // update _selectedNode only if possibleNodes is not empty
+        NSArray * possibleNodes = [self nodesAtPoint:touchLocation];
+        if (possibleNodes.count != 0) {
+            _selectedNode = (BlockNode *)possibleNodes[0];
+        }
     } else {
-         nodeAtPoint = [self nodesAtPoint:touchLocation][0];
+        // if no node at location, this does not update _selectedNode
+        _selectedNode = (BlockNode *)[self nodeAtPoint:touchLocation];
     }
-    if ([nodeAtPoint isKindOfClass:[BlockNode class]]) {
-        _selectedNode = (BlockNode *)nodeAtPoint;
-    }
-    else {
-        _selectedNode = nil;
-    }
-
 }
 
 /*
