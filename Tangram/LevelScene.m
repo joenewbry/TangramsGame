@@ -137,6 +137,7 @@
             
             // add tangram
             BlockNode *block = [self createNodeWithType:i withPoint:shapeStartingPoints[i]];
+            block.physicsBody.usesPreciseCollisionDetection = YES;
             [self addChild:block];
             
             // add label
