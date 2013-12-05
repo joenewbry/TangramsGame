@@ -15,7 +15,8 @@
 {
 
     NSArray *filePaths = @[TRIANGLE_FILE, SQUARE_FILE, TRAPEZOID_FILE, RHOMBUS_FILE];
-    
+    NSArray *filePathsBlink = @[TRIANGLE_FILE_BLINK, SQUARE_FILE_BLINK, TRAPEZOID_FILE_BLINK, RHOMBUS_FILE_BLINK];
+
     if (self = [super initWithImageNamed:filePaths[blockType]]) {
 
         self.objectType = blockType;
@@ -55,10 +56,11 @@
     self.physicsBody.categoryBitMask = blockCategory;
     self.physicsBody.contactTestBitMask = blockCategory | targetCategory | wallCategory;
     self.physicsBody.collisionBitMask = 0;
+
+    [self configureBlinkAnimation:blockType withFilePath:filePaths withBlinkFilePath:filePathsBlink];
     
     return self;
 }
-
 
 -(SKPhysicsBody *)createTriangleBodyScale:(int)scale
 {
@@ -132,7 +134,26 @@
     
     SKPhysicsBody * body = [SKPhysicsBody bodyWithPolygonFromPath:path];
     return body;
-    
+}
+
+- (void) configureBlinkAnimation: (BlockType) blockType withFilePath:(NSArray *) filePath withBlinkFilePath:(NSArray *) filePathBlink
+{
+    SKTexture *f1 = [SKTexture textureWithImageNamed:filePath[blockType]];
+    SKTexture *f2 = [SKTexture textureWithImageNamed:filePathBlink[blockType]];
+    NSArray *blinkFrames = @[f2];
+    NSArray *unblinkFrames = @[f1];
+    self.blinkAnimation = [SKAction animateWithTextures:blinkFrames timePerFrame:.1];
+    self.unblinkAnimation = [SKAction animateWithTextures:unblinkFrames timePerFrame:.1];
+}
+
+- (void)shouldBlink
+{
+    [self runAction:self.blinkAnimation];
+}
+
+- (void)shouldUnblink
+{
+    [self runAction:self.unblinkAnimation];
 }
 
 @end

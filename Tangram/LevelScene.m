@@ -233,6 +233,7 @@
         BlockNode *blockNode = (BlockNode *)node;
         SKAction *rotate = [SKAction rotateByAngle:M_PI_4 duration:ROTATE_DURATION];
         [blockNode runAction:rotate];
+        [blockNode blinkAnimation];
 
         
         
@@ -314,6 +315,7 @@
     startPoint.y = startPoint.y + touchLocation.y - _selectedNode.position.y;
 
     [_selectedNode setZPosition:100];
+    [_selectedNode shouldBlink];
 }
 
 /*
@@ -336,6 +338,7 @@
 {
     
     [_selectedNode setZPosition:1];
+    [_selectedNode shouldUnblink];
     
     // unsuccessful placement
     if (_selectedNode.touchingTangram) {
