@@ -118,14 +118,14 @@
     float placementHeight = self.size.height / 10;
     shapeStartingPoints[TRIANGLE] = CGPointMake(blockOffset + 100, placementHeight);
     shapeStartingPoints[TRAPEZOID] = CGPointMake(blockOffset + 240, placementHeight);
-    shapeStartingPoints[RHOMBUS] = CGPointMake(blockOffset + 450, self.size.height / 9);
+    shapeStartingPoints[PARALLELOGRAM] = CGPointMake(blockOffset + 450, self.size.height / 9);
     shapeStartingPoints[SQUARE] = CGPointMake(blockOffset + 630, placementHeight);
     
     // set tangram label starting points
     int offset = 75;
     shapeLabelPoints[TRIANGLE] = CGPointMake(shapeStartingPoints[TRIANGLE].x - 30, shapeStartingPoints[TRIANGLE].y + offset);
     shapeLabelPoints[TRAPEZOID] = CGPointMake(shapeStartingPoints[TRAPEZOID].x, shapeStartingPoints[TRAPEZOID].y + offset);
-    shapeLabelPoints[RHOMBUS] = CGPointMake(shapeStartingPoints[RHOMBUS].x, placementHeight + offset);
+    shapeLabelPoints[PARALLELOGRAM] = CGPointMake(shapeStartingPoints[PARALLELOGRAM].x, placementHeight + offset);
     shapeLabelPoints[SQUARE] = CGPointMake(shapeStartingPoints[SQUARE].x, shapeStartingPoints[SQUARE].y + offset);
 
     

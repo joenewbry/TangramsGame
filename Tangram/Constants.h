@@ -12,18 +12,17 @@ typedef enum {
     TRIANGLE,
     SQUARE,
     TRAPEZOID,
-    RHOMBUS
+    PARALLELOGRAM
 } BlockType;
-
 
 #define TRIANGLE_FILE @"tri-open.png"
 #define SQUARE_FILE @"sq-open.png"
 #define TRAPEZOID_FILE @"trap-open.png"
-#define RHOMBUS_FILE @"para-open.png"
+#define PARALLELOGRAM_FILE @"para-open.png"
 #define TRIANGLE_FILE_BLINK @"tri-closed.png"
 #define SQUARE_FILE_BLINK @"sq-closed.png"
 #define TRAPEZOID_FILE_BLINK @"trap-closed.png"
-#define RHOMBUS_FILE_BLINK @"para-closed.png"
+#define PARALLELOGRAM_FILE_BLINK @"para-closed.png"
 
 #define NUM_SHAPES 4
 #define NUM_LEVELS 3
