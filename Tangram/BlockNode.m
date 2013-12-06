@@ -14,8 +14,8 @@
 -(id)initWithBlockType:(BlockType)blockType deviceIsRetina:(BOOL)isRetina
 {
 
-    NSArray *filePaths = @[TRIANGLE_FILE, SQUARE_FILE, TRAPEZOID_FILE, RHOMBUS_FILE];
-    NSArray *filePathsBlink = @[TRIANGLE_FILE_BLINK, SQUARE_FILE_BLINK, TRAPEZOID_FILE_BLINK, RHOMBUS_FILE_BLINK];
+    NSArray *filePaths = @[TRIANGLE_FILE, SQUARE_FILE, TRAPEZOID_FILE, PARALLELOGRAM_FILE];
+    NSArray *filePathsBlink = @[TRIANGLE_FILE_BLINK, SQUARE_FILE_BLINK, TRAPEZOID_FILE_BLINK, PARALLELOGRAM_FILE_BLINK];
 
     if (self = [super initWithImageNamed:filePaths[blockType]]) {
 
@@ -46,9 +46,9 @@
             self.tangramTriangleNumber = 4;
             
         }
-        else if (blockType == RHOMBUS) {
+        else if (blockType == PARALLELOGRAM) {
             self.inDrawer = YES;
-            [self setPhysicsBody:[self createRhombusBodyScale:scale]];
+            [self setPhysicsBody:[self createParallelogramBodyScale:scale]];
             self.tangramTriangleNumber = 2;
         }
     }
@@ -61,6 +61,7 @@
     
     return self;
 }
+
 
 -(SKPhysicsBody *)createTriangleBodyScale:(int)scale
 {
@@ -117,7 +118,7 @@
     
 }
 
--(SKPhysicsBody *)createRhombusBodyScale:(int)scale
+-(SKPhysicsBody *)createParallelogramBodyScale:(int)scale
 {
     
     CGFloat offsetX = self.frame.size.width * self.anchorPoint.x;

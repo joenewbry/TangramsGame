@@ -13,6 +13,7 @@
 #import "LevelSelectionScene.h"
 #import "TemplateNode.h"
 #import "TemplateEdgeNode.h"
+#import "YMCPhysicsDebugger.h"
 
 
 @interface LevelScene : SKScene <SKPhysicsContactDelegate>
