@@ -137,7 +137,6 @@
     return body;
 }
 
-// Tip: Because actions are effectively immutable objects, you can run the same action safely on multiple nodes in the tree at the same time. For this reason, if you have an action that is used repeatedly in your game, create a single instance of the action and then reuse it whenever you need a node to execute it
 - (void) configureBlinkAnimation: (BlockType) blockType withFilePath:(NSArray *) filePath withBlinkFilePath:(NSArray *) filePathBlink
 {
     SKTexture *f1 = [SKTexture textureWithImageNamed:filePath[blockType]];
