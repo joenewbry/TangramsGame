@@ -54,6 +54,13 @@
 		D8D49B6E1850541700E37F11 /* sq-closed.png in Resources */ = {isa = PBXBuildFile; fileRef = D8D49B6A1850541700E37F11 /* sq-closed.png */; };
 		D8D49B6F1850541700E37F11 /* trap-closed.png in Resources */ = {isa = PBXBuildFile; fileRef = D8D49B6B1850541700E37F11 /* trap-closed.png */; };
 		D8D49B701850541700E37F11 /* tri-closed.png in Resources */ = {isa = PBXBuildFile; fileRef = D8D49B6C1850541700E37F11 /* tri-closed.png */; };
+		D8D49B7818525D9F00E37F11 /* level-five.png in Resources */ = {isa = PBXBuildFile; fileRef = D8D49B7118525D9F00E37F11 /* level-five.png */; };
+		D8D49B7918525D9F00E37F11 /* level-four.png in Resources */ = {isa = PBXBuildFile; fileRef = D8D49B7218525D9F00E37F11 /* level-four.png */; };
+		D8D49B7A18525D9F00E37F11 /* level-hard.png in Resources */ = {isa = PBXBuildFile; fileRef = D8D49B7318525D9F00E37F11 /* level-hard.png */; };
+		D8D49B7B18525D9F00E37F11 /* level-med.png in Resources */ = {isa = PBXBuildFile; fileRef = D8D49B7418525D9F00E37F11 /* level-med.png */; };
+		D8D49B7C18525D9F00E37F11 /* level-one.png in Resources */ = {isa = PBXBuildFile; fileRef = D8D49B7518525D9F00E37F11 /* level-one.png */; };
+		D8D49B7D18525D9F00E37F11 /* level-three.png in Resources */ = {isa = PBXBuildFile; fileRef = D8D49B7618525D9F00E37F11 /* level-three.png */; };
+		D8D49B7E18525D9F00E37F11 /* level-two.png in Resources */ = {isa = PBXBuildFile; fileRef = D8D49B7718525D9F00E37F11 /* level-two.png */; };
 		D8D9034F183DD8AF005A6562 /* Final-Level-One-Template-01.png in Resources */ = {isa = PBXBuildFile; fileRef = D8D9034E183DD8AF005A6562 /* Final-Level-One-Template-01.png */; };
 		D8D90351183DD99D005A6562 /* template_level_1-01.png in Resources */ = {isa = PBXBuildFile; fileRef = D8D90350183DD99D005A6562 /* template_level_1-01.png */; };
 /* End PBXBuildFile section */
@@ -132,6 +139,13 @@
 		D8D49B6A1850541700E37F11 /* sq-closed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sq-closed.png"; sourceTree = "<group>"; };
 		D8D49B6B1850541700E37F11 /* trap-closed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trap-closed.png"; sourceTree = "<group>"; };
 		D8D49B6C1850541700E37F11 /* tri-closed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tri-closed.png"; sourceTree = "<group>"; };
+		D8D49B7118525D9F00E37F11 /* level-five.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-five.png"; sourceTree = "<group>"; };
+		D8D49B7218525D9F00E37F11 /* level-four.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-four.png"; sourceTree = "<group>"; };
+		D8D49B7318525D9F00E37F11 /* level-hard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-hard.png"; sourceTree = "<group>"; };
+		D8D49B7418525D9F00E37F11 /* level-med.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-med.png"; sourceTree = "<group>"; };
+		D8D49B7518525D9F00E37F11 /* level-one.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-one.png"; sourceTree = "<group>"; };
+		D8D49B7618525D9F00E37F11 /* level-three.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-three.png"; sourceTree = "<group>"; };
+		D8D49B7718525D9F00E37F11 /* level-two.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-two.png"; sourceTree = "<group>"; };
 		D8D9034E183DD8AF005A6562 /* Final-Level-One-Template-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Final-Level-One-Template-01.png"; sourceTree = "<group>"; };
 		D8D90350183DD99D005A6562 /* template_level_1-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "template_level_1-01.png"; sourceTree = "<group>"; };
 		E8133666681B4204B5050E52 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -300,6 +314,13 @@
 				D8D49B6C1850541700E37F11 /* tri-closed.png */,
 				0DBB59B9182C1742002353CF /* tri-open.png */,
 				0DA9EC90184E87C800E9A672 /* level-six.png */,
+				D8D49B7118525D9F00E37F11 /* level-five.png */,
+				D8D49B7218525D9F00E37F11 /* level-four.png */,
+				D8D49B7318525D9F00E37F11 /* level-hard.png */,
+				D8D49B7418525D9F00E37F11 /* level-med.png */,
+				D8D49B7518525D9F00E37F11 /* level-one.png */,
+				D8D49B7618525D9F00E37F11 /* level-three.png */,
+				D8D49B7718525D9F00E37F11 /* level-two.png */,
 				0DB9770F18445B2700FB7A9C /* resume.png */,
 				D8D90350183DD99D005A6562 /* template_level_1-01.png */,
 				03FD6645185101CD00BFADC9 /* Icon-40.png */,
@@ -403,11 +424,14 @@
 				0DBB59B6182C1734002353CF /* sq-open.png in Resources */,
 				03FD6644185101BE00BFADC9 /* Icon-Small@2x.png in Resources */,
 				0DEC65051835558B006AB966 /* pause.png in Resources */,
+				D8D49B7C18525D9F00E37F11 /* level-one.png in Resources */,
 				D8D9034F183DD8AF005A6562 /* Final-Level-One-Template-01.png in Resources */,
 				724A600818259AB900852FDE /* levelsData.plist in Resources */,
+				D8D49B7A18525D9F00E37F11 /* level-hard.png in Resources */,
 				03F47FB2183BEC6D00FDB580 /* hoffman.png in Resources */,
 				D8693E66181B08AE005EE51F /* Images.xcassets in Resources */,
 				03FD6648185101CD00BFADC9 /* Icon-40@2x.png in Resources */,
+				D8D49B7918525D9F00E37F11 /* level-four.png in Resources */,
 				0DBB59B4182C0F5F002353CF /* para-open.png in Resources */,
 				D8D49B6E1850541700E37F11 /* sq-closed.png in Resources */,
 				D8D49B6D1850541700E37F11 /* para-closed.png in Resources */,
@@ -419,11 +443,15 @@
 				0DBB59BA182C1742002353CF /* tri-open.png in Resources */,
 				03FD664C185101DA00BFADC9 /* Icon-76@2x.png in Resources */,
 				0DBB59BE182C18CE002353CF /* trap-open.png in Resources */,
+				D8D49B7B18525D9F00E37F11 /* level-med.png in Resources */,
 				03FD664B185101DA00BFADC9 /* Icon-76.png in Resources */,
+				D8D49B7818525D9F00E37F11 /* level-five.png in Resources */,
 				D8693E5C181B08AE005EE51F /* Main.storyboard in Resources */,
 				03F47FB4183BEDC100FDB580 /* geometry.png in Resources */,
+				D8D49B7E18525D9F00E37F11 /* level-two.png in Resources */,
 				D8D49B701850541700E37F11 /* tri-closed.png in Resources */,
 				03FD6647185101CD00BFADC9 /* Icon-40.png in Resources */,
+				D8D49B7D18525D9F00E37F11 /* level-three.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
