@@ -8,6 +8,16 @@
 
 #import "BlockNode.h"
 
+@interface BlockNode ()
+{
+    // block juice
+    SKAction * blinkAnimation;
+    SKAction * unblinkAnimation;
+    SKAction * wiggleAnimation;
+}
+@end
+
+
 @implementation BlockNode
 
 
@@ -57,6 +67,7 @@
     self.physicsBody.contactTestBitMask = blockCategory | targetCategory | wallCategory;
     self.physicsBody.collisionBitMask = 0;
 
+    [self configureWiggleAnimation];
     [self configureBlinkAnimation:blockType withFilePath:filePaths withBlinkFilePath:filePathsBlink];
     
     return self;
@@ -143,18 +154,35 @@
     SKTexture *f2 = [SKTexture textureWithImageNamed:filePathBlink[blockType]];
     NSArray *blinkFrames = @[f2];
     NSArray *unblinkFrames = @[f1];
-    self.blinkAnimation = [SKAction animateWithTextures:blinkFrames timePerFrame:.1];
-    self.unblinkAnimation = [SKAction animateWithTextures:unblinkFrames timePerFrame:.1];
+    blinkAnimation = [SKAction animateWithTextures:blinkFrames timePerFrame:.1];
+    unblinkAnimation = [SKAction animateWithTextures:unblinkFrames timePerFrame:.1];
 }
 
 - (void)shouldBlink
 {
-    [self runAction:self.blinkAnimation];
+    [self runAction:blinkAnimation];
 }
 
 - (void)shouldUnblink
 {
-    [self runAction:self.unblinkAnimation];
+    [self runAction:unblinkAnimation];
 }
+
+- (void) configureWiggleAnimation
+{
+    SKAction *one = [SKAction rotateByAngle: (M_PI_4/8) duration: 0.05];
+    one.timingMode = SKActionTimingEaseInEaseOut;
+    SKAction *two = [SKAction rotateByAngle: -(M_PI_4/4) duration: 0.01];
+    SKAction *three = [SKAction rotateByAngle: (M_PI_4/8) duration: 0.05];
+    three.timingMode = SKActionTimingEaseInEaseOut;
+    wiggleAnimation = [SKAction sequence:@[one, two, three]];
+}
+
+- (void) shouldWiggle
+{
+    [self runAction:wiggleAnimation];
+}
+
+
 
 @end

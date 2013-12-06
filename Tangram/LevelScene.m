@@ -217,7 +217,7 @@
         BlockNode *blockNode = (BlockNode *)_selectedNode;
         SKAction *rotate = [SKAction rotateByAngle:M_PI_4 duration:ROTATE_DURATION];
         [blockNode runAction:rotate];
-        [blockNode blinkAnimation];
+        [blockNode shouldBlink];
         
         // Check if collision occurs. If so, rotate back.
         // Need to do this in another thread b/c rotate takes 0.25 sec to register contact.
@@ -437,6 +437,7 @@
     if ((secondBody.categoryBitMask & blockCategory) != 0) {
         _selectedNode.touchingTangram = YES;
         [_selectedNode setAlpha:.4];
+        [_selectedNode shouldWiggle];
     }
     
     // handle a block and a template touching
