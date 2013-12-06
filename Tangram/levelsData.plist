@@ -61,5 +61,100 @@
 			<integer>10</integer>
 		</array>
 	</dict>
+	<dict>
+		<key>triangleNumber</key>
+		<integer>2</integer>
+		<key>physicsBodyCoords</key>
+		<array>
+			<string>9 63</string>
+			<string>9 10</string>
+			<string>60 10</string>
+		</array>
+		<key>outlineFilepath</key>
+		<string>level-four.png</string>
+		<key>shapeCount</key>
+		<array>
+			<integer>3</integer>
+			<integer>2</integer>
+			<integer>2</integer>
+			<integer>10</integer>
+		</array>
+	</dict>
+	<dict>
+		<key>triangleNumber</key>
+		<integer>2</integer>
+		<key>physicsBodyCoords</key>
+		<array>
+			<string>9 63</string>
+			<string>9 10</string>
+			<string>60 10</string>
+		</array>
+		<key>outlineFilepath</key>
+		<string>level-five.png</string>
+		<key>shapeCount</key>
+		<array>
+			<integer>3</integer>
+			<integer>2</integer>
+			<integer>2</integer>
+			<integer>10</integer>
+		</array>
+	</dict>
+	<dict>
+		<key>triangleNumber</key>
+		<integer>2</integer>
+		<key>physicsBodyCoords</key>
+		<array>
+			<string>9 63</string>
+			<string>9 10</string>
+			<string>60 10</string>
+		</array>
+		<key>outlineFilepath</key>
+		<string>level-six.png</string>
+		<key>shapeCount</key>
+		<array>
+			<integer>3</integer>
+			<integer>2</integer>
+			<integer>2</integer>
+			<integer>10</integer>
+		</array>
+	</dict>
+	<dict>
+		<key>triangleNumber</key>
+		<integer>2</integer>
+		<key>physicsBodyCoords</key>
+		<array>
+			<string>9 63</string>
+			<string>9 10</string>
+			<string>60 10</string>
+		</array>
+		<key>outlineFilepath</key>
+		<string>level-med.png</string>
+		<key>shapeCount</key>
+		<array>
+			<integer>3</integer>
+			<integer>2</integer>
+			<integer>2</integer>
+			<integer>10</integer>
+		</array>
+	</dict>
+	<dict>
+		<key>triangleNumber</key>
+		<integer>2</integer>
+		<key>physicsBodyCoords</key>
+		<array>
+			<string>9 63</string>
+			<string>9 10</string>
+			<string>60 10</string>
+		</array>
+		<key>outlineFilepath</key>
+		<string>level-hard.png</string>
+		<key>shapeCount</key>
+		<array>
+			<integer>3</integer>
+			<integer>2</integer>
+			<integer>2</integer>
+			<integer>10</integer>
+		</array>
+	</dict>
 </array>
 </plist>

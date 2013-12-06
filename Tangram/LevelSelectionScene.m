@@ -41,10 +41,10 @@
 {
     // set placement values
     float placementWidth = self.size.width / 4;
-    float placementHeight = self.size.height / 2;
+    float placementHeight = self.size.height / 6;
     int offset = 75;
     for (int i = 0; i < NUM_LEVELS; i++) {
-        levelStartPoints[i] = CGPointMake(placementWidth * (i+1), placementHeight);
+        levelStartPoints[i] = CGPointMake(placementWidth * ((i % 3)+1), placementHeight + ((i / 3) * placementHeight));
         levelLabelStartPoints[i] = CGPointMake(levelStartPoints[i].x, levelStartPoints[i].y - offset);
     }
 

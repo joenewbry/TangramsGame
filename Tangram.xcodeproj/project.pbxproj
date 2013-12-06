@@ -313,14 +313,7 @@
 				0DBB59BD182C18CE002353CF /* trap-open.png */,
 				D8D49B6C1850541700E37F11 /* tri-closed.png */,
 				0DBB59B9182C1742002353CF /* tri-open.png */,
-				0DA9EC90184E87C800E9A672 /* level-six.png */,
-				D8D49B7118525D9F00E37F11 /* level-five.png */,
-				D8D49B7218525D9F00E37F11 /* level-four.png */,
-				D8D49B7318525D9F00E37F11 /* level-hard.png */,
-				D8D49B7418525D9F00E37F11 /* level-med.png */,
-				D8D49B7518525D9F00E37F11 /* level-one.png */,
-				D8D49B7618525D9F00E37F11 /* level-three.png */,
-				D8D49B7718525D9F00E37F11 /* level-two.png */,
+				D8D49B7F18525DF400E37F11 /* Level Templates */,
 				0DB9770F18445B2700FB7A9C /* resume.png */,
 				D8D90350183DD99D005A6562 /* template_level_1-01.png */,
 				03FD6645185101CD00BFADC9 /* Icon-40.png */,
@@ -335,6 +328,21 @@
 				03581B931835547A0015E22B /* level-selection.png */,
 			);
 			name = art.atlas;
+			sourceTree = "<group>";
+		};
+		D8D49B7F18525DF400E37F11 /* Level Templates */ = {
+			isa = PBXGroup;
+			children = (
+				D8D49B7418525D9F00E37F11 /* level-med.png */,
+				D8D49B7318525D9F00E37F11 /* level-hard.png */,
+				D8D49B7518525D9F00E37F11 /* level-one.png */,
+				D8D49B7718525D9F00E37F11 /* level-two.png */,
+				D8D49B7618525D9F00E37F11 /* level-three.png */,
+				D8D49B7218525D9F00E37F11 /* level-four.png */,
+				D8D49B7118525D9F00E37F11 /* level-five.png */,
+				0DA9EC90184E87C800E9A672 /* level-six.png */,
+			);
+			name = "Level Templates";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
