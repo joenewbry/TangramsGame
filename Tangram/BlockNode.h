@@ -16,7 +16,7 @@
 // call to make any shape blink
 - (void)shouldBlink;
 - (void)shouldUnblink;
-
+- (void)shouldWiggle;
 
 // inDrawer is true if this node has not been removed from the drawer yet.
 @property (nonatomic) BOOL inDrawer;
@@ -40,11 +40,6 @@
 
 // triangle number of shape
 @property (nonatomic) int tangramTriangleNumber;
-
-// array to store blink animation
-@property (nonatomic) SKAction *blinkAnimation;
-@property (nonatomic) SKAction *unblinkAnimation;
-
 
 @end
 

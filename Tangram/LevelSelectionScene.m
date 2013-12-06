@@ -8,6 +8,7 @@
 
 #import "LevelSelectionScene.h"
 
+
 @implementation LevelSelectionScene
 {
     CGPoint levelStartPoints[NUM_LEVELS];
@@ -44,7 +45,7 @@
     float placementHeight = self.size.height / 6;
     int offset = 75;
     for (int i = 0; i < NUM_LEVELS; i++) {
-        levelStartPoints[i] = CGPointMake(placementWidth * ((i % 3)+1), placementHeight + ((i / 3) * placementHeight));
+        levelStartPoints[i] = CGPointMake(placementWidth * ((i % 3)+1), 800 - ((i / 3) * placementHeight));
         levelLabelStartPoints[i] = CGPointMake(levelStartPoints[i].x, levelStartPoints[i].y - offset);
     }
 
@@ -66,6 +67,7 @@
 {
     LevelSelectionNode * node = [[LevelSelectionNode alloc] initWithLevel:level];
     node.position = point;
+    NSLog(@"Node stuff %@ and level is %i", node, level);
     return node;
 }
 
@@ -77,7 +79,7 @@
 
 -(void)tap:(UIGestureRecognizer*) gesture
 {
-    CGPoint touchLocation = [gesture locationInView:gesture.view];
+    CGPoint touchLocation = [gesture locationInView:self.view];
     [self selectNodeForTouch:touchLocation];
 
     // only if we actually tapped a level selection node
@@ -95,6 +97,7 @@
 
 -(void)selectNodeForTouch:(CGPoint)touchLocation
 {
+
     if ([[self nodeAtPoint:touchLocation] isKindOfClass:[LevelSelectionNode class]]) {
         _selectedNode = (LevelSelectionNode *)[self nodeAtPoint:touchLocation];
     } else {

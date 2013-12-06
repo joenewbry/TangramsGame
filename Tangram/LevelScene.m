@@ -106,7 +106,7 @@
 /*
  * Position and place all tangrams in their respective locations in the drawer.
  */
--(void)setupTangramDrawer
+- (void)setupTangramDrawer
 {
     float blockOffset = 20;
     float placementHeight = self.size.height / 10;
@@ -217,7 +217,7 @@
         BlockNode *blockNode = (BlockNode *)_selectedNode;
         SKAction *rotate = [SKAction rotateByAngle:M_PI_4 duration:ROTATE_DURATION];
         [blockNode runAction:rotate];
-        [blockNode blinkAnimation];
+        [blockNode shouldBlink];
         
         // Check if collision occurs. If so, rotate back.
         // Need to do this in another thread b/c rotate takes 0.25 sec to register contact.
@@ -328,7 +328,6 @@
     
     // unsuccessful placement
     if (_selectedNode.touchingTangram) {
-        _selectedNode.alpha = 1;
         [_selectedNode setPosition:CGPointMake(startPoint.x, self.size.height - startPoint.y)];
         _selectedNode.touchingTangram = NO;
     }
@@ -436,19 +435,17 @@
     // handle two blocks touching
     if ((secondBody.categoryBitMask & blockCategory) != 0) {
         _selectedNode.touchingTangram = YES;
-        [_selectedNode setAlpha:.4];
+        [_selectedNode shouldWiggle];
     }
     
     // handle a block and a template touching
     if ((secondBody.categoryBitMask & targetCategory) != 0) {
         _selectedNode.touchingTemplateVolumn = YES;
-        _selectedNode.alpha = 0.5;
     }
     
     // handle a block and a edge touching
     if ((secondBody.categoryBitMask & edgeCategory) != 0) {
         _selectedNode.touchingTemplateEdge = YES;
-        _selectedNode.alpha = 0.5;
     }
     
     
@@ -471,19 +468,16 @@
     // handle two blocks ending contact with each other
     if ((secondBody.categoryBitMask & blockCategory) != 0) {
         _selectedNode.touchingTangram = NO;
-        [_selectedNode setAlpha:1];
     }
     
     // handle tangram ending contact with volumn
     if ((secondBody.categoryBitMask & targetCategory) != 0){
         _selectedNode.touchingTemplateVolumn = NO;
-        [_selectedNode setAlpha:1];
     }
     
     // handle tangram ending contact with edge
     if ((secondBody.categoryBitMask & edgeCategory) != 0){
         _selectedNode.touchingTemplateEdge = NO;
-        [_selectedNode setAlpha:1];
     }
 }
 

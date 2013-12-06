@@ -4,6 +4,64 @@
 <array>
 	<dict>
 		<key>triangleNumber</key>
+		<integer>1</integer>
+		<key>physicsBodyCoords</key>
+		<array>
+			<string>6 71</string>
+			<string>70 6</string>
+			<string>5 6</string>
+		</array>
+		<key>outlineFilepath</key>
+		<string>level-one.png</string>
+		<key>shapeCount</key>
+		<array>
+			<integer>3</integer>
+			<integer>2</integer>
+			<integer>1</integer>
+			<integer>10</integer>
+		</array>
+	</dict>
+	<dict>
+		<key>triangleNumber</key>
+		<integer>1</integer>
+		<key>physicsBodyCoords</key>
+		<array>
+			<string>0 65</string>
+			<string>63 0</string>
+			<string>63 66</string>
+		</array>
+		<key>outlineFilepath</key>
+		<string>level-two.png</string>
+		<key>shapeCount</key>
+		<array>
+			<integer>3</integer>
+			<integer>2</integer>
+			<integer>1</integer>
+			<integer>10</integer>
+		</array>
+	</dict>
+	<dict>
+		<key>triangleNumber</key>
+		<integer>2</integer>
+		<key>physicsBodyCoords</key>
+		<array>
+			<string>2 63</string>
+			<string>3 2</string>
+			<string>62 3</string>
+			<string>61 63</string>
+		</array>
+		<key>outlineFilepath</key>
+		<string>level-three.png</string>
+		<key>shapeCount</key>
+		<array>
+			<integer>3</integer>
+			<integer>2</integer>
+			<integer>1</integer>
+			<integer>10</integer>
+		</array>
+	</dict>
+	<dict>
+		<key>triangleNumber</key>
 		<integer>9</integer>
 		<key>physicsBodyCoords</key>
 		<array>
