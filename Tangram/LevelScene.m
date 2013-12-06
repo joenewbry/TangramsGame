@@ -106,7 +106,7 @@
 /*
  * Position and place all tangrams in their respective locations in the drawer.
  */
--(void)setupTangramDrawer
+- (void)setupTangramDrawer
 {
     float blockOffset = 20;
     float placementHeight = self.size.height / 10;
