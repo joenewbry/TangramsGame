@@ -72,7 +72,7 @@
 			<string>84 192</string>
 		</array>
 		<key>outlineFilepath</key>
-		<string>level-six.png</string>
+		<string>level-four.png</string>
 		<key>shapeCount</key>
 		<array>
 			<integer>3</integer>
@@ -91,7 +91,7 @@
 			<string>60 10</string>
 		</array>
 		<key>outlineFilepath</key>
-		<string>template_level_1-01.png</string>
+		<string>level-five.png</string>
 		<key>shapeCount</key>
 		<array>
 			<integer>5</integer>
@@ -105,66 +105,11 @@
 		<integer>2</integer>
 		<key>physicsBodyCoords</key>
 		<array>
-			<string>9 63</string>
-			<string>9 10</string>
-			<string>60 10</string>
-		</array>
-		<key>outlineFilepath</key>
-		<string>template_level_1-01.png</string>
-		<key>shapeCount</key>
-		<array>
-			<integer>3</integer>
-			<integer>2</integer>
-			<integer>2</integer>
-			<integer>10</integer>
-		</array>
-	</dict>
-	<dict>
-		<key>triangleNumber</key>
-		<integer>2</integer>
-		<key>physicsBodyCoords</key>
-		<array>
-			<string>9 63</string>
-			<string>9 10</string>
-			<string>60 10</string>
-		</array>
-		<key>outlineFilepath</key>
-		<string>level-four.png</string>
-		<key>shapeCount</key>
-		<array>
-			<integer>3</integer>
-			<integer>2</integer>
-			<integer>2</integer>
-			<integer>10</integer>
-		</array>
-	</dict>
-	<dict>
-		<key>triangleNumber</key>
-		<integer>2</integer>
-		<key>physicsBodyCoords</key>
-		<array>
-			<string>9 63</string>
-			<string>9 10</string>
-			<string>60 10</string>
-		</array>
-		<key>outlineFilepath</key>
-		<string>level-five.png</string>
-		<key>shapeCount</key>
-		<array>
-			<integer>3</integer>
-			<integer>2</integer>
-			<integer>2</integer>
-			<integer>10</integer>
-		</array>
-	</dict>
-	<dict>
-		<key>triangleNumber</key>
-		<integer>2</integer>
-		<key>physicsBodyCoords</key>
-		<array>
-			<string>9 63</string>
-			<string>9 10</string>
-			<string>60 10</string>
+			<string>16 188</string>
+			<string>17 21</string>
+			<string>185 21</string>
+			<string>190 82</string>
+			<string>84 192</string>
 		</array>
 		<key>outlineFilepath</key>
 		<string>level-six.png</string>
@@ -178,7 +123,7 @@
 	</dict>
 	<dict>
 		<key>triangleNumber</key>
-		<integer>2</integer>
+		<real>0</real>
 		<key>physicsBodyCoords</key>
 		<array>
 			<string>9 63</string>
@@ -186,7 +131,7 @@
 			<string>60 10</string>
 		</array>
 		<key>outlineFilepath</key>
-		<string>level-med.png</string>
+		<string>level-medium.png</string>
 		<key>shapeCount</key>
 		<array>
 			<integer>3</integer>
