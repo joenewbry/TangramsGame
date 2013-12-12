@@ -81,18 +81,27 @@
     moveInPlayButton.timingMode = SKActionTimingEaseOut;
     [startButton runAction:moveInPlayButton];
 
+    moveOutPlayButton = [SKAction moveTo:CGPointMake(self.size.width/2, -startButton.size.height) duration:.5];
+    moveOutPlayButton.timingMode = SKActionTimingEaseIn;
+
     // perform action for title screen
     moveInTitle = [SKAction moveTo:CGPointMake(self.size.width/2, self.size.height/2) duration:.75];
     moveInTitle.timingMode = SKActionTimingEaseOut;
     [startText runAction:moveInTitle];
 
+    moveOutTitle = [SKAction moveTo:CGPointMake(self.size.width/2, self.size.height + 100) duration:.5];
+
 }
 
 -(void)tap:(UIGestureRecognizer*) gesture
 {
-    SKTransition *reveal = [SKTransition  doorsOpenHorizontalWithDuration:0.5];
+    [startText runAction:moveOutTitle];
+    [startButton runAction:moveOutPlayButton completion:^{
+        SKTransition *fade = [SKTransition fadeWithColor:[UIColor grayColor] duration:.5];
     SKScene *levelSelctionScene = [[LevelSelectionScene alloc] initWithSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height)];
-    [self.view presentScene:levelSelctionScene transition:reveal];
+    [self.view presentScene:levelSelctionScene transition:fade];
+
+    }]; // could make these grouped
 }
 
 @end

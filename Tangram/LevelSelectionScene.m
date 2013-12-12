@@ -14,6 +14,9 @@
     CGPoint levelStartPoints[NUM_LEVELS];
     CGPoint levelLabelStartPoints[NUM_LEVELS];
     LevelSelectionNode *_selectedNode;
+
+    NSMutableArray *levelNodesArray;
+    NSMutableArray *levelLabelArray;
 }
 
 - (id)initWithSize:(CGSize) size
@@ -54,16 +57,22 @@
     for (int i = 0; i < NUM_LEVELS; i++) {
         LevelSelectionNode * levelNode = [self createLevelNodeOfLevel:i At:levelStartPoints[i]];
         levelNode.position = levelStartPoints[i];
-        NSLog(@"start point in init: %f",levelStartPoints[i].y);
 
         [self addChild:levelNode];
-        
+
+        if (!levelNodesArray) levelNodesArray = [[NSMutableArray alloc] init];
+
+        [levelNodesArray addObject:levelNode];
+
         SKLabelNode * levelLabel = [[SKLabelNode alloc] initWithFontNamed:@"HelveticaNeue-Bold"];
         levelLabel.position = levelLabelStartPoints[i];
         levelLabel.fontColor = [UIColor colorWithHue:0.000 saturation:0.000 brightness:0.224 alpha:1];
         levelLabel.fontSize = 20;
         levelLabel.text = [NSString stringWithFormat:@"Level %i", (i+1)];
         [self addChild:levelLabel];
+
+        if (!levelLabelArray) levelLabelArray = [[NSMutableArray alloc] init];
+        [levelLabelArray addObject:levelLabel];
     }
 }
 
@@ -80,9 +89,11 @@
 {
     [super didMoveToView:view];
     [self setupLevelArray];
+
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(tap:)];
     [[self view] addGestureRecognizer:tapGestureRecognizer];
+
 }
 
 -(void)tap:(UIGestureRecognizer*) gesture
@@ -96,9 +107,23 @@
     // only if we actually tapped a level selection node
     if (_selectedNode != nil) {
         // initialize the correct level
+
+
+        for (LevelSelectionNode *level in levelNodesArray){
+            if (level == _selectedNode){
+                [level shouldMoveToCenter];
+            } else {
+                [level setAlpha:0.0];
+            }
+        }
+
+        for (SKLabelNode *label in levelLabelArray ){
+            [label setAlpha:0.0];
+        }
+
         CGSize size = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height);
         LevelScene * level = [[LevelScene alloc] initWithLevel:_selectedNode.level AndSize:size];
-        
+
         // present the level with a nice transition
         SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration:0.5];
         [self.view presentScene:level transition:reveal];

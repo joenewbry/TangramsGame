@@ -14,4 +14,6 @@
 
 -(id)initWithLevel:(int)level;
 
+-(void) shouldMoveToCenter;
+
 @end

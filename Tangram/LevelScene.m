@@ -9,8 +9,6 @@
 #import "LevelScene.h"
 #import "LevelWonScene.h"
 
-#import "UITouchDownGestureRecognizer.h"
-
 @interface LevelScene ()
 {
     CGPoint startPoint; // stores starting touch location if final block placement is incorrect
@@ -168,6 +166,7 @@
 {
     template = [[TemplateNode alloc] initWithModel:levelModel deviceIsRetina:isRetina];
     template.position = CGPointMake(self.size.width/2, self.size.height/3 *2);
+    //NSLog(@"screen size is %f, %f", self.size.width, self.size.height);
     [self addChild:template];
 }
 
@@ -208,16 +207,9 @@
                                                                                     action:@selector(pan:)];
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(tap:)];
-
-    UITouchDownGestureRecognizer *touchDownGestureRecognizer = [[UITouchDownGestureRecognizer alloc] initWithTarget:self action:@selector(touchDown:)];
     [[self view] addGestureRecognizer:rotateRecognizer];
     [[self view] addGestureRecognizer:panRecognizer];
     [[self view] addGestureRecognizer:tapGestureRecognizer];
-    [[self view] addGestureRecognizer:touchDownGestureRecognizer];
-}
-
--(void) touchDown:(UITouchDownGestureRecognizer *)gesture {
-
 }
 
 - (void)tap:(UITapGestureRecognizer *)gesture
@@ -452,7 +444,7 @@
     // handle two blocks touching
     if ((secondBody.categoryBitMask & blockCategory) != 0) {
         _selectedNode.touchingTangram = YES;
-        [_selectedNode shouldWiggle];
+        [_selectedNode shouldFrown];
     }
     
     // handle a block and a template touching
@@ -485,6 +477,8 @@
     // handle two blocks ending contact with each other
     if ((secondBody.categoryBitMask & blockCategory) != 0) {
         _selectedNode.touchingTangram = NO;
+
+        [_selectedNode shouldUnblink];
     }
     
     // handle tangram ending contact with volumn

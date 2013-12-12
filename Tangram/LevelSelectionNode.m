@@ -8,6 +8,14 @@
 
 #import "LevelSelectionNode.h"
 
+@interface LevelSelectionNode ()
+{
+    SKAction *moveToCenter;
+    SKAction *scaleToFullSize;
+}
+
+@end
+
 @implementation LevelSelectionNode
 
 -(id)initWithLevel:(int)level
@@ -21,6 +29,15 @@
         [self setSize:CGSizeMake(100.0, 100.0)];
     }
     return self;
+}
+
+- (void)shouldMoveToCenter
+{
+    moveToCenter = [SKAction moveTo:CGPointMake(400, 600) duration:.75];
+    scaleToFullSize = [SKAction scaleTo:3.0 duration:.75];
+
+    [self runAction:moveToCenter];
+    [self runAction:scaleToFullSize];
 }
 
 @end
