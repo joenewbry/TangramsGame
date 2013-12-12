@@ -183,6 +183,9 @@
     [self runAction:wiggleAnimation];
 }
 
-
-
+- (void) shouldFrown
+{
+#warning replace with frown animation once created
+    [self runAction:blinkAnimation];
+}
 @end

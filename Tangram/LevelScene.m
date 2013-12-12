@@ -21,13 +21,10 @@
     CGPoint shapeLabelPoints[NUM_SHAPES];
     BOOL isRetina;  // device has a Retina display.
 
-    // back button
     SKSpriteNode *backButton;
-    
-    // Template
+    SKSpriteNode *pauseButton;
+
     TemplateNode *template;
-    
-    // Template edge
     TemplateEdgeNode *templateEdge;
 
 }
@@ -77,6 +74,7 @@
         [self setupTemplateWithModel:self.levelModel];
         [self setupTemplateEdgeWithModel:self.levelModel];
         [self setupBackButton];
+        [self setupPauseButton];
         
         self.backgroundColor = [UIColor whiteColor];
         
@@ -168,6 +166,7 @@
 {
     template = [[TemplateNode alloc] initWithModel:levelModel deviceIsRetina:isRetina];
     template.position = CGPointMake(self.size.width/2, self.size.height/3 *2);
+    //NSLog(@"screen size is %f, %f", self.size.width, self.size.height);
     [self addChild:template];
 }
 
@@ -191,6 +190,10 @@
     [self addChild:backButton];
 }
 
+-(void) setupPauseButton
+{
+    //pauseButton = [[SKSpriteNode alloc] initWithImageNamed:@"
+}
 
 /*
  * Set recognizers for pan, rotate and tap gestures
@@ -204,15 +207,14 @@
                                                                                     action:@selector(pan:)];
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(tap:)];
-
     [[self view] addGestureRecognizer:rotateRecognizer];
     [[self view] addGestureRecognizer:panRecognizer];
     [[self view] addGestureRecognizer:tapGestureRecognizer];
 }
 
-
 - (void)tap:(UITapGestureRecognizer *)gesture
 {
+    NSLog(@"Tap location y value %f", [gesture locationInView:nil].y);
     if ([_selectedNode isKindOfClass:[BlockNode class]]) {
         BlockNode *blockNode = (BlockNode *)_selectedNode;
         SKAction *rotate = [SKAction rotateByAngle:M_PI_4 duration:ROTATE_DURATION];
@@ -226,6 +228,12 @@
             if (blockNode.touchingTangram == YES) {
                 SKAction *rotateBack = [SKAction rotateByAngle:-M_PI_4 duration:0.25];
                 [blockNode runAction:rotateBack];
+                dispatch_async(dispatch_queue_create("check contact", nil), ^{
+                    [NSThread sleepForTimeInterval:ROTATE_DURATION];
+                    [blockNode shouldUnblink];
+                });
+            } else {
+                [blockNode shouldUnblink];
             }
         });
     }
@@ -265,6 +273,7 @@
 {
     UITouch *touch = [touches anyObject];
     CGPoint touchLocation = [touch locationInNode:self];
+    touchLocation = [self.view convertPoint:touchLocation fromView:self.view];
     [self selectNodeForTouch:touchLocation];
 }
 
@@ -435,7 +444,7 @@
     // handle two blocks touching
     if ((secondBody.categoryBitMask & blockCategory) != 0) {
         _selectedNode.touchingTangram = YES;
-        [_selectedNode shouldWiggle];
+        [_selectedNode shouldFrown];
     }
     
     // handle a block and a template touching
@@ -468,6 +477,8 @@
     // handle two blocks ending contact with each other
     if ((secondBody.categoryBitMask & blockCategory) != 0) {
         _selectedNode.touchingTangram = NO;
+
+        [_selectedNode shouldUnblink];
     }
     
     // handle tangram ending contact with volumn

@@ -17,6 +17,7 @@
 - (void)shouldBlink;
 - (void)shouldUnblink;
 - (void)shouldWiggle;
+- (void)shouldFrown;
 
 // inDrawer is true if this node has not been removed from the drawer yet.
 @property (nonatomic) BOOL inDrawer;

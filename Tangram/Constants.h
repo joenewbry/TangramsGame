@@ -25,7 +25,7 @@ typedef enum {
 #define PARALLELOGRAM_FILE_BLINK @"para-closed.png"
 
 #define NUM_SHAPES 4
-#define NUM_LEVELS 8
+#define NUM_LEVELS 8 
 
 #define ROTATE_DURATION 0.25
 
