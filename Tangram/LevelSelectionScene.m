@@ -29,7 +29,7 @@
         // It would be nice to have a background pattern, can't figure
         // it out at the moment though. - Josh 11/19
         //UIImage *patternImage = [UIImage imageNamed:@"geometry.png"];
-        //self.backgroundColor = [UIColor lightGrayColor];
+        self.backgroundColor = [UIColor whiteColor];
         
         // call setup methods
         //[self setupPhysics];

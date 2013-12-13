@@ -51,10 +51,14 @@
 		D8693E84181B218B005EE51F /* LevelScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D8693E83181B218B005EE51F /* LevelScene.m */; };
 		D8693E8D181B638A005EE51F /* BlockNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D8693E8C181B638A005EE51F /* BlockNode.m */; };
 		D87AAA36185988F30056B2BB /* UITouchDownGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = D87AAA35185988F30056B2BB /* UITouchDownGestureRecognizer.m */; };
+		D8C43D6F185AC4DD00CF181F /* sq-x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8C43D6E185AC4DD00CF181F /* sq-x.png */; };
+		D8C43D71185AC53000CF181F /* sq-closed.png in Resources */ = {isa = PBXBuildFile; fileRef = D8C43D70185AC53000CF181F /* sq-closed.png */; };
+		D8C43D73185AC54E00CF181F /* tri-closed.png in Resources */ = {isa = PBXBuildFile; fileRef = D8C43D72185AC54E00CF181F /* tri-closed.png */; };
+		D8C43D79185AC5CF00CF181F /* para-x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8C43D78185AC5CF00CF181F /* para-x.png */; };
+		D8C43D7B185AC5ED00CF181F /* tri-x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8C43D7A185AC5ED00CF181F /* tri-x.png */; };
+		D8C43D7D185AC64E00CF181F /* trap-x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8C43D7C185AC64E00CF181F /* trap-x.png */; };
 		D8D49B6D1850541700E37F11 /* para-closed.png in Resources */ = {isa = PBXBuildFile; fileRef = D8D49B691850541700E37F11 /* para-closed.png */; };
-		D8D49B6E1850541700E37F11 /* sq-closed.png in Resources */ = {isa = PBXBuildFile; fileRef = D8D49B6A1850541700E37F11 /* sq-closed.png */; };
 		D8D49B6F1850541700E37F11 /* trap-closed.png in Resources */ = {isa = PBXBuildFile; fileRef = D8D49B6B1850541700E37F11 /* trap-closed.png */; };
-		D8D49B701850541700E37F11 /* tri-closed.png in Resources */ = {isa = PBXBuildFile; fileRef = D8D49B6C1850541700E37F11 /* tri-closed.png */; };
 		D8D49B7818525D9F00E37F11 /* level-five.png in Resources */ = {isa = PBXBuildFile; fileRef = D8D49B7118525D9F00E37F11 /* level-five.png */; };
 		D8D49B7918525D9F00E37F11 /* level-four.png in Resources */ = {isa = PBXBuildFile; fileRef = D8D49B7218525D9F00E37F11 /* level-four.png */; };
 		D8D49B7A18525D9F00E37F11 /* level-hard.png in Resources */ = {isa = PBXBuildFile; fileRef = D8D49B7318525D9F00E37F11 /* level-hard.png */; };
@@ -138,10 +142,14 @@
 		D8693E8C181B638A005EE51F /* BlockNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockNode.m; sourceTree = "<group>"; };
 		D87AAA34185988F30056B2BB /* UITouchDownGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITouchDownGestureRecognizer.h; sourceTree = "<group>"; };
 		D87AAA35185988F30056B2BB /* UITouchDownGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITouchDownGestureRecognizer.m; sourceTree = "<group>"; };
+		D8C43D6E185AC4DD00CF181F /* sq-x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sq-x.png"; sourceTree = "<group>"; };
+		D8C43D70185AC53000CF181F /* sq-closed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sq-closed.png"; sourceTree = "<group>"; };
+		D8C43D72185AC54E00CF181F /* tri-closed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tri-closed.png"; sourceTree = "<group>"; };
+		D8C43D78185AC5CF00CF181F /* para-x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "para-x.png"; sourceTree = "<group>"; };
+		D8C43D7A185AC5ED00CF181F /* tri-x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tri-x.png"; sourceTree = "<group>"; };
+		D8C43D7C185AC64E00CF181F /* trap-x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trap-x.png"; sourceTree = "<group>"; };
 		D8D49B691850541700E37F11 /* para-closed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "para-closed.png"; sourceTree = "<group>"; };
-		D8D49B6A1850541700E37F11 /* sq-closed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sq-closed.png"; sourceTree = "<group>"; };
 		D8D49B6B1850541700E37F11 /* trap-closed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trap-closed.png"; sourceTree = "<group>"; };
-		D8D49B6C1850541700E37F11 /* tri-closed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tri-closed.png"; sourceTree = "<group>"; };
 		D8D49B7118525D9F00E37F11 /* level-five.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-five.png"; sourceTree = "<group>"; };
 		D8D49B7218525D9F00E37F11 /* level-four.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-four.png"; sourceTree = "<group>"; };
 		D8D49B7318525D9F00E37F11 /* level-hard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-hard.png"; sourceTree = "<group>"; };
@@ -340,12 +348,16 @@
 			children = (
 				D8D49B691850541700E37F11 /* para-closed.png */,
 				0DBB59B3182C0F5F002353CF /* para-open.png */,
-				D8D49B6A1850541700E37F11 /* sq-closed.png */,
+				D8C43D78185AC5CF00CF181F /* para-x.png */,
+				D8C43D70185AC53000CF181F /* sq-closed.png */,
 				0DBB59B5182C1734002353CF /* sq-open.png */,
+				D8C43D6E185AC4DD00CF181F /* sq-x.png */,
 				D8D49B6B1850541700E37F11 /* trap-closed.png */,
 				0DBB59BD182C18CE002353CF /* trap-open.png */,
-				D8D49B6C1850541700E37F11 /* tri-closed.png */,
+				D8C43D7C185AC64E00CF181F /* trap-x.png */,
+				D8C43D72185AC54E00CF181F /* tri-closed.png */,
 				0DBB59B9182C1742002353CF /* tri-open.png */,
+				D8C43D7A185AC5ED00CF181F /* tri-x.png */,
 			);
 			name = "Tangram Shapes";
 			sourceTree = "<group>";
@@ -447,6 +459,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8C43D79185AC5CF00CF181F /* para-x.png in Resources */,
 				D8693E53181B08AE005EE51F /* InfoPlist.strings in Resources */,
 				D8D90351183DD99D005A6562 /* template_level_1-01.png in Resources */,
 				0DBB59B6182C1734002353CF /* sq-open.png in Resources */,
@@ -454,6 +467,7 @@
 				0DEC65051835558B006AB966 /* pause.png in Resources */,
 				D8D49B7C18525D9F00E37F11 /* level-one.png in Resources */,
 				D8D9034F183DD8AF005A6562 /* Final-Level-One-Template-01.png in Resources */,
+				D8C43D7B185AC5ED00CF181F /* tri-x.png in Resources */,
 				724A600818259AB900852FDE /* levelsData.plist in Resources */,
 				D8D49B7A18525D9F00E37F11 /* level-hard.png in Resources */,
 				03F47FB2183BEC6D00FDB580 /* hoffman.png in Resources */,
@@ -461,8 +475,9 @@
 				03FD6648185101CD00BFADC9 /* Icon-40@2x.png in Resources */,
 				D8D49B7918525D9F00E37F11 /* level-four.png in Resources */,
 				0DBB59B4182C0F5F002353CF /* para-open.png in Resources */,
-				D8D49B6E1850541700E37F11 /* sq-closed.png in Resources */,
 				D8D49B6D1850541700E37F11 /* para-closed.png in Resources */,
+				D8C43D73185AC54E00CF181F /* tri-closed.png in Resources */,
+				D8C43D7D185AC64E00CF181F /* trap-x.png in Resources */,
 				0DA9EC91184E87C800E9A672 /* level-six.png in Resources */,
 				D8D49B6F1850541700E37F11 /* trap-closed.png in Resources */,
 				03FD6643185101BE00BFADC9 /* Icon-Small.png in Resources */,
@@ -471,13 +486,14 @@
 				0DBB59BA182C1742002353CF /* tri-open.png in Resources */,
 				03FD664C185101DA00BFADC9 /* Icon-76@2x.png in Resources */,
 				0DBB59BE182C18CE002353CF /* trap-open.png in Resources */,
+				D8C43D6F185AC4DD00CF181F /* sq-x.png in Resources */,
 				D8D49B7B18525D9F00E37F11 /* level-med.png in Resources */,
+				D8C43D71185AC53000CF181F /* sq-closed.png in Resources */,
 				03FD664B185101DA00BFADC9 /* Icon-76.png in Resources */,
 				D8D49B7818525D9F00E37F11 /* level-five.png in Resources */,
 				D8693E5C181B08AE005EE51F /* Main.storyboard in Resources */,
 				03F47FB4183BEDC100FDB580 /* geometry.png in Resources */,
 				D8D49B7E18525D9F00E37F11 /* level-two.png in Resources */,
-				D8D49B701850541700E37F11 /* tri-closed.png in Resources */,
 				03FD6647185101CD00BFADC9 /* Icon-40.png in Resources */,
 				D8D49B7D18525D9F00E37F11 /* level-three.png in Resources */,
 			);

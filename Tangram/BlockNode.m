@@ -13,6 +13,7 @@
     // block juice
     SKAction * blinkAnimation;
     SKAction * unblinkAnimation;
+    SKAction *frownAnimation;
 }
 @end
 
@@ -25,6 +26,7 @@
 
     NSArray *filePaths = @[TRIANGLE_FILE, SQUARE_FILE, TRAPEZOID_FILE, PARALLELOGRAM_FILE];
     NSArray *filePathsBlink = @[TRIANGLE_FILE_BLINK, SQUARE_FILE_BLINK, TRAPEZOID_FILE_BLINK, PARALLELOGRAM_FILE_BLINK];
+    NSArray *filePathsFrown = @[TRIANGLE_FILE_FROWN, SQUARE_FILE_FROWN, TRAPEZOID_FILE_FROWN, PARALLELOGRAM_FILE_FROWN];
 
     if (self = [super initWithImageNamed:filePaths[blockType]]) {
 
@@ -66,7 +68,7 @@
     self.physicsBody.contactTestBitMask = blockCategory | targetCategory | wallCategory;
     self.physicsBody.collisionBitMask = 0;
 
-    [self configureBlinkAnimation:blockType withFilePath:filePaths withBlinkFilePath:filePathsBlink];
+    [self configureAnimation:blockType withFilePath:filePaths withBlinkFilePath:filePathsBlink withFrownFilePath:filePathsFrown];
     
     return self;
 }
@@ -146,14 +148,18 @@
     return body;
 }
 
-- (void) configureBlinkAnimation: (BlockType) blockType withFilePath:(NSArray *) filePath withBlinkFilePath:(NSArray *) filePathBlink
+- (void) configureAnimation: (BlockType) blockType withFilePath:(NSArray *) filePath withBlinkFilePath:(NSArray *) filePathBlink withFrownFilePath:(NSArray *)filePathFrown
 {
-    SKTexture *f1 = [SKTexture textureWithImageNamed:filePath[blockType]];
-    SKTexture *f2 = [SKTexture textureWithImageNamed:filePathBlink[blockType]];
-    NSArray *blinkFrames = @[f2];
-    NSArray *unblinkFrames = @[f1];
-    blinkAnimation = [SKAction animateWithTextures:blinkFrames timePerFrame:.1];
+    SKTexture *unblinkTexture = [SKTexture textureWithImageNamed:filePath[blockType]];
+    SKTexture *blinkTexture = [SKTexture textureWithImageNamed:filePathBlink[blockType]];
+    SKTexture *frownTexture = [SKTexture textureWithImageNamed:filePathFrown[blockType]];
+    NSArray *blinkFrames = @[blinkTexture];
+    NSArray *unblinkFrames = @[unblinkTexture];
+    NSArray *frownFrames = @[frownTexture];
+    blinkAnimation = [SKAction animateWithTextures:blinkFrames timePerFrame:1];
+    //blinkAnimation = [SKAction repeatActionForever:blinkAnimation];
     unblinkAnimation = [SKAction animateWithTextures:unblinkFrames timePerFrame:.1];
+    frownAnimation = [SKAction animateWithTextures:frownFrames timePerFrame:.1];
 }
 
 - (void)shouldBlink
@@ -180,14 +186,15 @@
     
     // slide to previous position
     SKAction *slideTo = [SKAction moveTo:point duration:0.2];
+
+    SKAction *wiggleSequence = [SKAction sequence:@[wOne, wTwo, wThree, wait, slideTo]];
     
     // run animation
-    [self runAction: [SKAction sequence:@[wOne, wTwo, wThree, wait, slideTo]]];
+    [self runAction:wiggleSequence];
 }
 
 - (void) shouldFrown
 {
-#warning replace with frown animation once created
-    [self runAction:blinkAnimation];
+    [self runAction:frownAnimation];
 }
 @end

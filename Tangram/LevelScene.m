@@ -374,7 +374,6 @@
         BlockNode * addBlock = [self createNodeWithType:type withPoint:shapeStartingPoints[type]];
         [self addChild:addBlock];
     }
-    
 }
 
 /*
@@ -455,7 +454,7 @@
     if ((secondBody.categoryBitMask & blockCategory) != 0) {
         _selectedNode.touchingTangram = NO;
 
-        [_selectedNode shouldUnblink];
+        [_selectedNode shouldBlink];
     }
     
     // handle tangram ending contact with volumn

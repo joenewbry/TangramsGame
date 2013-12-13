@@ -11,7 +11,8 @@
 @interface TemplateNode ()
 {
     SKAction *moveToCenter;
-    SKAction *scaleToFullSize;
+    SKAction *scaleXToFullSize;
+    SKAction *scaleYToFullSize;
     CGSize spriteSize;
 }
 
@@ -65,6 +66,7 @@
         self.level = level;
         self = [self initWithModel:levelModel deviceIsRetina:isRetina];
         spriteSize = self.size;
+#warning scale this differently
         self.size = CGSizeMake(100.0, 100.0);
     }
     return self;
@@ -75,11 +77,14 @@
 {
     moveToCenter = [SKAction moveTo:CGPointMake(400, 600) duration:.75];
     self.size = spriteSize;
-    //scaleToFullSize = [SKAction scaleXTo:spriteSize.width duration:.75];
 
+#warning scale back up
+    //scaleXToFullSize = [SKAction scal
+    //scaleYToFullSize = [SKAction scaleYTo:1 duration:.75];
 
     [self runAction:moveToCenter];
-    //[self runAction:scaleToFullSize];
+    //[self runAction:scaleXToFullSize];
+    //[self runAction:scaleYToFullSize];
 }
 
 @end

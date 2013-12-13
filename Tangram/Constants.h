@@ -23,6 +23,10 @@ typedef enum {
 #define SQUARE_FILE_BLINK @"sq-closed.png"
 #define TRAPEZOID_FILE_BLINK @"trap-closed.png"
 #define PARALLELOGRAM_FILE_BLINK @"para-closed.png"
+#define TRIANGLE_FILE_FROWN @"tri-x.png"
+#define SQUARE_FILE_FROWN @"sq-x.png"
+#define TRAPEZOID_FILE_FROWN @"trap-x.png"
+#define PARALLELOGRAM_FILE_FROWN @"para-x.png"
 
 #define NUM_SHAPES 4
 #define NUM_LEVELS 8 
