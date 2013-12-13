@@ -216,7 +216,7 @@
     
     // Handle backbutton
     else if ([_selectedNode isEqual:backButton]){
-            SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration:0.5];
+            SKTransition *reveal = [SKTransition flipVerticalWithDuration:0.5];
             SKScene *levelSelctionScene = [[LevelSelectionScene alloc] initWithSize:CGSizeMake(self.view.bounds.size.width,
                                                                                                self.view.bounds.size.height)];
             [self.view presentScene:levelSelctionScene transition:reveal];
@@ -393,14 +393,43 @@
 
 - (void) gameWon
 {
-    // initialize the correct level
-    CGSize size = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height);
-    LevelWonScene * levelWonScene = [[LevelWonScene alloc] initWithSize:size];
+    
+    NSArray * possibleTangrams = @[TRIANGLE_FILE, SQUARE_FILE, TRAPEZOID_FILE, PARALLELOGRAM_FILE,
+                                   TRIANGLE_FILE_BLINK, SQUARE_FILE_BLINK, TRAPEZOID_FILE_BLINK, PARALLELOGRAM_FILE_BLINK];
 
-    // present the level with a nice transition
-    //SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration:0.5];
-    [self.view presentScene:levelWonScene transition:nil];
+    dispatch_async(dispatch_queue_create("sleep then open", nil), ^{
+        [NSThread sleepForTimeInterval:2.75];
+        CGSize size = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height);
+        LevelSelectionScene * nextScene = [[LevelSelectionScene alloc] initWithSize:size];
+        
+        SKTransition *reveal = [SKTransition flipVerticalWithDuration:0.5];
+        [self.view presentScene:nextScene transition:reveal];
+    });
+    
+    
+    for (int i = 0; i < 100; i++) {
+        // set up random numbers
+        NSInteger randomNumber = arc4random() % 8;
+        CGFloat randomX = self.size.width * ((double)arc4random() / 0x100000000);
+        CGFloat randomY = self.size.height * ((double)arc4random() / 0x100000000);
+        
+        CGFloat randomEntrance = 1.5 * ((double)arc4random() / 0x100000000);
+        CGFloat randomExit = 1.5 * ((double)arc4random() / 0x100000000);
 
+        // create a new node and give it
+        SKSpriteNode * newIcon = [[SKSpriteNode alloc] initWithImageNamed:possibleTangrams[randomNumber]];
+        newIcon.position = CGPointMake(randomX, randomY);
+        newIcon.alpha = 0;
+        [self addChild:newIcon];
+        
+        SKAction * comeIn = [SKAction fadeAlphaTo:1 duration:randomEntrance];
+        SKAction * wait = [SKAction waitForDuration:1];
+        SKAction * goOut = [SKAction fadeAlphaTo:0 duration:randomExit];
+        
+        SKAction * inAndOut = [SKAction sequence:@[comeIn, wait, goOut, wait]];
+        [newIcon runAction: inAndOut];
+    }
+    
 }
 
 /*

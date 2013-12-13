@@ -60,7 +60,7 @@
 {
     SKNode *node = [self nodeAtPoint:[self convertPointFromView:[gesture locationInView:gesture.view]]];
     if ([node isEqual:backButton]){
-        SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration:0.5];
+        SKTransition *reveal = [SKTransition flipVerticalWithDuration:0.5];
         SKScene *levelSelctionScene = [[LevelSelectionScene alloc] initWithSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height)];
         [self.view presentScene:levelSelctionScene transition:reveal];
     }

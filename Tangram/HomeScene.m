@@ -95,8 +95,8 @@
 {
     [startText runAction:moveOutTitle];
     [startButton runAction:moveOutPlayButton completion:^{
-        SKTransition *fade = [SKTransition fadeWithColor:[UIColor grayColor] duration:.5];
-    SKScene *levelSelctionScene = [[LevelSelectionScene alloc] initWithSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height)];
+        SKTransition *fade = [SKTransition flipVerticalWithDuration:.5];
+        SKScene *levelSelctionScene = [[LevelSelectionScene alloc] initWithSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height)];
     [self.view presentScene:levelSelctionScene transition:fade];
 
     }]; // could make these grouped
