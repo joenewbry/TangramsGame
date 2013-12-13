@@ -7,19 +7,12 @@
 		<integer>1</integer>
 		<key>physicsBodyCoords</key>
 		<array>
-			<string>6 71</string>
-			<string>70 6</string>
-			<string>5 6</string>
+			<string>5 72</string>
+			<string>72 5</string>
+			<string>5 5</string>
 		</array>
 		<key>outlineFilepath</key>
 		<string>level-one.png</string>
-		<key>shapeCount</key>
-		<array>
-			<integer>3</integer>
-			<integer>2</integer>
-			<integer>1</integer>
-			<integer>10</integer>
-		</array>
 	</dict>
 	<dict>
 		<key>triangleNumber</key>
@@ -27,137 +20,95 @@
 		<key>physicsBodyCoords</key>
 		<array>
 			<string>0 65</string>
-			<string>63 0</string>
-			<string>63 66</string>
+			<string>65 0</string>
+			<string>65 65</string>
 		</array>
 		<key>outlineFilepath</key>
 		<string>level-two.png</string>
-		<key>shapeCount</key>
-		<array>
-			<integer>3</integer>
-			<integer>2</integer>
-			<integer>1</integer>
-			<integer>10</integer>
-		</array>
 	</dict>
 	<dict>
 		<key>triangleNumber</key>
 		<integer>2</integer>
 		<key>physicsBodyCoords</key>
 		<array>
-			<string>2 63</string>
-			<string>3 2</string>
+			<string>3 62</string>
+			<string>3 3</string>
 			<string>62 3</string>
-			<string>61 63</string>
+			<string>62 62</string>
 		</array>
 		<key>outlineFilepath</key>
 		<string>level-three.png</string>
-		<key>shapeCount</key>
+	</dict>
+	<dict>
+		<key>triangleNumber</key>
+		<integer>2</integer>
+		<key>physicsBodyCoords</key>
 		<array>
-			<integer>3</integer>
-			<integer>2</integer>
-			<integer>1</integer>
-			<integer>10</integer>
+			<string>-3 6</string>
+			<string>39 51</string>
+			<string>122 51</string>
+			<string>80 6</string>
 		</array>
+		<key>outlineFilepath</key>
+		<string>level-four.png</string>
+	</dict>
+	<dict>
+		<key>triangleNumber</key>
+		<integer>4</integer>
+		<key>physicsBodyCoords</key>
+		<array>
+			<string>-4 67</string>
+			<string>52 9</string>
+			<string>106 9</string>
+			<string>162 67</string>
+		</array>
+		<key>outlineFilepath</key>
+		<string>level-five.png</string>
 	</dict>
 	<dict>
 		<key>triangleNumber</key>
 		<integer>9</integer>
 		<key>physicsBodyCoords</key>
 		<array>
-			<string>16 188</string>
-			<string>17 21</string>
-			<string>185 21</string>
-			<string>190 82</string>
-			<string>84 192</string>
-		</array>
-		<key>outlineFilepath</key>
-		<string>level-four.png</string>
-		<key>shapeCount</key>
-		<array>
-			<integer>3</integer>
-			<integer>2</integer>
-			<integer>1</integer>
-			<integer>10</integer>
-		</array>
-	</dict>
-	<dict>
-		<key>triangleNumber</key>
-		<integer>5</integer>
-		<key>physicsBodyCoords</key>
-		<array>
-			<string>9 63</string>
-			<string>9 10</string>
-			<string>60 10</string>
-		</array>
-		<key>outlineFilepath</key>
-		<string>level-five.png</string>
-		<key>shapeCount</key>
-		<array>
-			<integer>5</integer>
-			<integer>2</integer>
-			<integer>5</integer>
-			<integer>8</integer>
-		</array>
-	</dict>
-	<dict>
-		<key>triangleNumber</key>
-		<integer>2</integer>
-		<key>physicsBodyCoords</key>
-		<array>
-			<string>16 188</string>
-			<string>17 21</string>
-			<string>185 21</string>
-			<string>190 82</string>
-			<string>84 192</string>
+			<string>25 182</string>
+			<string>25 26</string>
+			<string>182 28</string>
+			<string>181 82</string>
+			<string>82 183</string>
 		</array>
 		<key>outlineFilepath</key>
 		<string>level-six.png</string>
-		<key>shapeCount</key>
-		<array>
-			<integer>3</integer>
-			<integer>2</integer>
-			<integer>2</integer>
-			<integer>10</integer>
-		</array>
 	</dict>
 	<dict>
 		<key>triangleNumber</key>
-		<real>0</real>
+		<integer>20</integer>
 		<key>physicsBodyCoords</key>
 		<array>
-			<string>9 63</string>
-			<string>9 10</string>
-			<string>60 10</string>
+			<string>109 216</string>
+			<string>8 109</string>
+			<string>62 9</string>
+			<string>218 10</string>
+			<string>267 113</string>
+			<string>165 217</string>
 		</array>
 		<key>outlineFilepath</key>
-		<string>level-medium.png</string>
-		<key>shapeCount</key>
-		<array>
-			<integer>3</integer>
-			<integer>2</integer>
-			<integer>2</integer>
-			<integer>10</integer>
-		</array>
+		<string>level-med.png</string>
 	</dict>
 	<dict>
 		<key>triangleNumber</key>
-		<integer>2</integer>
+		<integer>22</integer>
 		<key>physicsBodyCoords</key>
 		<array>
-			<string>9 63</string>
-			<string>9 10</string>
-			<string>60 10</string>
+			<string>6 107</string>
+			<string>111 4</string>
+			<string>166 5</string>
+			<string>218 58</string>
+			<string>216 261</string>
+			<string>115 310</string>
+			<string>58 308</string>
 		</array>
 		<key>outlineFilepath</key>
 		<string>level-hard.png</string>
-		<key>shapeCount</key>
-		<array>
-			<integer>3</integer>
-			<integer>2</integer>
-			<integer>2</integer>
-			<integer>10</integer>
-		</array>
 	</dict>
 </array>
 </plist>
