@@ -26,8 +26,8 @@
         NSArray *levelsData = [NSArray arrayWithContentsOfFile:filePath];
         NSDictionary *levelData = [levelsData objectAtIndex:level];
         
-        // shapecount is hardcoded. so effectively unlimited.
-        self.shapeCount = @[@20, @20, @20, @20];
+        // shapecount is hardcoded at 100. so effectively unlimited.
+        self.shapeCount = @[@100, @100, @100, @100];
         self.outlineFilepath = [levelData objectForKey:kOutlineFilepath];
         self.triangleNumber = [[levelData objectForKey:kTriangleNumber] intValue];
 
