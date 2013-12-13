@@ -68,7 +68,7 @@
         [self setupBackButton];
         [self setupPauseButton];
         
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor colorWithHue:0.359 saturation:0.051 brightness:1.000 alpha:1];
         
         // Figure out if device has Retina display.
         if ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&

@@ -91,15 +91,6 @@
     if (_selectedNode != nil) {
         // initialize the correct level
 
-
-        for (TemplateNode *level in levelNodesArray){
-            if (level == _selectedNode){
-                [level shouldMoveToCenter];
-            } else {
-                [level setAlpha:0.0];
-            }
-        }
-
         for (SKLabelNode *label in levelLabelArray ){
             [label setAlpha:0.0];
         }
