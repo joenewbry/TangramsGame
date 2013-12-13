@@ -7,16 +7,19 @@
 //
 
 #import "LevelSelectionScene.h"
-
+#import "TemplateNode.h"
+#import "LevelModel.h"
 
 @implementation LevelSelectionScene
 {
     CGPoint levelStartPoints[NUM_LEVELS];
     CGPoint levelLabelStartPoints[NUM_LEVELS];
-    LevelSelectionNode *_selectedNode;
+    TemplateNode *_selectedNode;
 
     NSMutableArray *levelNodesArray;
     NSMutableArray *levelLabelArray;
+
+    BOOL isRetna;
 }
 
 - (id)initWithSize:(CGSize) size
@@ -43,6 +46,14 @@
 
 -(void)setupLevelArray
 {
+    // figure out if device is retna
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
+        ([UIScreen mainScreen].scale == 2.0)) {
+        isRetna = YES;
+    } else {
+        isRetna = NO;
+    }
+
     // set placement values
     float placementWidth = self.size.width / 4;
     float placementHeight = self.size.height / 6;
@@ -55,7 +66,7 @@
 
     // create sprites and labels for level selectors
     for (int i = 0; i < NUM_LEVELS; i++) {
-        LevelSelectionNode * levelNode = [self createLevelNodeOfLevel:i At:levelStartPoints[i]];
+        TemplateNode *levelNode = [self createLevelNodeOfLevel:i At:levelStartPoints[i]];
         levelNode.position = levelStartPoints[i];
 
         [self addChild:levelNode];
@@ -76,9 +87,10 @@
     }
 }
 
--(LevelSelectionNode*)createLevelNodeOfLevel:(int)level At:(CGPoint) point
+-(TemplateNode *)createLevelNodeOfLevel:(int)level At:(CGPoint) point
 {
-    LevelSelectionNode * node = [[LevelSelectionNode alloc] initWithLevel:level];
+    LevelModel *levelModel = [[LevelModel alloc] initWithLevel:level];
+    TemplateNode * node = [[TemplateNode alloc] initWithModel:levelModel deviceIsRetina:isRetna level:level];
     [node setPosition:point];
 
     NSLog(@"Node stuff %@ and level is %i", node, level);
@@ -109,7 +121,7 @@
         // initialize the correct level
 
 
-        for (LevelSelectionNode *level in levelNodesArray){
+        for (TemplateNode *level in levelNodesArray){
             if (level == _selectedNode){
                 [level shouldMoveToCenter];
             } else {
@@ -120,21 +132,25 @@
         for (SKLabelNode *label in levelLabelArray ){
             [label setAlpha:0.0];
         }
+        dispatch_async(dispatch_queue_create("check contact", nil), ^{
+            [NSThread sleepForTimeInterval:.75];
+            CGSize size = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height);
+            LevelScene * levelScene = [[LevelScene alloc] initWithLevel:_selectedNode.level AndSize:size];
 
-        CGSize size = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height);
-        LevelScene * level = [[LevelScene alloc] initWithLevel:_selectedNode.level AndSize:size];
+            // present the level with a nice transition
+            SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration:0.5];
+            [self.view presentScene:levelScene transition:reveal];
+        });
 
-        // present the level with a nice transition
-        SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration:0.5];
-        [self.view presentScene:level transition:reveal];
+
     }
 }
 
 -(void)selectNodeForTouch:(CGPoint)touchLocation
 {
     SKNode *selectedNode = [self nodeAtPoint:touchLocation];
-    if ([selectedNode isKindOfClass:[LevelSelectionNode class]]) {
-        _selectedNode = (LevelSelectionNode *)[self nodeAtPoint:touchLocation];
+    if ([selectedNode isKindOfClass:[TemplateNode class]]) {
+        _selectedNode = (TemplateNode *)[self nodeAtPoint:touchLocation];
     } else {
         _selectedNode = nil;
     }

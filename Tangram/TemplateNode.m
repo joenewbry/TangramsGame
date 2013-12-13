@@ -8,6 +8,15 @@
 
 #import "TemplateNode.h"
 
+@interface TemplateNode ()
+{
+    SKAction *moveToCenter;
+    SKAction *scaleToFullSize;
+    CGSize spriteSize;
+}
+
+@end
+
 @implementation TemplateNode
 
 - (id)initWithModel:(LevelModel *)levelModel deviceIsRetina:(BOOL)isRetina
@@ -17,7 +26,7 @@
         // set number of trianges that this can hold
         self.triangleNumber = levelModel.triangleNumber;
         self.numberOfTrianglesInside = 0; // start with 0
-    
+
         // set physics body
         CGFloat offsetX = self.frame.size.width * self.anchorPoint.x;
         CGFloat offsetY = self.frame.size.height * self.anchorPoint.y;
@@ -39,9 +48,6 @@
                                  ([coordPair[1] floatValue] * scale) - offsetY);
         }
         CGPathCloseSubpath(path);
-
-
-
         
         self.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:path];
         
@@ -54,5 +60,26 @@
     return self;
 }
 
+- (id)initWithModel:(LevelModel *)levelModel deviceIsRetina:(BOOL)isRetina level:(int)level {
+    if (self = [super initWithImageNamed:levelModel.outlineFilepath]) {
+        self.level = level;
+        self = [self initWithModel:levelModel deviceIsRetina:isRetina];
+        spriteSize = self.size;
+        self.size = CGSizeMake(100.0, 100.0);
+    }
+    return self;
+}
+
+
+- (void)shouldMoveToCenter
+{
+    moveToCenter = [SKAction moveTo:CGPointMake(400, 600) duration:.75];
+    self.size = spriteSize;
+    //scaleToFullSize = [SKAction scaleXTo:spriteSize.width duration:.75];
+
+
+    [self runAction:moveToCenter];
+    //[self runAction:scaleToFullSize];
+}
 
 @end

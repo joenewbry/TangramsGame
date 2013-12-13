@@ -15,8 +15,12 @@
 // Max number of "unit" triangles that can fit inside the template outline.
 @property (nonatomic) int triangleNumber;
 @property (nonatomic) int numberOfTrianglesInside;
+@property (nonatomic) int level;
 
+- (id)initWithModel:(LevelModel *)levelModel deviceIsRetina:(BOOL)isRetina level:(int)level;
 - (id)initWithModel:(LevelModel *)levelModel deviceIsRetina:(BOOL)isRetina;
+
+-(void) shouldMoveToCenter;
 
 
 @end
