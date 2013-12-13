@@ -150,25 +150,29 @@
 
 - (void) configureAnimation: (BlockType) blockType withFilePath:(NSArray *) filePath withBlinkFilePath:(NSArray *) filePathBlink withFrownFilePath:(NSArray *)filePathFrown
 {
-    SKTexture *unblinkTexture = [SKTexture textureWithImageNamed:filePath[blockType]];
+
     SKTexture *blinkTexture = [SKTexture textureWithImageNamed:filePathBlink[blockType]];
+    SKTexture *unblinkTexture = [SKTexture textureWithImageNamed:filePath[blockType]];
     SKTexture *frownTexture = [SKTexture textureWithImageNamed:filePathFrown[blockType]];
+
     NSArray *blinkFrames = @[blinkTexture];
     NSArray *unblinkFrames = @[unblinkTexture];
     NSArray *frownFrames = @[frownTexture];
-    blinkAnimation = [SKAction animateWithTextures:blinkFrames timePerFrame:1];
+    blinkAnimation = [SKAction animateWithTextures:blinkFrames timePerFrame:.1];
     //blinkAnimation = [SKAction repeatActionForever:blinkAnimation];
-    unblinkAnimation = [SKAction animateWithTextures:unblinkFrames timePerFrame:.1];
+    unblinkAnimation = [SKAction animateWithTextures:unblinkFrames timePerFrame:.2];
     frownAnimation = [SKAction animateWithTextures:frownFrames timePerFrame:.1];
 }
 
 - (void)shouldBlink
 {
+    NSLog(@"Should blink");
     [self runAction:blinkAnimation];
 }
 
 - (void)shouldUnblink
 {
+    NSLog(@"Should unblink");
     [self runAction:unblinkAnimation];
 }
 

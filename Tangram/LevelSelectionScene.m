@@ -26,23 +26,11 @@
 {
      if (self = [super initWithSize:size])
     {
-        // It would be nice to have a background pattern, can't figure
-        // it out at the moment though. - Josh 11/19
-        //UIImage *patternImage = [UIImage imageNamed:@"geometry.png"];
         self.backgroundColor = [UIColor whiteColor];
-        
-        // call setup methods
-        //[self setupPhysics];
-        //[self setupLevelArray];
     }
     return self;
 }
 
-- (void)setupPhysics
-{
-    //self.physicsWorld.gravity = CGVectorMake(0.0, -0.0);
-    //self.physicsWorld.contactDelegate = self;
-}
 
 -(void)setupLevelArray
 {
@@ -57,10 +45,8 @@
     // set placement values
     float placementWidth = self.size.width / 4;
     float placementHeight = self.size.height / 6;
-    int offset = 75;
     for (int i = 0; i < NUM_LEVELS; i++) {
         levelStartPoints[i] = CGPointMake(placementWidth * ((i % 3)+1), 800 - ((i / 3) * placementHeight));
-        levelLabelStartPoints[i] = CGPointMake(levelStartPoints[i].x, levelStartPoints[i].y - offset);
     }
 
     // create sprites and labels for level selectors
@@ -73,16 +59,6 @@
         if (!levelNodesArray) levelNodesArray = [[NSMutableArray alloc] init];
 
         [levelNodesArray addObject:levelNode];
-
-        SKLabelNode * levelLabel = [[SKLabelNode alloc] initWithFontNamed:@"HelveticaNeue-Bold"];
-        levelLabel.position = levelLabelStartPoints[i];
-        levelLabel.fontColor = [UIColor colorWithHue:0.000 saturation:0.000 brightness:0.224 alpha:1];
-        levelLabel.fontSize = 20;
-        levelLabel.text = [NSString stringWithFormat:@"Level %i", (i+1)];
-        [self addChild:levelLabel];
-
-        if (!levelLabelArray) levelLabelArray = [[NSMutableArray alloc] init];
-        [levelLabelArray addObject:levelLabel];
     }
 }
 
@@ -91,7 +67,6 @@
     LevelModel *levelModel = [[LevelModel alloc] initWithLevel:level];
     TemplateNode * node = [[TemplateNode alloc] initWithModel:levelModel deviceIsRetina:isRetna level:level];
     [node setPosition:point];
-
     return node;
 }
 
@@ -137,8 +112,6 @@
             SKTransition *reveal = [SKTransition doorsOpenHorizontalWithDuration:0.5];
             [self.view presentScene:levelScene transition:reveal];
         });
-
-
     }
 }
 

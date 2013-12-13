@@ -19,10 +19,12 @@ typedef enum {
 #define SQUARE_FILE @"sq-open.png"
 #define TRAPEZOID_FILE @"trap-open.png"
 #define PARALLELOGRAM_FILE @"para-open.png"
+
 #define TRIANGLE_FILE_BLINK @"tri-closed.png"
 #define SQUARE_FILE_BLINK @"sq-closed.png"
 #define TRAPEZOID_FILE_BLINK @"trap-closed.png"
 #define PARALLELOGRAM_FILE_BLINK @"para-closed.png"
+
 #define TRIANGLE_FILE_FROWN @"tri-x.png"
 #define SQUARE_FILE_FROWN @"sq-x.png"
 #define TRAPEZOID_FILE_FROWN @"trap-x.png"

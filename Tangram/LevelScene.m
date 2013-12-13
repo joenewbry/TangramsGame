@@ -204,7 +204,7 @@
             if (blockNode.touchingTangram == YES) {
                 SKAction *rotateBack = [SKAction rotateByAngle:-M_PI_4 duration:0.25];
                 [blockNode runAction:rotateBack];
-                dispatch_async(dispatch_queue_create("check contact", nil), ^{
+                dispatch_async(dispatch_queue_create("unblink", nil), ^{
                     [NSThread sleepForTimeInterval:ROTATE_DURATION];
                     [blockNode shouldUnblink];
                 });
@@ -431,9 +431,8 @@
     // handle a block and a edge touching
     if ((secondBody.categoryBitMask & edgeCategory) != 0) {
         _selectedNode.touchingTemplateEdge = YES;
+        [_selectedNode shouldFrown];
     }
-    
-    
 }
 
 /*
@@ -453,7 +452,6 @@
     // handle two blocks ending contact with each other
     if ((secondBody.categoryBitMask & blockCategory) != 0) {
         _selectedNode.touchingTangram = NO;
-
         [_selectedNode shouldBlink];
     }
     

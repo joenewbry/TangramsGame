@@ -26,7 +26,7 @@
         
         // create shape
         [self setColor:[UIColor colorWithHue:0.315 saturation:0.220 brightness:0.875 alpha:1]];
-        [self setSize:CGSizeMake(100.0, 100.0)];
+        [self setSize:CGSizeMake(150.0, 150.0)];
     }
     return self;
 }
