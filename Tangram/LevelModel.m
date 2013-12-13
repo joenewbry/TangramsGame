@@ -26,7 +26,8 @@
         NSArray *levelsData = [NSArray arrayWithContentsOfFile:filePath];
         NSDictionary *levelData = [levelsData objectAtIndex:level];
         
-        self.shapeCount = [levelData objectForKey:kShapeCount];
+        // shapecount is hardcoded. so effectively unlimited.
+        self.shapeCount = @[@20, @20, @20, @20];
         self.outlineFilepath = [levelData objectForKey:kOutlineFilepath];
         self.triangleNumber = [[levelData objectForKey:kTriangleNumber] intValue];
 
@@ -41,7 +42,7 @@
         
         // Set properties.
         self.physicsBodyCoords = physicsBodyCoords;
-            }
+    }
     return self;
 }
 

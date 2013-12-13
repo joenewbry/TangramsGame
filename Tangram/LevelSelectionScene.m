@@ -49,7 +49,6 @@
     int offset = 75;
     for (int i = 0; i < NUM_LEVELS; i++) {
         levelStartPoints[i] = CGPointMake(placementWidth * ((i % 3)+1), 800 - ((i / 3) * placementHeight));
-        NSLog(@"start point: %f",levelStartPoints[i].y);
         levelLabelStartPoints[i] = CGPointMake(levelStartPoints[i].x, levelStartPoints[i].y - offset);
     }
 
@@ -81,7 +80,6 @@
     LevelSelectionNode * node = [[LevelSelectionNode alloc] initWithLevel:level];
     [node setPosition:point];
 
-    NSLog(@"Node stuff %@ and level is %i", node, level);
     return node;
 }
 
@@ -100,8 +98,6 @@
 {
     CGPoint touchLocation = [gesture locationInView:self.view];
     touchLocation = [self.view convertPoint:touchLocation toScene:self];
-    
-    NSLog(@"Click location is %f, %f", touchLocation.x, touchLocation.y);
     [self selectNodeForTouch:touchLocation];
 
     // only if we actually tapped a level selection node

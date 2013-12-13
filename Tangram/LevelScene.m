@@ -16,7 +16,6 @@
     BlockNode *_selectedNode;
     
     int shapeCount[NUM_SHAPES];
-    SKLabelNode *shapesRemaining[NUM_SHAPES];
     CGPoint shapeStartingPoints[NUM_SHAPES];
     CGPoint shapeLabelPoints[NUM_SHAPES];
     BOOL isRetina;  // device has a Retina display.
@@ -55,13 +54,6 @@
         if (debugMode) [YMCPhysicsDebugger init];
 
         self.levelModel = [[LevelModel alloc] initWithLevel:level];
-
-        // create a level label -- this is mostly to prove that levels work, we might not want this
-        SKLabelNode * levelLabel = [[SKLabelNode alloc] initWithFontNamed:@"HelveticaNeue-Bold"];
-        levelLabel.fontColor = [UIColor colorWithHue:0.000 saturation:0.000 brightness:0.224 alpha:1];
-        levelLabel.text =  [NSString stringWithFormat:@"Level %i", (level+1)];
-        levelLabel.position = CGPointMake(self.size.width / 2, self.size.height - 87);
-        [self addChild:levelLabel];
         
         // convert shapeCount to ints
         for (int i = 0; i < self.levelModel.shapeCount.count; i++) {
@@ -113,27 +105,12 @@
     shapeStartingPoints[PARALLELOGRAM] = CGPointMake(blockOffset + 450, self.size.height / 9);
     shapeStartingPoints[SQUARE] = CGPointMake(blockOffset + 630, placementHeight);
     
-    // set tangram label starting points
-    int offset = 75;
-    shapeLabelPoints[TRIANGLE] = CGPointMake(shapeStartingPoints[TRIANGLE].x - 30, shapeStartingPoints[TRIANGLE].y + offset);
-    shapeLabelPoints[TRAPEZOID] = CGPointMake(shapeStartingPoints[TRAPEZOID].x, shapeStartingPoints[TRAPEZOID].y + offset);
-    shapeLabelPoints[PARALLELOGRAM] = CGPointMake(shapeStartingPoints[PARALLELOGRAM].x, placementHeight + offset);
-    shapeLabelPoints[SQUARE] = CGPointMake(shapeStartingPoints[SQUARE].x, shapeStartingPoints[SQUARE].y + offset);
-
-    
     // initialize the tangrams as sprites and add them to the scene
     for (int i=0; i < NUM_SHAPES; i++){
         if (shapeCount[i] > 0){
-            
-            // add tangram
             BlockNode *block = [self createNodeWithType:i withPoint:shapeStartingPoints[i]];
             block.physicsBody.usesPreciseCollisionDetection = YES;
             [self addChild:block];
-            
-            // add label
-            shapesRemaining[i] = [self labelNodeWithRemaining:shapeCount[i] at:shapeLabelPoints[i]];
-            [self addChild:shapesRemaining[i]];
-            
         }
     }
 }
@@ -214,7 +191,6 @@
 
 - (void)tap:(UITapGestureRecognizer *)gesture
 {
-    NSLog(@"Tap location y value %f", [gesture locationInView:nil].y);
     if ([_selectedNode isKindOfClass:[BlockNode class]]) {
         BlockNode *blockNode = (BlockNode *)_selectedNode;
         SKAction *rotate = [SKAction rotateByAngle:M_PI_4 duration:ROTATE_DURATION];
@@ -390,8 +366,7 @@
 {
     // remove one node of this type
     shapeCount[type]--;
-    shapesRemaining[type].text = [NSString stringWithFormat:@"%i", shapeCount[type]];
-        
+    
     // a block should be added if there is more than 1 block of this type left
     if (shapeCount[type] > 0) {
         BlockNode * addBlock = [self createNodeWithType:type withPoint:shapeStartingPoints[type]];
