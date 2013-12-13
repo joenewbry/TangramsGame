@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		03581B941835547A0015E22B /* level-selection.png in Resources */ = {isa = PBXBuildFile; fileRef = 03581B931835547A0015E22B /* level-selection.png */; };
+		03934DAE185AD3E400D090AE /* level-tiles-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 03934DA6185AD3E400D090AE /* level-tiles-1.png */; };
+		03934DAF185AD3E400D090AE /* level-tiles-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 03934DA7185AD3E400D090AE /* level-tiles-2.png */; };
+		03934DB0185AD3E400D090AE /* level-tiles-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 03934DA8185AD3E400D090AE /* level-tiles-3.png */; };
+		03934DB1185AD3E400D090AE /* level-tiles-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 03934DA9185AD3E400D090AE /* level-tiles-4.png */; };
+		03934DB2185AD3E400D090AE /* level-tiles-5.png in Resources */ = {isa = PBXBuildFile; fileRef = 03934DAA185AD3E400D090AE /* level-tiles-5.png */; };
+		03934DB3185AD3E400D090AE /* level-tiles-6.png in Resources */ = {isa = PBXBuildFile; fileRef = 03934DAB185AD3E400D090AE /* level-tiles-6.png */; };
+		03934DB4185AD3E400D090AE /* level-tiles-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 03934DAC185AD3E400D090AE /* level-tiles-7.png */; };
+		03934DB5185AD3E400D090AE /* level-tiles-8.png in Resources */ = {isa = PBXBuildFile; fileRef = 03934DAD185AD3E400D090AE /* level-tiles-8.png */; };
 		03F47FB2183BEC6D00FDB580 /* hoffman.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F47FB1183BEC6D00FDB580 /* hoffman.png */; };
 		03F47FB4183BEDC100FDB580 /* geometry.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F47FB3183BEDC100FDB580 /* geometry.png */; };
 		03FD6643185101BE00BFADC9 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 03FD6641185101BE00BFADC9 /* Icon-Small.png */; };
@@ -79,6 +87,14 @@
 
 /* Begin PBXFileReference section */
 		03581B931835547A0015E22B /* level-selection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-selection.png"; sourceTree = "<group>"; };
+		03934DA6185AD3E400D090AE /* level-tiles-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-tiles-1.png"; sourceTree = "<group>"; };
+		03934DA7185AD3E400D090AE /* level-tiles-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-tiles-2.png"; sourceTree = "<group>"; };
+		03934DA8185AD3E400D090AE /* level-tiles-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-tiles-3.png"; sourceTree = "<group>"; };
+		03934DA9185AD3E400D090AE /* level-tiles-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-tiles-4.png"; sourceTree = "<group>"; };
+		03934DAA185AD3E400D090AE /* level-tiles-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-tiles-5.png"; sourceTree = "<group>"; };
+		03934DAB185AD3E400D090AE /* level-tiles-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-tiles-6.png"; sourceTree = "<group>"; };
+		03934DAC185AD3E400D090AE /* level-tiles-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-tiles-7.png"; sourceTree = "<group>"; };
+		03934DAD185AD3E400D090AE /* level-tiles-8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level-tiles-8.png"; sourceTree = "<group>"; };
 		03F47FB1183BEC6D00FDB580 /* hoffman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hoffman.png; sourceTree = "<group>"; };
 		03F47FB3183BEDC100FDB580 /* geometry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = geometry.png; sourceTree = "<group>"; };
 		03FD6641185101BE00BFADC9 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
@@ -182,6 +198,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03934DA5185AD10300D090AE /* Level Tiles */ = {
+			isa = PBXGroup;
+			children = (
+				03934DA6185AD3E400D090AE /* level-tiles-1.png */,
+				03934DA7185AD3E400D090AE /* level-tiles-2.png */,
+				03934DA8185AD3E400D090AE /* level-tiles-3.png */,
+				03934DA9185AD3E400D090AE /* level-tiles-4.png */,
+				03934DAA185AD3E400D090AE /* level-tiles-5.png */,
+				03934DAB185AD3E400D090AE /* level-tiles-6.png */,
+				03934DAC185AD3E400D090AE /* level-tiles-7.png */,
+				03934DAD185AD3E400D090AE /* level-tiles-8.png */,
+			);
+			name = "Level Tiles";
+			sourceTree = "<group>";
+		};
 		0D501B8F181F713200870EB0 /* models */ = {
 			isa = PBXGroup;
 			children = (
@@ -321,6 +352,7 @@
 				D8D9034E183DD8AF005A6562 /* Final-Level-One-Template-01.png */,
 				03FD6649185101DA00BFADC9 /* Icon-76.png */,
 				03FD664A185101DA00BFADC9 /* Icon-76@2x.png */,
+				03934DA5185AD10300D090AE /* Level Tiles */,
 				0DEC65041835558B006AB966 /* pause.png */,
 				03FD6641185101BE00BFADC9 /* Icon-Small.png */,
 				03FD6642185101BE00BFADC9 /* Icon-Small@2x.png */,
@@ -462,18 +494,25 @@
 				03F47FB2183BEC6D00FDB580 /* hoffman.png in Resources */,
 				D8693E66181B08AE005EE51F /* Images.xcassets in Resources */,
 				03FD6648185101CD00BFADC9 /* Icon-40@2x.png in Resources */,
+				03934DB3185AD3E400D090AE /* level-tiles-6.png in Resources */,
 				D8D49B7918525D9F00E37F11 /* level-four.png in Resources */,
 				0DBB59B4182C0F5F002353CF /* para-open.png in Resources */,
+				03934DB5185AD3E400D090AE /* level-tiles-8.png in Resources */,
+				03934DB4185AD3E400D090AE /* level-tiles-7.png in Resources */,
 				D8D49B6E1850541700E37F11 /* sq-closed.png in Resources */,
 				D8D49B6D1850541700E37F11 /* para-closed.png in Resources */,
 				0DA9EC91184E87C800E9A672 /* level-six.png in Resources */,
+				03934DAF185AD3E400D090AE /* level-tiles-2.png in Resources */,
+				03934DB0185AD3E400D090AE /* level-tiles-3.png in Resources */,
 				D8D49B6F1850541700E37F11 /* trap-closed.png in Resources */,
 				03FD6643185101BE00BFADC9 /* Icon-Small.png in Resources */,
+				03934DB2185AD3E400D090AE /* level-tiles-5.png in Resources */,
 				0DB9771018445B2700FB7A9C /* resume.png in Resources */,
 				03581B941835547A0015E22B /* level-selection.png in Resources */,
 				0DBB59BA182C1742002353CF /* tri-open.png in Resources */,
 				0D21BB18185ACBF60040EA55 /* welcome.png in Resources */,
 				03FD664C185101DA00BFADC9 /* Icon-76@2x.png in Resources */,
+				03934DB1185AD3E400D090AE /* level-tiles-4.png in Resources */,
 				0DBB59BE182C18CE002353CF /* trap-open.png in Resources */,
 				D8D49B7B18525D9F00E37F11 /* level-med.png in Resources */,
 				03FD664B185101DA00BFADC9 /* Icon-76.png in Resources */,
@@ -482,6 +521,7 @@
 				03F47FB4183BEDC100FDB580 /* geometry.png in Resources */,
 				D8D49B7E18525D9F00E37F11 /* level-two.png in Resources */,
 				D8D49B701850541700E37F11 /* tri-closed.png in Resources */,
+				03934DAE185AD3E400D090AE /* level-tiles-1.png in Resources */,
 				03FD6647185101CD00BFADC9 /* Icon-40.png in Resources */,
 				D8D49B7D18525D9F00E37F11 /* level-three.png in Resources */,
 			);
