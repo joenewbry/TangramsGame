@@ -17,7 +17,7 @@
 - (void)shouldBlink;
 - (void)shouldUnblink;
 - (void)shouldFrown;
-- (void) shouldWiggleByX: (CGFloat) xAmount andY: (CGFloat) yAmount;
+- (void)shouldWiggleSlideTo: (CGPoint) point;
 
 // inDrawer is true if this node has not been removed from the drawer yet.
 @property (nonatomic) BOOL inDrawer;
