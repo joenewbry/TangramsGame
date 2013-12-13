@@ -16,6 +16,7 @@
 		03FD6648185101CD00BFADC9 /* Icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03FD6646185101CD00BFADC9 /* Icon-40@2x.png */; };
 		03FD664B185101DA00BFADC9 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 03FD6649185101DA00BFADC9 /* Icon-76.png */; };
 		03FD664C185101DA00BFADC9 /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03FD664A185101DA00BFADC9 /* Icon-76@2x.png */; };
+		0D21BB18185ACBF60040EA55 /* welcome.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D21BB17185ACBF60040EA55 /* welcome.png */; };
 		0D25777C1828BBF600CC65EE /* LevelSelectionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D25777B1828BBF600CC65EE /* LevelSelectionNode.m */; };
 		0D501B92181F716700870EB0 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D501B91181F716700870EB0 /* GameView.m */; };
 		0D501B95181F718400870EB0 /* LevelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D501B94181F718400870EB0 /* LevelModel.m */; };
@@ -86,6 +87,7 @@
 		03FD6646185101CD00BFADC9 /* Icon-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40@2x.png"; sourceTree = "<group>"; };
 		03FD6649185101DA00BFADC9 /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = "<group>"; };
 		03FD664A185101DA00BFADC9 /* Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76@2x.png"; sourceTree = "<group>"; };
+		0D21BB17185ACBF60040EA55 /* welcome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome.png; sourceTree = "<group>"; };
 		0D2577741828B05600CC65EE /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		0D25777A1828BBF600CC65EE /* LevelSelectionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelSelectionNode.h; sourceTree = "<group>"; };
 		0D25777B1828BBF600CC65EE /* LevelSelectionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelSelectionNode.m; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				D8C61BCB185591B4006F29F0 /* Tangram Shapes */,
 				D8D49B7F18525DF400E37F11 /* Level Templates */,
 				0DB9770F18445B2700FB7A9C /* resume.png */,
+				0D21BB17185ACBF60040EA55 /* welcome.png */,
 				D8D90350183DD99D005A6562 /* template_level_1-01.png */,
 				03FD6645185101CD00BFADC9 /* Icon-40.png */,
 				03FD6646185101CD00BFADC9 /* Icon-40@2x.png */,
@@ -469,6 +472,7 @@
 				0DB9771018445B2700FB7A9C /* resume.png in Resources */,
 				03581B941835547A0015E22B /* level-selection.png in Resources */,
 				0DBB59BA182C1742002353CF /* tri-open.png in Resources */,
+				0D21BB18185ACBF60040EA55 /* welcome.png in Resources */,
 				03FD664C185101DA00BFADC9 /* Icon-76@2x.png in Resources */,
 				0DBB59BE182C18CE002353CF /* trap-open.png in Resources */,
 				D8D49B7B18525D9F00E37F11 /* level-med.png in Resources */,

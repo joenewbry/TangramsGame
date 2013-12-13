@@ -31,19 +31,16 @@
 -(id)initWithSize:(CGSize)size {
      if (self = [super initWithSize:size])
      {
-        /* Setup your scene here */
         
-        self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+//        self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
 
-         [self addBackgroundTriangles];
-
-         // Title Text
-         startText = [[SKLabelNode alloc] initWithFontNamed:@"HelveticaNeue-Bold"];
-         startText.fontSize = 80;
-         startText.fontColor = [UIColor colorWithHue:0.000 saturation:0.000 brightness:0.224 alpha:1];
-         startText.text = @"Geopets";
-         startText.position = CGPointMake(self.size.width/2, self.size.height + 100);
-         [self addChild:startText];
+//         // Title Text
+//         startText = [[SKLabelNode alloc] initWithFontNamed:@"HelveticaNeue-Bold"];
+//         startText.fontSize = 80;
+//         startText.fontColor = [UIColor colorWithHue:0.000 saturation:0.000 brightness:0.224 alpha:1];
+//         startText.text = @"Geopets";
+//         startText.position = CGPointMake(self.size.width/2, self.size.height + 100);
+//         [self addChild:startText];
          
          // start button
          startButton = [[SKSpriteNode alloc] initWithImageNamed:@"resume.png"];
@@ -53,25 +50,24 @@
     return self;
 }
 
-- (void) addBackgroundTriangles
+
+-(void) setupBackground
 {
-    CGFloat x = 0.0;
-    CGFloat y = 0.0;
-    while (x < self.frame.size.width && y < self.frame.size.height){
-        SKSpriteNode *backgroundTile = [[SKSpriteNode alloc] initWithImageNamed:@"Icon-40@2x.png"];
-        backgroundTile.position = CGPointMake(x, y);
-        [self addChild:backgroundTile];
-        x = x + backgroundTile.size.width;
-        if (x > self.frame.size.width) {
-            y = y + backgroundTile.size.height;
-            x = 0;
-        }
-    }
+    SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"welcome.png"];
+    SKSpriteNode *background = [[SKSpriteNode alloc] initWithTexture:backgroundTexture];
+    background.size = self.view.frame.size;
+    
+    background.position = (CGPoint) {CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame)};
+    [self addChild:background];
+
 }
 
 // TODO: remove unnecessary gesture recognizers
 - (void)didMoveToView:(SKView *)view
 {
+    
+    [self setupBackground];
+    
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(tap:)];
     [[self view] addGestureRecognizer:tapGestureRecognizer];
@@ -91,6 +87,7 @@
 
     moveOutTitle = [SKAction moveTo:CGPointMake(self.size.width/2, self.size.height + 100) duration:.5];
 
+    
 }
 
 -(void)tap:(UIGestureRecognizer*) gesture
