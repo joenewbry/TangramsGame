@@ -21,7 +21,7 @@
 - (id)initWithSize:(CGSize) size
 {
      if (self = [super initWithSize:size]) {
-        self.backgroundColor = [UIColor lightGrayColor];
+        self.backgroundColor = [UIColor colorWithHue:0.359 saturation:0.051 brightness:1.000 alpha:1];
     }
     return self;
 }
@@ -78,13 +78,13 @@
         // initialize the correct level
 
 
-        for (LevelSelectionNode *level in levelNodesArray){
-            if (level == _selectedNode){
-                [level shouldMoveToCenter];
-            } else {
-                [level setAlpha:0.0];
-            }
-        }
+//        for (LevelSelectionNode *level in levelNodesArray){
+//            if (level == _selectedNode){
+//                [level shouldMoveToCenter];
+//            } else {
+//                [level setAlpha:0.0];
+//            }
+//        }
 
         CGSize size = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height);
         LevelScene * level = [[LevelScene alloc] initWithLevel:_selectedNode.level AndSize:size];
