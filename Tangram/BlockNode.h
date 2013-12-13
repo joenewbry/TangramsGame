@@ -16,8 +16,8 @@
 // call to make any shape blink
 - (void)shouldBlink;
 - (void)shouldUnblink;
-- (void)shouldWiggle;
 - (void)shouldFrown;
+- (void) shouldWiggleByX: (CGFloat) xAmount andY: (CGFloat) yAmount;
 
 // inDrawer is true if this node has not been removed from the drawer yet.
 @property (nonatomic) BOOL inDrawer;

@@ -13,7 +13,7 @@
     // block juice
     SKAction * blinkAnimation;
     SKAction * unblinkAnimation;
-    SKAction * wiggleAnimation;
+//    SKAction * wiggleSlideAnimation;
 }
 @end
 
@@ -67,7 +67,7 @@
     self.physicsBody.contactTestBitMask = blockCategory | targetCategory | wallCategory;
     self.physicsBody.collisionBitMask = 0;
 
-    [self configureWiggleAnimation];
+//    [self configureWiggleSlideAnimation];
     [self configureBlinkAnimation:blockType withFilePath:filePaths withBlinkFilePath:filePathsBlink];
     
     return self;
@@ -168,19 +168,20 @@
     [self runAction:unblinkAnimation];
 }
 
-- (void) configureWiggleAnimation
+- (void) shouldWiggleByX: (CGFloat) xAmount andY: (CGFloat) yAmount
 {
-    SKAction *one = [SKAction rotateByAngle: (M_PI_4/8) duration: 0.05];
-    one.timingMode = SKActionTimingEaseInEaseOut;
-    SKAction *two = [SKAction rotateByAngle: -(M_PI_4/4) duration: 0.01];
-    SKAction *three = [SKAction rotateByAngle: (M_PI_4/8) duration: 0.05];
-    three.timingMode = SKActionTimingEaseInEaseOut;
-    wiggleAnimation = [SKAction sequence:@[one, two, three]];
-}
-
-- (void) shouldWiggle
-{
-    [self runAction:wiggleAnimation];
+    // wiggle
+    SKAction *wOne = [SKAction rotateByAngle: (M_PI_4/8) duration: 0.05];
+    wOne.timingMode = SKActionTimingEaseInEaseOut;
+    SKAction *wTwo = [SKAction rotateByAngle: -(M_PI_4/4) duration: 0.01];
+    SKAction *wThree = [SKAction rotateByAngle: (M_PI_4/8) duration: 0.05];
+    wThree.timingMode = SKActionTimingEaseInEaseOut;
+    
+    // slide to previous position
+    SKAction *slideBy = [SKAction moveByX:xAmount y:yAmount duration:1.0];
+    
+    // run animation
+    [self runAction: [SKAction sequence:@[wOne, wTwo, wThree, slideBy]]];
 }
 
 - (void) shouldFrown

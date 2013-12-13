@@ -313,7 +313,15 @@
     
     // unsuccessful placement
     if (_selectedNode.touchingTangram) {
-        [_selectedNode setPosition:CGPointMake(startPoint.x, self.size.height - startPoint.y)];
+        
+        CGFloat xAmount = (startPoint.x - _selectedNode.position.x);
+        CGFloat yAmount = 0.5 * (_selectedNode.position.y - startPoint.y);
+        NSLog(@"x amount %f", xAmount);
+        NSLog(@"y amount %f", yAmount);
+
+        [_selectedNode shouldWiggleByX: xAmount andY:yAmount];
+        
+//        [_selectedNode setPosition:CGPointMake(startPoint.x, self.size.height - startPoint.y)];
         _selectedNode.touchingTangram = NO;
     }
     
