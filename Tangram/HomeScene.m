@@ -20,7 +20,7 @@
     SKAction *moveOutTitle;
 
     SKSpriteNode *startButton;
-    SKLabelNode *startText;
+    SKSpriteNode *startText;
 }
 
 @end
@@ -29,24 +29,7 @@
 
 // TODO: add in settings page
 -(id)initWithSize:(CGSize)size {
-     if (self = [super initWithSize:size])
-     {
-        
-//        self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
-
-//         // Title Text
-//         startText = [[SKLabelNode alloc] initWithFontNamed:@"HelveticaNeue-Bold"];
-//         startText.fontSize = 80;
-//         startText.fontColor = [UIColor colorWithHue:0.000 saturation:0.000 brightness:0.224 alpha:1];
-//         startText.text = @"Geopets";
-//         startText.position = CGPointMake(self.size.width/2, self.size.height + 100);
-//         [self addChild:startText];
-         
-         // start button
-         startButton = [[SKSpriteNode alloc] initWithImageNamed:@"resume.png"];
-         startButton.position = CGPointMake(self.size.width/2, -startButton.size.height);
-         [self addChild:startButton];
-    }
+    self = [super initWithSize:size];
     return self;
 }
 
@@ -62,18 +45,36 @@
 
 }
 
+-(void) setupPlayButton
+{
+    startButton = [[SKSpriteNode alloc] initWithImageNamed:@"resume.png"];
+    startButton.position = CGPointMake(self.size.width/2, -startButton.size.height);
+    [self addChild:startButton];
+}
+
+-(void) setupTitle
+{
+    startText = [[SKSpriteNode alloc] initWithImageNamed:@"geopets_logo-02.png"];
+    startText.size = CGSizeMake(482, 167);
+    
+    startText.position = CGPointMake(self.size.width/2, self.size.height + 100);
+    [self addChild:startText];
+}
+
+
 // TODO: remove unnecessary gesture recognizers
 - (void)didMoveToView:(SKView *)view
 {
-    
     [self setupBackground];
+    [self setupPlayButton];
+    [self setupTitle];
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(tap:)];
     [[self view] addGestureRecognizer:tapGestureRecognizer];
 
     // perform action for play button
-    moveInPlayButton = [SKAction moveTo:CGPointMake(self.size.width/2, self.size.height/2 - 80) duration:.75];
+    moveInPlayButton = [SKAction moveTo:CGPointMake(self.size.width/2, self.size.height/2 - 20) duration:1];
     moveInPlayButton.timingMode = SKActionTimingEaseOut;
     [startButton runAction:moveInPlayButton];
 
@@ -81,7 +82,7 @@
     moveOutPlayButton.timingMode = SKActionTimingEaseIn;
 
     // perform action for title screen
-    moveInTitle = [SKAction moveTo:CGPointMake(self.size.width/2, self.size.height/2) duration:.75];
+    moveInTitle = [SKAction moveTo:CGPointMake(self.size.width/2, self.size.height/2 + 120) duration:1];
     moveInTitle.timingMode = SKActionTimingEaseOut;
     [startText runAction:moveInTitle];
 
